@@ -37,8 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_weight="8
-"
+                    android:layout_weight="8"
                     android:padding="8dp"
                     android:text="@string/shop"
                     android:textSize="16sp"
@@ -77,8 +76,7 @@
                     android:textAlignment="viewStart"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                    app:layout_constraintVertical_bias="0.077"
-                    tools:layout_editor_absoluteX="0dp" />
+                    app:layout_constraintVertical_bias="0.077" />
             </LinearLayout>
 
 

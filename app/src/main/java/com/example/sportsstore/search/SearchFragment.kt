@@ -14,8 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapter
-import com.example.sportsstore.adapters.ParentAdapter
-import com.example.sportsstore.databinding.FragmentSearchBarBinding
 import com.example.sportsstore.databinding.FragmentSearchBinding
 import com.example.sportsstore.models.ChildItem
 
@@ -53,12 +51,6 @@ class SearchFragment : Fragment() {
             ChildItem("Socks", null, 50.0, R.mipmap.socks_foreground),
         )
 
-        val latestsList: List<ChildItem> = listOf(
-            ChildItem("Sweat Pants", null, 100.0, R.mipmap.sweatpants_foreground),
-            ChildItem("Socks", null, 50.0, R.mipmap.socks_foreground),
-            ChildItem("Hat", null, 120.0, R.mipmap.hat_foreground)
-        )
-
         val recyclerView_H = binding.recyclerViewResearchH
         val adapter1 = ChildAdapter()
         recyclerView_H.adapter = adapter1
@@ -67,18 +59,27 @@ class SearchFragment : Fragment() {
 
         val recyclerView_V = binding.recyclerViewResearchH
         val adapter2 = ChildAdapter()
-        recyclerView_H.adapter = adapter2
-        recyclerView_H.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView_V.adapter = adapter2
+        recyclerView_V.layoutManager = LinearLayoutManager(requireContext())
         adapter2.setData(itemDisplay)
 
+        /*
+        Author: Farouk Haitham
+        fixed the recycler view h instead of v
+        removed unused list
+        removed unused imports
+         */
 
         return binding.root
     }
 
 
+    /*
+    * replaced the actions of the search nav graph with the actions of the nav_graph
+    * deleted the search nav graph*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.button2.setOnClickListener{
-            findNavController().navigate(R.id.action_searchFragment_to_searchBarFragment)
+            findNavController().navigate(R.id.action_searchFragment2_to_searchBarFragment2)
         }
     }
 

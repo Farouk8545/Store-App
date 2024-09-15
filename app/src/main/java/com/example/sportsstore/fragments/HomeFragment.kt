@@ -2,6 +2,7 @@ package com.example.sportsstore.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,10 @@ import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 
 class HomeFragment : Fragment() {
+
     private lateinit var binding: FragmentHomeBinding
     private lateinit var authViewModel: AuthViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,8 +72,15 @@ class HomeFragment : Fragment() {
 
         authViewModel.user.observe(viewLifecycleOwner) { user ->
             if(user != null){
-                binding.userName.text = user.displayName
-                binding.userImage.setImageURI(user.photoUrl)
+                binding.userName.text =
+                    if(user.displayName.isNullOrEmpty()) user.email?.substringBefore("@") ?: "User" else user.displayName
+
+                user.photoUrl?.let { uri ->
+                    binding.userImage.setImageURI(uri)
+                } ?: run {
+                    // Set default image if the photo URL is null
+                    binding.userImage.setImageResource(R.drawable.baseline_account_circle_24)
+                }
             }else {
                 val intent = Intent(requireContext(), SignInActivity::class.java)
                 startActivity(intent)
