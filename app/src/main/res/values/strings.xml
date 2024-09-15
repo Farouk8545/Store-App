@@ -2,4 +2,12 @@
     <string name="app_name">Sports Store</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="find_product">Find product</string>
+    <string name="shop">SHOP</string>
+    <string name="latests">Latests</string>
+    <string name="shoes">Shoes</string>
+    <string name="shirts">Shirts</string>
+    <string name="best_seller">best seller</string>
+    <string name="overtures">overtures</string>
+    <string name="todo">TODO</string>
 </resources>
