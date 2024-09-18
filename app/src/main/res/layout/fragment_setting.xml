@@ -1,0 +1,253 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Account Settings -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp">
+        <LinearLayout
+            android:id="@+id/account_settings_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/accountsetting"
+                android:contentDescription="Account Settings Icon" />
+
+            <Button
+                id="@+id/account_settings_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Account Setting"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+        <!-- Notification Settings -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:id="@+id/notification_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/notification_setting"
+                    android:contentDescription="notification Settings Icon" />
+
+                <Button
+                    android:id="@+id/notification_settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Notification setting"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Privacy & Security -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:id="@+id/privacy_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/privacy"
+                    android:contentDescription="privacy Settings Icon" />
+
+                <Button
+                    android:id="@+id/privacy_settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Privacy &amp; Security"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Payment Methods -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:id="@+id/payment_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/payment"
+                    android:contentDescription="payment Settings Icon" />
+
+                <Button
+                    android:id="@+id/payment_settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="payment"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Language Selection -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:id="@+id/language_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/language_setting"
+                    android:contentDescription="language Settings Icon" />
+
+                <Button
+                    id="@+id/language_settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="language"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Help & Support -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="8dp">
+            <LinearLayout
+                android:id="@+id/help_settings_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/privacy"
+                    android:contentDescription="help Settings Icon" />
+
+                <Button
+                    id="@+id/help_settings_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Help &amp; Support"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Snackbar"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp" />
+    </LinearLayout>
+
+</layout>
