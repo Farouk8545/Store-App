@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment2"
             app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment2"
@@ -24,6 +27,9 @@
         <action
             android:id="@+id/action_searchFragment2_to_searchBarFragment2"
             app:destination="@id/searchBarFragment2" />
+        <action
+            android:id="@+id/action_searchFragment2_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
     </fragment>
     <fragment
         android:id="@+id/searchBarFragment2"
@@ -32,5 +38,27 @@
         <action
             android:id="@+id/action_searchBarFragment2_to_searchFragment2"
             app:destination="@id/searchFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentProfileBinding"
+        android:name="com.example.sportsstore.fragments.FragmentProfileBinding"
+        android:label="FragmentProfileBinding" >
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_searchFragment2"
+            app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_fragmentSettingBinding"
+            app:destination="@id/fragmentSettingBinding" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSettingBinding"
+        android:name="com.example.sportsstore.fragments.FragmentSettingBinding"
+        android:label="FragmentSettingBinding" >
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
     </fragment>
 </navigation>
