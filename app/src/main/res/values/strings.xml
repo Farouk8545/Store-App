@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Sports Store</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="default_web_client_id">940922219769-tqbatc687v2pt3toomp3laqb7mgs01m8.apps.googleusercontent.com</string>
-=======
     <string name="find_product">Find product</string>
     <string name="shop">SHOP</string>
     <string name="latests">Latests</string>
@@ -12,5 +10,6 @@
     <string name="best_seller">best seller</string>
     <string name="overtures">overtures</string>
     <string name="todo">TODO</string>
->>>>>>> 3f76e516d0c9ae79fb63eba8230b21f82f61b330
+    <string name="suggests">suggests</string>
+
 </resources>

@@ -28,7 +28,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:shapeAppearanceOverlay="@style/roundImageView"
-            android:src="@mipmap/cat_foreground"
             app:layout_constraintEnd_toStartOf="@id/userName"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginEnd="8dp" />

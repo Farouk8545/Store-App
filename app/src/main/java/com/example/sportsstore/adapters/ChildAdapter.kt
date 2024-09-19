@@ -37,4 +37,11 @@ class ChildAdapter(): RecyclerView.Adapter<ChildAdapter.MyViewHolder>() {
         myList = newList
         notifyDataSetChanged()
     }
+
+    fun setDataSearch(newList: List<ChildItem>?){
+        if (newList != null) {
+            myList = newList
+        }
+        notifyDataSetChanged()
+    }
 }
