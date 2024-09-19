@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.searchFragment2)
                     true
                 }
+                R.id.profile -> {
+                    navController.navigate(R.id.fragmentProfileBinding)
+                    true
+                }
 
                 else -> false
             }
