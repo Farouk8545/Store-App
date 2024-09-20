@@ -2,7 +2,6 @@ package com.example.sportsstore.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +15,13 @@ import com.example.sportsstore.databinding.FragmentHomeBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
 
@@ -28,39 +34,44 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        val shirtsList: List<ChildItem> = listOf(
-            ChildItem("Real Madrid - Home", "2024", 150.0,
-                R.mipmap.real_madrid_home_2024_foreground
-            ),
-            ChildItem("Real Madrid - Home", "2023", 150.0,
-                R.mipmap.real_madrid_home_2023_foreground
-            ),
-            ChildItem("Real Madrid - Away", "2023", 150.0,
-                R.mipmap.real_madrid_away_2023_foreground
-            )
-        )
-
-        val shoesList: List<ChildItem> = listOf(
-            ChildItem("Nike", null, 350.0, R.mipmap.nike_shoes_foreground),
-            ChildItem("Adidas", null, 400.0, R.mipmap.adidas_shoes_foreground),
-            ChildItem("Puma", null, 300.0, R.mipmap.puma_shoes_foreground)
-        )
-
-        val latestsList: List<ChildItem> = listOf(
-            ChildItem("Sweat Pants", null, 100.0, R.mipmap.sweatpants_foreground),
-            ChildItem("Socks", null, 50.0, R.mipmap.socks_foreground),
-            ChildItem("Hat", null, 120.0, R.mipmap.hat_foreground)
-        )
-
         val recyclerView = binding.verticalRv
         val adapter = ParentAdapter()
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        adapter.setData(listOf(
-            ParentItem("Clubs Shirts", shirtsList),
-            ParentItem("Shoes", shoesList),
-            ParentItem("Latests", latestsList)
-            ))
+
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                // Fetch both collections in parallel
+                val sportsShirtsDeferred = async {
+                    FirebaseFirestore.getInstance().collection("sports_shirts")
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
+
+                val latestDeferred = async {
+                    FirebaseFirestore.getInstance().collection("latest")
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
+
+                // Wait for both collections to be fetched
+                val sportsShirts = sportsShirtsDeferred.await()
+                val latest = latestDeferred.await()
+
+                // Once both are ready, update the adapter on the main thread
+                withContext(Dispatchers.Main) {
+                    adapter.setData(listOf(
+                        ParentItem("Sports Shirts", sportsShirts),
+                        ParentItem("Latest", latest)
+                    ))
+                }
+            } catch (e: Exception) {
+                // Handle any errors that occur during data fetching
+                e.printStackTrace()
+            }
+        }
 
         authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
 

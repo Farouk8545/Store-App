@@ -14,13 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
-import com.example.sportsstore.adapters.ChildAdapter
-import com.example.sportsstore.adapters.ParentAdapter
 import com.example.sportsstore.adapters.ParentResearchAdpters
 import com.example.sportsstore.databinding.FragmentSearchBinding
 import com.example.sportsstore.models.ChildItem
-import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.models.ParentResearchItem
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class SearchFragment : Fragment() {
@@ -35,32 +33,13 @@ class SearchFragment : Fragment() {
         binding =FragmentSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-        val bestSell: List<ChildItem> = listOf(
-            ChildItem("Real Madrid - Home", "2024", 150.0, R.mipmap.real_madrid_home_2024_foreground),
-            ChildItem("Sweat Pants", null, 100.0, R.mipmap.sweatpants_foreground),
-            ChildItem("Adidas", null, 400.0, R.mipmap.adidas_shoes_foreground),
-        )
-
-        val itemDisplay: List<ChildItem> = listOf(
-            ChildItem("Real Madrid - Home", "2024", 150.0, R.mipmap.real_madrid_home_2024_foreground),
-            ChildItem("Nike", null, 350.0, R.mipmap.nike_shoes_foreground),
-            ChildItem("Sweat Pants", null, 100.0, R.mipmap.sweatpants_foreground),
-            ChildItem("Adidas", null, 400.0, R.mipmap.adidas_shoes_foreground),
-            ChildItem("Real Madrid - Home", "2023", 150.0, R.mipmap.real_madrid_home_2023_foreground),
-            ChildItem("Real Madrid - Away", "2023", 150.0, R.mipmap.real_madrid_away_2023_foreground),
-            ChildItem("Hat", null, 120.0, R.mipmap.hat_foreground),
-            ChildItem("Socks", null, 50.0, R.mipmap.socks_foreground),
-            ChildItem("Real Madrid - Home", "2024", 150.0, R.mipmap.real_madrid_home_2024_foreground),
-            ChildItem("Nike", null, 350.0, R.mipmap.nike_shoes_foreground),
-            ChildItem("Sweat Pants", null, 100.0, R.mipmap.sweatpants_foreground),
-            ChildItem("Adidas", null, 400.0, R.mipmap.adidas_shoes_foreground),
-            ChildItem("Real Madrid - Home", "2023", 150.0, R.mipmap.real_madrid_home_2023_foreground),
-            ChildItem("Real Madrid - Away", "2023", 150.0, R.mipmap.real_madrid_away_2023_foreground),
-            ChildItem("Hat", null, 120.0, R.mipmap.hat_foreground),
-            ChildItem("Socks", null, 50.0, R.mipmap.socks_foreground),
-
-        )
+        var bestSell: MutableList<ChildItem> = mutableListOf()
+        var itemDisplay: MutableList<ChildItem> = mutableListOf()
+        FirebaseFirestore.getInstance().collection("sports_shirts")
+            .get().addOnSuccessListener {
+                bestSell = it.toObjects(ChildItem::class.java)
+                itemDisplay = it.toObjects(ChildItem::class.java)
+            }
 
         val recyclerView = binding.recyclerViewResearchH
         val adapter = ParentResearchAdpters()
