@@ -12,8 +12,8 @@ import com.example.sportsstore.models.ParentResearchItem
 
 class ParentResearchAdpters: RecyclerView.Adapter<ParentResearchAdpters.MyViewHolder>(){
 
-    private var myList = emptyList<ParentResearchItem>()
-
+    private var myList1 = emptyList<ParentResearchItem>()
+    private var myList2 = emptyList<ParentResearchItem>()
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recyclerView1: RecyclerView = itemView.findViewById(R.id.recyclerView_sea_H)
@@ -27,10 +27,10 @@ class ParentResearchAdpters: RecyclerView.Adapter<ParentResearchAdpters.MyViewHo
         return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.row_layout_search, parent, false))
     }
 
-    override fun getItemCount(): Int = myList.size
+    override fun getItemCount(): Int = myList1.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentItem = myList[position]
+        val currentItem = myList1[position]
         holder.recyclerView1.adapter = holder.childAdapter
         holder.recyclerView2.adapter = holder.childAdapter
         holder.recyclerView1.layoutManager = LinearLayoutManager(holder.itemView.context, LinearLayoutManager.HORIZONTAL, false)
@@ -40,8 +40,13 @@ class ParentResearchAdpters: RecyclerView.Adapter<ParentResearchAdpters.MyViewHo
     }
 
 
-    fun setData(newList: List<ParentResearchItem>){
-        myList = newList
+    fun setData(newList: MutableList<ParentResearchItem>){
+        myList1 = newList
+        notifyDataSetChanged()
+    }
+
+    fun setDataTwo(newList: MutableList<ParentResearchItem>){
+        myList2 = newList
         notifyDataSetChanged()
     }
 }

@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
         var itemDisplay: MutableList<ChildItem> = mutableListOf()
         FirebaseFirestore.getInstance().collection("sports_shirts")
             .get().addOnSuccessListener {
-                bestSell = it.toObjects(ChildItem::class.java)
+                //bestSell = it.toObjects(ChildItem::class.java)
                 itemDisplay = it.toObjects(ChildItem::class.java)
             }
 
@@ -46,9 +46,11 @@ class SearchFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         //recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        adapter.setData(listOf(
-            ParentResearchItem(bestSell, itemDisplay),
-        ))
+        adapter.setData(
+            mutableListOf(
+            ParentResearchItem(itemDisplay, itemDisplay),
+        )
+        )
 
 
         /*
