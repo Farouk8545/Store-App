@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_fragmentProfileBinding_to_fragmentSettingBinding"
             app:destination="@id/fragmentSettingBinding" />
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettingBinding"
@@ -59,6 +62,15 @@
         android:label="FragmentSettingBinding" >
         <action
             android:id="@+id/action_fragmentSettingBinding_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="com.example.sportsstore.fragments.PurchaseHistoryFragment"
+        android:label="fragment_purchase_history"
+        tools:layout="@layout/fragment_purchase_history" >
+        <action
+            android:id="@+id/action_purchaseHistoryFragment_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
     </fragment>
 </navigation>

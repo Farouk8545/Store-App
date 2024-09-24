@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,7 @@ import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentAdapter
 import com.example.sportsstore.databinding.FragmentSearchBarBinding
 import com.example.sportsstore.models.ChildItem
+import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Locale
 
@@ -29,6 +31,7 @@ import java.util.Locale
 class SearchBarFragment : Fragment() {
 
     private lateinit var binding :FragmentSearchBarBinding
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +47,10 @@ class SearchBarFragment : Fragment() {
                 itemDisplay = it.toObjects(ChildItem::class.java)
             }
 
+        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
+
         val recyclerView = binding.recyclerView
-        val adapter = ChildAdapter()
+        val adapter = ChildAdapter(authViewModel, this)
         recyclerView.adapter = adapter
         adapter.setDataSearch(emptyList()) // Start with an empty list
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2) // 2 columns

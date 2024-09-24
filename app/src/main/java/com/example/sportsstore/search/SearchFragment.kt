@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,12 +19,19 @@ import com.example.sportsstore.adapters.ParentResearchAdpters
 import com.example.sportsstore.databinding.FragmentSearchBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentResearchItem
+import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 
 class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
-
+    private lateinit var authViewModel: AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,23 +41,42 @@ class SearchFragment : Fragment() {
         binding =FragmentSearchBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        var bestSell: MutableList<ChildItem> = mutableListOf()
-        var itemDisplay: MutableList<ChildItem> = mutableListOf()
-        FirebaseFirestore.getInstance().collection("sports_shirts")
-            .get().addOnSuccessListener {
-                bestSell = it.toObjects(ChildItem::class.java)
-                itemDisplay = it.toObjects(ChildItem::class.java)
-            }
+        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
 
         val recyclerView = binding.recyclerViewResearchH
-        val adapter = ParentResearchAdpters()
+        val adapter = ParentResearchAdpters(authViewModel, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         //recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        adapter.setData(listOf(
-            ParentResearchItem(bestSell, itemDisplay),
-        ))
 
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
+                val bestSellDeferred = async {
+                    FirebaseFirestore.getInstance().collection("latest")
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
+
+                val itemDisplayDeferred = async {
+                    FirebaseFirestore.getInstance().collection("sports_shirts")
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
+
+                val bestSell = bestSellDeferred.await()
+                val itemDisplay = itemDisplayDeferred.await()
+
+                withContext(Dispatchers.Main){
+                    adapter.setData(listOf(
+                        ParentResearchItem(bestSell, itemDisplay),
+                    ))
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+        }
 
         /*
         Author: Farouk Haitham

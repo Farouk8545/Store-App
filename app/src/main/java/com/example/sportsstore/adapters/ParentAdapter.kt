@@ -4,18 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsstore.R
 import com.example.sportsstore.models.ParentItem
+import com.example.sportsstore.viewmodels.AuthViewModel
 
-class ParentAdapter: RecyclerView.Adapter<ParentAdapter.MyViewHolder>() {
+class ParentAdapter(private val authViewModel: AuthViewModel, private val lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<ParentAdapter.MyViewHolder>() {
     private var myList = emptyList<ParentItem>()
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recyclerView: RecyclerView = itemView.findViewById(R.id.horizontalRv)
         val categoryName: TextView = itemView.findViewById(R.id.categoryField)
-        val childAdapter = ChildAdapter()
+        val childAdapter = ChildAdapter(authViewModel, lifecycleOwner)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

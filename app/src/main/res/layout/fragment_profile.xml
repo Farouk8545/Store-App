@@ -127,7 +127,7 @@
                 android:textAlignment="center"
                 android:layout_gravity="center"
                 android:textSize="20sp"
-                android:text="Order History"
+                android:text="Purchase History"
                 android:textColor="@color/black"
                 android:padding="8dp"
                 android:background="@color/white"
