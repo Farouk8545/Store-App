@@ -14,10 +14,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -95,6 +97,50 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     _user.value = auth.currentUser
                 }else Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    fun purchaseDocument(){
+        val firestore = FirebaseFirestore.getInstance()
+
+        auth.addAuthStateListener { firebaseAuth ->
+            val user = firebaseAuth.currentUser
+            if(user != null){
+                val userId = user.uid
+                val userDoc = firestore.collection("users_purchases").document(userId)
+                userDoc.get().addOnSuccessListener { document ->
+                    if(!document.exists()){
+                        val userData = hashMapOf(
+                            "email" to user.email,
+                            "displayName" to user.displayName
+                        )
+
+                        userDoc.set(userData)
+                    }
+                }
+            }
+        }
+    }
+
+    fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?){
+        val firestore = FirebaseFirestore.getInstance()
+        val purchaseRef = auth.currentUser?.let {
+            firestore.collection("users_purchases").document(it.uid).collection("purchases")
+        }
+
+        val purchaseData = hashMapOf(
+            "product" to product,
+            "price" to price,
+            "date" to date,
+            "state" to state,
+            "paymentMethod" to paymentMethod,
+            "imageUrl" to imageUrl
+        )
+
+        purchaseRef?.add(purchaseData)?.addOnSuccessListener {
+            Log.d("Purchase", "Purchase added successfully")
+        }?.addOnFailureListener{e ->
+            Log.d("Purchase", e.toString())
+        }
     }
 
     companion object {

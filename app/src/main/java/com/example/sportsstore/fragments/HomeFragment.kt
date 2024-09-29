@@ -15,6 +15,7 @@ import com.example.sportsstore.databinding.FragmentHomeBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -34,8 +35,10 @@ class HomeFragment : Fragment() {
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
+
         val recyclerView = binding.verticalRv
-        val adapter = ParentAdapter()
+        val adapter = ParentAdapter(authViewModel, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -72,8 +75,6 @@ class HomeFragment : Fragment() {
                 e.printStackTrace()
             }
         }
-
-        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
 
         authViewModel.initGoogleSignInClient(requireContext())
 

@@ -32,7 +32,7 @@
             android:id="@+id/searchView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_bar"
+
             android:iconifiedByDefault="false"
             android:queryBackground="@color/white"
             android:queryHint="Search Here ..."

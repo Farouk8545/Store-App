@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_searchFragment2_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
+        <action
+            android:id="@+id/action_searchFragment2_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchBarFragment2"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_searchBarFragment2_to_searchFragment2"
             app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_searchBarFragment2_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfileBinding"
@@ -52,6 +58,9 @@
         <action
             android:id="@+id/action_fragmentProfileBinding_to_fragmentSettingBinding"
             app:destination="@id/fragmentSettingBinding" />
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_purchaseHistoryFragment"
+            app:destination="@id/purchaseHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettingBinding"
@@ -60,5 +69,25 @@
         <action
             android:id="@+id/action_fragmentSettingBinding_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseHistoryFragment"
+        android:name="com.example.sportsstore.fragments.PurchaseHistoryFragment"
+        android:label="fragment_purchase_history"
+        tools:layout="@layout/fragment_purchase_history" >
+        <action
+            android:id="@+id/action_purchaseHistoryFragment_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.sportsstore.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_fragmentProfileBinding"
+            app:destination="@id/fragmentProfileBinding" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_searchFragment2"
+            app:destination="@id/searchFragment2" />
     </fragment>
 </navigation>

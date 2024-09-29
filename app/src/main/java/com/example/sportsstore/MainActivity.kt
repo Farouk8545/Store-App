@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.fragmentProfileBinding)
                     true
                 }
+                R.id.favorite -> {
+                    navController.navigate(R.id.favoriteFragment)
+                    true
+                }
 
                 else -> false
             }
