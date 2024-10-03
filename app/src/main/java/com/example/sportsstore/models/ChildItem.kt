@@ -5,8 +5,9 @@ class ChildItem(
     val year: String?,
     val price: Double,
     val imageUrl: String?,
-    val description: String?
+    val description: String?,
+    val id: String
 ){
-    constructor() : this("", null, 0.0, null, null)
+    constructor() : this("", null, 0.0, null, null, "")
 
 }

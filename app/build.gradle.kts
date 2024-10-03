@@ -68,4 +68,7 @@ dependencies {
 
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+
+    //country code picker
+    implementation("com.hbb20:ccp:2.7.0")
 }

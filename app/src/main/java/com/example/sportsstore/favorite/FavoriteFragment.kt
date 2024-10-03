@@ -13,6 +13,7 @@ import com.example.sportsstore.adapters.ChildAdapterFav
 import com.example.sportsstore.databinding.FragmentFavoriteBinding
 import com.example.sportsstore.databinding.FragmentSearchBarBinding
 import com.example.sportsstore.models.ChildItem
+import com.example.sportsstore.models.FavoriteModel
 import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -50,22 +51,22 @@ class FavoriteFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 // Fetch both collections in parallel
-                val sportsShirtsDeferred = async {
-                    FirebaseFirestore.getInstance().collection("latest")
+                val favouriteDeferred = async {
+                    FirebaseFirestore.getInstance().collection("users").document(authViewModel.user.value?.uid!!).collection("favorites")
                         .get()
                         .await()
-                        .toObjects(ChildItem::class.java)
+                        .toObjects(FavoriteModel::class.java)
                 }
 
 
                 // Wait for both collections to be fetched
-                val sportsShirts = sportsShirtsDeferred.await()
+                val favourites = favouriteDeferred.await()
 
-                binding.textView5.text = " ${sportsShirts.size} products"
+                binding.textView5.text = " ${favourites.size} products"
                 // Once both are ready, update the adapter on the main thread
                 withContext(Dispatchers.Main) {
                     adapter.setData(
-                        sportsShirts,
+                        favourites,
                     )
                 }
             } catch (e: Exception) {

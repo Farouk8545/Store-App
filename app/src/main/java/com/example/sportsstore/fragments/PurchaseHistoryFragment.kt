@@ -50,7 +50,7 @@ class PurchaseHistoryFragment : Fragment() {
         binding.purchaseHistoryRv.adapter = adapter
         binding.purchaseHistoryRv.layoutManager = LinearLayoutManager(requireContext())
 
-        FirebaseFirestore.getInstance().collection("users_purchases").document(authViewModel.user.value?.uid ?: "").collection("purchases")
+        FirebaseFirestore.getInstance().collection("users").document(authViewModel.user.value?.uid ?: "").collection("purchases")
             .get().addOnSuccessListener {
                 adapter.setData(it.toObjects(PurchaseModel::class.java))
             }

@@ -19,8 +19,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val auth: FirebaseAuth = Firebase.auth
@@ -81,10 +83,21 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun createAccount(email: String, password: String){
+    fun createAccount(email: String, password: String, phoneNumber: String, address: String){
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful){
+                    val firestore = FirebaseFirestore.getInstance()
+                    val userRef = auth.currentUser?.let {
+                        firestore.collection("users").document(it.uid)
+                    }
+                    val hashmap = hashMapOf(
+                        "email" to email,
+                        "displayName" to user.value?.displayName,
+                        "phoneNumber" to phoneNumber,
+                        "address" to address
+                    )
+                    userRef?.set(hashmap)
                     _user.value = auth.currentUser
                 }else Toast.makeText(getApplication(), "Failed to create account!", Toast.LENGTH_SHORT).show()
             }
@@ -99,32 +112,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun purchaseDocument(){
-        val firestore = FirebaseFirestore.getInstance()
-
-        auth.addAuthStateListener { firebaseAuth ->
-            val user = firebaseAuth.currentUser
-            if(user != null){
-                val userId = user.uid
-                val userDoc = firestore.collection("users_purchases").document(userId)
-                userDoc.get().addOnSuccessListener { document ->
-                    if(!document.exists()){
-                        val userData = hashMapOf(
-                            "email" to user.email,
-                            "displayName" to user.displayName
-                        )
-
-                        userDoc.set(userData)
-                    }
-                }
-            }
-        }
-    }
-
-    fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?){
+    fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
-            firestore.collection("users_purchases").document(it.uid).collection("purchases")
+            firestore.collection("users").document(it.uid).collection("purchases").document(id)
         }
 
         val purchaseData = hashMapOf(
@@ -136,10 +127,78 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "imageUrl" to imageUrl
         )
 
-        purchaseRef?.add(purchaseData)?.addOnSuccessListener {
-            Log.d("Purchase", "Purchase added successfully")
+        purchaseRef?.set(purchaseData)?.addOnSuccessListener {
+            val query = firestore.collection("sports_shirts").whereEqualTo("id", id)
+            query.get().addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    for(document in task.result){
+                        document.reference.update("salesCount", FieldValue.increment(1))
+                    }
+                }
+            }
         }?.addOnFailureListener{e ->
-            Log.d("Purchase", e.toString())
+            Log.d(TAG, e.toString())
+        }
+    }
+
+    fun addFavorite(product: String, price: Double, imageUrl: String?, description: String?, id: String){
+        val firestore = FirebaseFirestore.getInstance()
+        val favoriteRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("favorites").document(id)
+        }
+
+        val favoriteData = hashMapOf(
+            "product" to product,
+            "price" to price,
+            "imageUrl" to imageUrl,
+            "description" to description
+        )
+
+        favoriteRef?.set(favoriteData)?.addOnSuccessListener {
+            val query = firestore.collection("sports_shirts").whereEqualTo("id", id)
+            query.get().addOnCompleteListener { task ->
+                if(task.isSuccessful){
+                    for(document in task.result){
+                        document.reference.update("inFavourite", true)
+                    }
+                }
+            }
+        }?.addOnFailureListener{e ->
+            Log.d(TAG, e.toString())
+        }
+    }
+
+    fun deleteFavorite(id: String){
+        val firestore = FirebaseFirestore.getInstance()
+        val favoriteRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("favorites").document(id)
+        }
+        favoriteRef?.delete()?.addOnSuccessListener {
+            val query = firestore.collection("sports_shirts").whereEqualTo("id", id)
+            query.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    for (document in task.result) {
+                        document.reference.update("inFavourite", false)
+                    }
+                }
+            }
+        }?.addOnFailureListener{ e ->
+            Log.d(TAG, e.toString())
+        }
+    }
+
+    suspend fun inFavorite(id: String): Boolean{
+        val firestore = FirebaseFirestore.getInstance()
+        val favoriteRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("favorites").document(id)
+        }
+
+        return try {
+            val documentSnapshot = favoriteRef?.get()?.await()
+            documentSnapshot?.exists() ?: false
+        } catch (e: Exception) {
+            Log.d(TAG, e.toString())
+            false
         }
     }
 

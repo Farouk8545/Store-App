@@ -21,6 +21,7 @@ import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentResearchItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -52,7 +53,7 @@ class SearchFragment : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val bestSellDeferred = async {
-                    FirebaseFirestore.getInstance().collection("latest")
+                    FirebaseFirestore.getInstance().collection("sports_shirts").orderBy("salesCount", Query.Direction.DESCENDING).limit(5)
                         .get()
                         .await()
                         .toObjects(ChildItem::class.java)

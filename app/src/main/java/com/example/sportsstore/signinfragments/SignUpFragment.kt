@@ -40,8 +40,10 @@ class SignUpFragment : Fragment() {
         binding.emailSignUpButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
-            if(email.isNotEmpty() && password.isNotEmpty()){
-                authViewModel.createAccount(email, password)
+            val phoneNumber = binding.phoneNumberEditText.text.toString()
+            val address = binding.addressEditText.text.toString()
+            if(email.isNotEmpty() && password.isNotEmpty() && phoneNumber.isNotEmpty() && address.isNotEmpty()){
+                authViewModel.createAccount(email, password, phoneNumber, address)
             }else Toast.makeText(requireContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show()
         }
     }

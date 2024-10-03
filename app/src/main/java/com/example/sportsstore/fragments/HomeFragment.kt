@@ -1,6 +1,5 @@
 package com.example.sportsstore.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,14 +8,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
-import com.example.sportsstore.SignInActivity
 import com.example.sportsstore.adapters.ParentAdapter
 import com.example.sportsstore.databinding.FragmentHomeBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
-import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -53,7 +51,7 @@ class HomeFragment : Fragment() {
                 }
 
                 val latestDeferred = async {
-                    FirebaseFirestore.getInstance().collection("latest")
+                    FirebaseFirestore.getInstance().collection("sports_shirts").orderBy("salesCount", Query.Direction.DESCENDING).limit(5)
                         .get()
                         .await()
                         .toObjects(ChildItem::class.java)
@@ -78,10 +76,6 @@ class HomeFragment : Fragment() {
 
         authViewModel.initGoogleSignInClient(requireContext())
 
-        binding.userImage.setOnClickListener {
-            authViewModel.signOut()
-        }
-
         authViewModel.user.observe(viewLifecycleOwner) { user ->
             if(user != null){
                 binding.userName.text =
@@ -93,10 +87,6 @@ class HomeFragment : Fragment() {
                     // Set default image if the photo URL is null
                     binding.userImage.setImageResource(R.drawable.baseline_account_circle_24)
                 }
-            }else {
-                val intent = Intent(requireContext(), SignInActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
             }
         }
 

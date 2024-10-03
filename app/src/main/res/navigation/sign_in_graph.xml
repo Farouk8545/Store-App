@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -21,6 +24,14 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpWithGoogleFragment"
+        android:name="com.example.sportsstore.signinfragments.SignUpWithGoogleFragment"
+        android:label="SignUpWithGoogleFragment" >
+        <action
+            android:id="@+id/action_signUpWithGoogleFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

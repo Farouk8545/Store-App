@@ -10,6 +10,8 @@ import com.example.sportsstore.databinding.ColumnLayoutBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.Timestamp
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ChildAdapter(private val authViewModel: AuthViewModel, private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<ChildAdapter.MyViewHolder>() {
     private var myList = emptyList<ChildItem>()
@@ -19,18 +21,41 @@ class ChildAdapter(private val authViewModel: AuthViewModel, private val lifecyc
             binding.productName.text = item.productName
             binding.year.text = item.year
             binding.price.text = item.price.toString()
+
+            GlobalScope.launch {
+                if(authViewModel.inFavorite(item.id)) binding.favouriteButton.setImageResource(R.drawable.baseline_favorite_24)
+                else binding.favouriteButton.setImageResource(R.drawable.ic_not_chosen_favorite_icon)
+            }
+
             Glide.with(binding.productImage).load(item.imageUrl).placeholder(R.drawable.baseline_image_24).into(binding.productImage)
 
-            binding.root.setOnClickListener {
-                    authViewModel.purchaseDocument()
+            binding.productName.setOnClickListener {
                     authViewModel.addPurchase(
                         item.productName,
                         item.price,
                         Timestamp.now(),
                         "Pending",
                         "Paypal",
-                        item.imageUrl
+                        item.imageUrl,
+                        item.id
                     )
+            }
+            binding.favouriteButton.setOnClickListener {
+                GlobalScope.launch {
+                    if(authViewModel.inFavorite(item.id)){
+                        authViewModel.deleteFavorite(item.id)
+                        binding.favouriteButton.setImageResource(R.drawable.ic_not_chosen_favorite_icon)
+                    }else{
+                        authViewModel.addFavorite(
+                            item.productName,
+                            item.price,
+                            item.imageUrl,
+                            item.description,
+                            item.id
+                        )
+                        binding.favouriteButton.setImageResource(R.drawable.baseline_favorite_24)
+                    }
+                }
             }
         }
     }

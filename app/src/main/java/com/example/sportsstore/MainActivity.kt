@@ -1,13 +1,17 @@
 package com.example.sportsstore
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.sportsstore.databinding.ActivityMainBinding
+import com.example.sportsstore.viewmodels.AuthViewModel
 
 private lateinit var binding: ActivityMainBinding
+private lateinit var authViewModel: AuthViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,16 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 else -> false
+            }
+        }
+
+        authViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[AuthViewModel::class.java]
+        authViewModel.initGoogleSignInClient(this)
+        authViewModel.user.observe(this){ user ->
+            if(user == null){
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }

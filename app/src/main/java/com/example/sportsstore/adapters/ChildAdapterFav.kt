@@ -9,29 +9,19 @@ import com.example.sportsstore.R
 import com.example.sportsstore.databinding.ColumFavLayoutBinding
 import com.example.sportsstore.databinding.ColumnLayoutBinding
 import com.example.sportsstore.models.ChildItem
+import com.example.sportsstore.models.FavoriteModel
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.Timestamp
 
 class ChildAdapterFav(private val authViewModel: AuthViewModel, private val lifecycleOwner: LifecycleOwner)
     : RecyclerView.Adapter<ChildAdapterFav.MyViewHolder>() {
-    private var myList = emptyList<ChildItem>()
+    private var myList = emptyList<FavoriteModel>()
 
     inner class MyViewHolder(private val binding: ColumFavLayoutBinding): RecyclerView.ViewHolder(binding.root){
-        fun bindData(item: ChildItem){
+        fun bindData(item: FavoriteModel){
             binding.textView7.text = item.price.toString()
             Glide.with(binding.imageView3).load(item.imageUrl).placeholder(R.drawable.baseline_image_24).into(binding.imageView3)
-            binding.textView8.text = item.description.toString()
-            binding.root.setOnClickListener {
-                authViewModel.purchaseDocument()
-                authViewModel.addPurchase(
-                    item.productName,
-                    item.price,
-                    Timestamp.now(),
-                    "Pending",
-                    "Paypal",
-                    item.imageUrl
-                )
-            }
+            binding.textView8.text = item.description
         }
 }
 
@@ -47,7 +37,7 @@ class ChildAdapterFav(private val authViewModel: AuthViewModel, private val life
     }
 
 
-    fun setData(newList: List<ChildItem>){
+    fun setData(newList: List<FavoriteModel>){
         myList = newList
         notifyDataSetChanged()
     }
