@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
+        <action
+            android:id="@+id/action_homeFragment_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment2"
@@ -33,6 +36,9 @@
         <action
             android:id="@+id/action_searchFragment2_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_searchFragment2_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchBarFragment2"
@@ -44,6 +50,9 @@
         <action
             android:id="@+id/action_searchBarFragment2_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_searchBarFragment2_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfileBinding"
@@ -89,5 +98,13 @@
         <action
             android:id="@+id/action_favoriteFragment_to_searchFragment2"
             app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/productOverviewFragment"
+        android:name="com.example.sportsstore.fragments.ProductOverviewFragment"
+        android:label="fragment_product_overview"
+        tools:layout="@layout/fragment_product_overview" />
 </navigation>

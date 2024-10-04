@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
+import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentResearchAdpters
 import com.example.sportsstore.databinding.FragmentSearchBinding
 import com.example.sportsstore.models.ChildItem
@@ -30,7 +31,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), ChildAdapter.OnItemClickListener {
     private lateinit var binding : FragmentSearchBinding
     private lateinit var authViewModel: AuthViewModel
 
@@ -45,7 +46,7 @@ class SearchFragment : Fragment() {
         authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
 
         val recyclerView = binding.recyclerViewResearchH
-        val adapter = ParentResearchAdpters(authViewModel, this)
+        val adapter = ParentResearchAdpters(authViewModel, viewLifecycleOwner, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         //recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -97,6 +98,10 @@ class SearchFragment : Fragment() {
         binding.button2.setOnClickListener{
             findNavController().navigate(R.id.action_searchFragment2_to_searchBarFragment2)
         }
+    }
+
+    override fun onItemClick(item: ChildItem) {
+        findNavController().navigate(R.id.action_searchFragment2_to_productOverviewFragment)
     }
 
 }

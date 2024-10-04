@@ -27,7 +27,7 @@ import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Locale
 
-class SearchBarFragment : Fragment() {
+class SearchBarFragment : Fragment(), ChildAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentSearchBarBinding
     private lateinit var authViewModel: AuthViewModel
@@ -45,7 +45,7 @@ class SearchBarFragment : Fragment() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         )[AuthViewModel::class.java]
 
-        val adapter = ChildAdapter(authViewModel, this)
+        val adapter = ChildAdapter(authViewModel, viewLifecycleOwner, this)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
@@ -118,5 +118,9 @@ class SearchBarFragment : Fragment() {
         binding.imageButton3.setOnClickListener {
             findNavController().navigate(R.id.action_searchBarFragment2_to_searchFragment2)
         }
+    }
+
+    override fun onItemClick(item: ChildItem) {
+        findNavController().navigate(R.id.action_searchBarFragment2_to_productOverviewFragment)
     }
 }

@@ -9,12 +9,19 @@ import com.example.sportsstore.R
 import com.example.sportsstore.databinding.ColumnLayoutBinding
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.viewmodels.AuthViewModel
-import com.google.firebase.Timestamp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class ChildAdapter(private val authViewModel: AuthViewModel, private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<ChildAdapter.MyViewHolder>() {
+class ChildAdapter(
+    private val authViewModel: AuthViewModel,
+    private val lifecycleOwner: LifecycleOwner,
+    private val onItemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<ChildAdapter.MyViewHolder>() {
     private var myList = emptyList<ChildItem>()
+
+    interface OnItemClickListener {
+        fun onItemClick(item: ChildItem)
+    }
 
     inner class MyViewHolder(private val binding: ColumnLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bindData(item: ChildItem){
@@ -29,17 +36,6 @@ class ChildAdapter(private val authViewModel: AuthViewModel, private val lifecyc
 
             Glide.with(binding.productImage).load(item.imageUrl).placeholder(R.drawable.baseline_image_24).into(binding.productImage)
 
-            binding.productName.setOnClickListener {
-                    authViewModel.addPurchase(
-                        item.productName,
-                        item.price,
-                        Timestamp.now(),
-                        "Pending",
-                        "Paypal",
-                        item.imageUrl,
-                        item.id
-                    )
-            }
             binding.favouriteButton.setOnClickListener {
                 GlobalScope.launch {
                     if(authViewModel.inFavorite(item.id)){
@@ -56,6 +52,10 @@ class ChildAdapter(private val authViewModel: AuthViewModel, private val lifecyc
                         binding.favouriteButton.setImageResource(R.drawable.baseline_favorite_24)
                     }
                 }
+            }
+
+            binding.root.setOnClickListener {
+                onItemClickListener.onItemClick(item)
             }
         }
     }

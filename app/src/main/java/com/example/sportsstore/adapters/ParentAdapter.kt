@@ -11,13 +11,17 @@ import com.example.sportsstore.R
 import com.example.sportsstore.models.ParentItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 
-class ParentAdapter(private val authViewModel: AuthViewModel, private val lifecycleOwner: LifecycleOwner): RecyclerView.Adapter<ParentAdapter.MyViewHolder>() {
+class ParentAdapter(
+    private val authViewModel: AuthViewModel,
+    private val lifecycleOwner: LifecycleOwner,
+    private val onItemClickListener: ChildAdapter.OnItemClickListener
+): RecyclerView.Adapter<ParentAdapter.MyViewHolder>() {
     private var myList = emptyList<ParentItem>()
 
     inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val recyclerView: RecyclerView = itemView.findViewById(R.id.horizontalRv)
         val categoryName: TextView = itemView.findViewById(R.id.categoryField)
-        val childAdapter = ChildAdapter(authViewModel, lifecycleOwner)
+        val childAdapter = ChildAdapter(authViewModel, lifecycleOwner, onItemClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

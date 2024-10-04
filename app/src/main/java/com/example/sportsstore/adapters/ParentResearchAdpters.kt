@@ -13,7 +13,8 @@ import com.example.sportsstore.viewmodels.AuthViewModel
 
 class ParentResearchAdpters(
     private val authViewModel: AuthViewModel,
-    private val lifecycleOwner: LifecycleOwner
+    private val lifecycleOwner: LifecycleOwner,
+    private val onItemClickListener: ChildAdapter.OnItemClickListener
 ) : RecyclerView.Adapter<ParentResearchAdpters.MyViewHolder>() {
 
     private var myList1 = emptyList<ParentResearchItem>()
@@ -24,8 +25,8 @@ class ParentResearchAdpters(
         val recyclerView2: RecyclerView = itemView.findViewById(R.id.recyclerView_sea_V)
 
         // Two different child adapters for each RecyclerView
-        val childAdapter1 = ChildAdapter(authViewModel, lifecycleOwner)
-        val childAdapter2 = ChildAdapter(authViewModel, lifecycleOwner)
+        val childAdapter1 = ChildAdapter(authViewModel, lifecycleOwner, onItemClickListener)
+        val childAdapter2 = ChildAdapter(authViewModel, lifecycleOwner, onItemClickListener)
     }
 
     // Create ViewHolder instance

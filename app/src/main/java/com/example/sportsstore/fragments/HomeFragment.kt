@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
+import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentAdapter
 import com.example.sportsstore.databinding.FragmentHomeBinding
 import com.example.sportsstore.models.ChildItem
@@ -22,7 +24,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var authViewModel: AuthViewModel
@@ -36,7 +38,7 @@ class HomeFragment : Fragment() {
         authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
 
         val recyclerView = binding.verticalRv
-        val adapter = ParentAdapter(authViewModel, this)
+        val adapter = ParentAdapter(authViewModel, viewLifecycleOwner, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -91,5 +93,10 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onItemClick(item: ChildItem) {
+        // Handle the click event here, e.g., open a new fragment
+        findNavController().navigate(R.id.action_homeFragment_to_productOverviewFragment)
     }
 }
