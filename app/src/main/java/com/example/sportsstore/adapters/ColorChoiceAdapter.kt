@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sportsstore.databinding.RadioButtonLayoutBinding
 
 class ColorChoiceAdapter(private val colors: List<String>): RecyclerView.Adapter<ColorChoiceAdapter.MyViewHolder>() {
-    private var selectedPosition = -1
+    private var selectedPosition = 0
 
     inner class MyViewHolder(private val binding: RadioButtonLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bindDate(color: String, position: Int){

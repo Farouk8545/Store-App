@@ -9,6 +9,12 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.sportsstore.databinding.ActivityMainBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var authViewModel: AuthViewModel
@@ -54,6 +60,14 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        GlobalScope.launch {
+            if(!checkForNewUser()) {
+                withContext(Dispatchers.Main){
+                    navController.navigate(R.id.signUpWithGoogleFragment)
+                }
+            }
+        }
     }
 
     /*
@@ -65,5 +79,19 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private suspend fun checkForNewUser(): Boolean{
+        val firestore = FirebaseFirestore.getInstance()
+        val userRef = authViewModel.user.value?.let {
+            firestore.collection("users").document(it.uid)
+        }
+
+        return try {
+            val documentSnapshot = userRef?.get()?.await()
+            documentSnapshot?.exists() ?: false
+        }catch (e: Exception){
+            false
+        }
     }
 }

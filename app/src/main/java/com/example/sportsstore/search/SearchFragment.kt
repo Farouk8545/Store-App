@@ -18,6 +18,7 @@ import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentResearchAdpters
 import com.example.sportsstore.databinding.FragmentSearchBinding
+import com.example.sportsstore.fragments.HomeFragmentDirections
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentResearchItem
 import com.example.sportsstore.viewmodels.AuthViewModel
@@ -101,7 +102,8 @@ class SearchFragment : Fragment(), ChildAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: ChildItem) {
-        findNavController().navigate(R.id.action_searchFragment2_to_productOverviewFragment)
+        val action = SearchFragmentDirections.actionSearchFragment2ToProductOverviewFragment(item)
+        findNavController().navigate(action)
     }
 
 }

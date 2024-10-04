@@ -43,7 +43,7 @@ class SignUpWithGoogleFragment : Fragment() {
                 )
 
                 userRef?.set(hashmap)
-                findNavController().navigate(R.id.action_signUpWithGoogleFragment_to_signInFragment)
+                findNavController().navigate(R.id.action_signUpWithGoogleFragment_to_homeFragment)
             }else{
                 Toast.makeText(requireContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show()
             }

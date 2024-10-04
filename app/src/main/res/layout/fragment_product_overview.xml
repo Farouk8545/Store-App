@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_image"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:maxWidth="200dp"
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/product_name_text"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="real lksjklfjskldjfhwdhfsuihfusdh"/>
@@ -81,7 +81,7 @@
             app:layout_constraintStart_toEndOf="@id/color_text"
             app:layout_constraintTop_toBottomOf="@id/product_description"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"/>
 
         <TextView
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/size_text"
             app:layout_constraintTop_toBottomOf="@id/color_rv"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"/>
 
         <LinearLayout

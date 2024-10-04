@@ -22,6 +22,7 @@ import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentAdapter
 import com.example.sportsstore.databinding.FragmentSearchBarBinding
+import com.example.sportsstore.fragments.HomeFragmentDirections
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
@@ -121,6 +122,7 @@ class SearchBarFragment : Fragment(), ChildAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: ChildItem) {
-        findNavController().navigate(R.id.action_searchBarFragment2_to_productOverviewFragment)
+        val action = SearchBarFragmentDirections.actionSearchBarFragment2ToProductOverviewFragment(item)
+        findNavController().navigate(action)
     }
 }
