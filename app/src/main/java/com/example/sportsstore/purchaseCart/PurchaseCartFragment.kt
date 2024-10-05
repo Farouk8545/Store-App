@@ -1,4 +1,4 @@
-package com.example.sportsstore.favorite
+package com.example.sportsstore.purchaseCart
 
 import android.os.Bundle
 import android.util.Log
@@ -10,33 +10,30 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
-import com.example.sportsstore.adapters.ChildAdapter
+import com.example.sportsstore.adapters.ChildAdapterCart
 import com.example.sportsstore.adapters.ChildAdapterFav
 import com.example.sportsstore.databinding.FragmentFavoriteBinding
-import com.example.sportsstore.databinding.FragmentSearchBarBinding
-import com.example.sportsstore.models.ChildItem
+import com.example.sportsstore.databinding.FragmentPurchaseCardBinding
+import com.example.sportsstore.models.CartModel
 import com.example.sportsstore.models.FavoriteModel
-import com.example.sportsstore.models.ParentItem
-import com.example.sportsstore.models.User
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-class FavoriteFragment : Fragment() {
 
-    private lateinit var binding: FragmentFavoriteBinding
+class PurchaseCartFragment : Fragment() {
+    lateinit var binding: FragmentPurchaseCardBinding
     private lateinit var authViewModel: AuthViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        binding = FragmentPurchaseCardBinding.inflate(inflater,container,false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         authViewModel = ViewModelProvider(
@@ -44,9 +41,10 @@ class FavoriteFragment : Fragment() {
             ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
         )[AuthViewModel::class.java]
 
-        val adapter = ChildAdapterFav(authViewModel, this)
-        binding.recyclerFav.adapter = adapter
-        binding.recyclerFav.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = ChildAdapterCart(authViewModel, this)
+        binding.recyclerCart.adapter = adapter
+        binding.recyclerCart.layoutManager = LinearLayoutManager(requireContext())
+
 
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
             try {
@@ -64,7 +62,7 @@ class FavoriteFragment : Fragment() {
                         .collection("favorites")
                         .get()
                         .await()
-                        .toObjects(FavoriteModel::class.java)
+                        .toObjects(CartModel::class.java)
                 }
 
                 // Await the results of the asynchronous Firestore query
@@ -73,7 +71,7 @@ class FavoriteFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     if (favourites.isEmpty()) {
                         binding.imageView4.visibility = View.VISIBLE
-                        binding.textView5.text = "There are no favorite items yet"
+                        binding.textView5.text = "card is empty"
                     } else {
                         binding.imageView4.visibility = View.GONE
                         binding.textView5.text = "${favourites.size} products"
@@ -91,7 +89,9 @@ class FavoriteFragment : Fragment() {
                 }
             }
         }
-
+        // Inflate the layout for this fragment
         return binding.root
     }
+
+
 }

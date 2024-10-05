@@ -40,6 +40,10 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.favoriteFragment)
                     true
                 }
+                R.id.purchase_cart -> {
+                    navController.navigate(R.id.purchaseCartFragment)
+                    true
+                }
 
                 else -> false
             }

@@ -16,5 +16,8 @@
     <item android:id="@+id/profile"
         android:title="Profile"
         android:icon="@drawable/baseline_account_circle_24"/>
+    <item android:id="@+id/purchase_cart"
+        android:title="cart"
+        android:icon="@drawable/baseline_add_shopping_cart_24"/>
 
 </menu>

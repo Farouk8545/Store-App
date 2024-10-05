@@ -205,4 +205,52 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         private const val TAG = "AuthViewModel"
     }
+
+    fun addPurchaseCart(productName: String, price: Double, imageUrl: String?, description: String?, id: String) {
+        val firestore = FirebaseFirestore.getInstance()
+        val purchaseRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("purchases_cart").document(id)
+        }
+
+        val purchaseData = hashMapOf(
+            "productName" to productName,
+            "price" to price,
+            "imageUrl" to imageUrl,
+            "description" to description
+        )
+
+        purchaseRef?.set(purchaseData)?.addOnSuccessListener {
+            Log.d(TAG, "Purchase added successfully.")
+        }?.addOnFailureListener { e ->
+            Log.d(TAG, "Error adding purchase: ${e.message}")
+        }
+    }
+
+    fun deletePurchaseCart(id: String) {
+        val firestore = FirebaseFirestore.getInstance()
+        val purchaseRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("purchases_cart").document(id)
+        }
+
+        purchaseRef?.delete()?.addOnSuccessListener {
+            Log.d(TAG, "Purchase deleted successfully.")
+        }?.addOnFailureListener { e ->
+            Log.d(TAG, "Error deleting purchase: ${e.message}")
+        }
+    }
+
+    suspend fun purchaseCartExists(id: String): Boolean {
+        val firestore = FirebaseFirestore.getInstance()
+        val purchaseRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("purchases_cart").document(id)
+        }
+
+        return try {
+            val documentSnapshot = purchaseRef?.get()?.await()
+            documentSnapshot?.exists() ?: false
+        } catch (e: Exception) {
+            Log.d(TAG, "Error checking purchase existence: ${e.message}")
+            false
+        }
+    }
 }
