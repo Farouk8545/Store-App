@@ -10,6 +10,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.sportsstore.R
+import com.example.sportsstore.models.CartModel
+import com.example.sportsstore.models.FavoriteModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -27,6 +29,12 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val auth: FirebaseAuth = Firebase.auth
     private lateinit var googleSignInClient: GoogleSignInClient
     private val _user = MutableLiveData<FirebaseUser?>()
+    private val firestore = FirebaseFirestore.getInstance()
+    private val _cartItems = MutableLiveData<List<CartModel>>()
+    val cartItems: LiveData<List<CartModel>> get() = _cartItems
+    private val _favItems = MutableLiveData<List<FavoriteModel>>()
+    val favItems: LiveData<List<FavoriteModel>> get() = _favItems
+
 
     // LiveData to observe the user data
     val user: LiveData<FirebaseUser?>
@@ -140,6 +148,20 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun fetchFavoriteItems(){
+        val userId = auth.currentUser?.uid ?: return
+
+        firestore.collection("users").document(userId).collection("favorites")
+            .get()
+            .addOnSuccessListener { documents ->
+                val items = documents.toObjects(FavoriteModel::class.java)
+                _favItems.postValue(items)
+            }
+            .addOnFailureListener { e ->
+                Log.d(TAG, "Error fetching cart items: ${e.message}")
+            }
+    }
+
     fun addFavorite(product: String, price: Double, imageUrl: String?, description: String?, id: String){
         val firestore = FirebaseFirestore.getInstance()
         val favoriteRef = auth.currentUser?.let {
@@ -150,7 +172,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "product" to product,
             "price" to price,
             "imageUrl" to imageUrl,
-            "description" to description
+            "description" to description,
+            "id" to id
         )
 
         favoriteRef?.set(favoriteData)?.addOnSuccessListener {
@@ -205,6 +228,20 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         private const val TAG = "AuthViewModel"
     }
 
+    fun fetchCartItems() {
+        val userId = auth.currentUser?.uid ?: return
+
+        firestore.collection("users").document(userId).collection("purchases_cart")
+            .get()
+            .addOnSuccessListener { documents ->
+                val items = documents.toObjects(CartModel::class.java)
+                _cartItems.postValue(items)
+            }
+            .addOnFailureListener { e ->
+                Log.d(TAG, "Error fetching cart items: ${e.message}")
+            }
+    }
+
     fun addPurchaseCart(productName: String, price: Double, imageUrl: String?, description: String?, id: String) {
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
@@ -215,11 +252,13 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "productName" to productName,
             "price" to price,
             "imageUrl" to imageUrl,
-            "description" to description
+            "description" to description,
+            "id" to id
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {
             Log.d(TAG, "Purchase added successfully.")
+            fetchCartItems()
         }?.addOnFailureListener { e ->
             Log.d(TAG, "Error adding purchase: ${e.message}")
         }
@@ -233,6 +272,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
         purchaseRef?.delete()?.addOnSuccessListener {
             Log.d(TAG, "Purchase deleted successfully.")
+            fetchCartItems()
         }?.addOnFailureListener { e ->
             Log.d(TAG, "Error deleting purchase: ${e.message}")
         }

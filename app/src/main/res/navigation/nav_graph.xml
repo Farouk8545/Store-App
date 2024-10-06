@@ -171,5 +171,8 @@
         <action
             android:id="@+id/action_purchaseCartFragment2_to_fragmentSettingBinding"
             app:destination="@id/fragmentSettingBinding" />
+        <action
+            android:id="@+id/action_purchaseCartFragment2_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
     </fragment>
 </navigation>
