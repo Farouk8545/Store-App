@@ -97,6 +97,7 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
 
     override fun onItemClick(item: ChildItem) {
         // Handle the click event here, e.g., open a new fragment
-        findNavController().navigate(R.id.action_homeFragment_to_productOverviewFragment)
+        val action = HomeFragmentDirections.actionHomeFragmentToProductOverviewFragment(item)
+        findNavController().navigate(action)
     }
 }

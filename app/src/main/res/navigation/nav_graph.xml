@@ -20,8 +20,11 @@
             android:id="@+id/action_homeFragment_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_homeFragment_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment2"
@@ -43,8 +46,11 @@
             android:id="@+id/action_searchFragment2_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
         <action
-            android:id="@+id/action_searchFragment2_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_searchFragment2_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
+        <action
+            android:id="@+id/action_searchFragment2_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/searchBarFragment2"
@@ -60,8 +66,8 @@
             android:id="@+id/action_searchBarFragment2_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
         <action
-            android:id="@+id/action_searchBarFragment2_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_searchBarFragment2_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/fragmentProfileBinding"
@@ -80,8 +86,11 @@
             android:id="@+id/action_fragmentProfileBinding_to_purchaseHistoryFragment"
             app:destination="@id/purchaseHistoryFragment" />
         <action
-            android:id="@+id/action_fragmentProfileBinding_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_fragmentProfileBinding_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
+        <action
+            android:id="@+id/action_fragmentProfileBinding_to_purchaseCartFragment22"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSettingBinding"
@@ -91,8 +100,8 @@
             android:id="@+id/action_fragmentSettingBinding_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
         <action
-            android:id="@+id/action_fragmentSettingBinding_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_fragmentSettingBinding_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/purchaseHistoryFragment"
@@ -103,8 +112,8 @@
             android:id="@+id/action_purchaseHistoryFragment_to_fragmentProfileBinding"
             app:destination="@id/fragmentProfileBinding" />
         <action
-            android:id="@+id/action_purchaseHistoryFragment_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_purchaseHistoryFragment_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -120,36 +129,47 @@
             android:id="@+id/action_favoriteFragment_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
         <action
-            android:id="@+id/action_favoriteFragment_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_favoriteFragment_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
         android:id="@+id/productOverviewFragment"
         android:name="com.example.sportsstore.fragments.ProductOverviewFragment"
         android:label="fragment_product_overview"
         tools:layout="@layout/fragment_product_overview" >
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.sportsstore.models.ChildItem" />
         <action
-            android:id="@+id/action_productOverviewFragment_to_purchaseCartFragment"
-            app:destination="@id/purchaseCartFragment" />
-        <action
-            android:id="@+id/action_productOverviewFragment_to_purchaseCartFragment2"
-            app:destination="@id/purchaseCartFragment" />
+            android:id="@+id/action_productOverviewFragment_to_purchaseCartFragment22"
+            app:destination="@id/purchaseCartFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/purchaseCartFragment"
+        android:id="@+id/signUpWithGoogleFragment"
+        android:name="com.example.sportsstore.signinfragments.SignUpWithGoogleFragment"
+        android:label="SignUpWithGoogleFragment" >
+        <action
+            android:id="@+id/action_signUpWithGoogleFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signUpWithGoogleFragment_to_purchaseCartFragment2"
+            app:destination="@id/purchaseCartFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseCartFragment2"
         android:name="com.example.sportsstore.purchaseCart.PurchaseCartFragment"
         android:label="PurchaseCartFragment" >
         <action
-            android:id="@+id/action_purchaseCartFragment_to_fragmentSettingBinding"
-            app:destination="@id/fragmentSettingBinding" />
+            android:id="@+id/action_purchaseCartFragment2_to_signUpWithGoogleFragment"
+            app:destination="@id/signUpWithGoogleFragment" />
         <action
-            android:id="@+id/action_purchaseCartFragment_to_fragmentProfileBinding"
-            app:destination="@id/fragmentProfileBinding" />
-        <action
-            android:id="@+id/action_purchaseCartFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
-        <action
-            android:id="@+id/action_purchaseCartFragment_to_searchBarFragment2"
+            android:id="@+id/action_purchaseCartFragment2_to_searchBarFragment2"
             app:destination="@id/searchBarFragment2" />
+        <action
+            android:id="@+id/action_purchaseCartFragment2_to_fragmentSettingBinding"
+            app:destination="@id/fragmentSettingBinding" />
     </fragment>
 </navigation>

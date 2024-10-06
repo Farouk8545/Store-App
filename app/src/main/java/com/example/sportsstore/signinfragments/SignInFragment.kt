@@ -15,12 +15,6 @@ import com.example.sportsstore.MainActivity
 import com.example.sportsstore.R
 import com.example.sportsstore.databinding.FragmentSignInBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class SignInFragment : Fragment() {
 
@@ -60,17 +54,9 @@ class SignInFragment : Fragment() {
         // Observe user data
         authViewModel.user.observe(viewLifecycleOwner){ user ->
             if(user != null){
-                GlobalScope.launch {
-                    if(!checkForNewUser()) {
-                        withContext(Dispatchers.Main){
-                            findNavController().navigate(R.id.action_signInFragment_to_signUpWithGoogleFragment)
-                        }
-                    }else{
-                        val intent = Intent(requireActivity(), MainActivity::class.java)
-                        startActivity(intent)
-                        requireActivity().finish()
-                    }
-                }
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
             }
         }
 
@@ -91,19 +77,6 @@ class SignInFragment : Fragment() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 authViewModel.signIn(email, password)
             }else Toast.makeText(requireContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show()
-        }
-    }
-    private suspend fun checkForNewUser(): Boolean{
-        val firestore = FirebaseFirestore.getInstance()
-        val userRef = authViewModel.user.value?.let {
-            firestore.collection("users").document(it.uid)
-        }
-
-        return try {
-            val documentSnapshot = userRef?.get()?.await()
-            documentSnapshot?.exists() ?: false
-        }catch (e: Exception){
-            false
         }
     }
 }
