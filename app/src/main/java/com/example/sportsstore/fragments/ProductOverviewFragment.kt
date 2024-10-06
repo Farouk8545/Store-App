@@ -1,6 +1,8 @@
 package com.example.sportsstore.fragments
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,19 +11,28 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.sportsstore.R
+import com.example.sportsstore.adapters.ChildAdapter.OnItemClickListener
 import com.example.sportsstore.adapters.ColorChoiceAdapter
 import com.example.sportsstore.databinding.FragmentProductOverviewBinding
+import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.viewmodels.AuthViewModel
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ProductOverviewFragment : Fragment() {
     private lateinit var binding: FragmentProductOverviewBinding
     private val args by navArgs<ProductOverviewFragmentArgs>()
+    private lateinit var authViewModel: AuthViewModel
+    lateinit var item: ChildItem
+    lateinit var onItemClickListener: OnItemClickListener
+
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,11 +41,14 @@ class ProductOverviewFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProductOverviewBinding.inflate(inflater, container, false)
 
+        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
+
         val toolbar = binding.toolbar
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
         toolbar.setPadding(0, 0, 0, 0)
         toolbar.setContentInsetsAbsolute(0, 0)
+
 
 
         val layoutParams = Toolbar.LayoutParams(
@@ -55,6 +69,30 @@ class ProductOverviewFragment : Fragment() {
         val adapter = args.currentProduct.colors?.let { ColorChoiceAdapter(it) }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+
+            binding.cartAdd.setOnClickListener {
+                GlobalScope.launch {
+                    if(authViewModel.purchaseCartExists(args.currentProduct.id)){
+                        authViewModel.deletePurchaseCart(args.currentProduct.id)
+
+                    }else{
+                        authViewModel.addPurchaseCart(
+                            args.currentProduct.productName,
+                            args.currentProduct.price,
+                            args.currentProduct.imageUrl,
+                            args.currentProduct.description,
+                            args.currentProduct.id
+                        )
+                    }
+                }
+            }
+
+        binding.root.setOnClickListener {
+            onItemClickListener.onItemClick(item)
+        }
+
+
 
         val spinnerAdapter =
             context?.let {

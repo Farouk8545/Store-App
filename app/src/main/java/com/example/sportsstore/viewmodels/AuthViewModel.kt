@@ -14,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -112,7 +111,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String){
+    fun addPurchase(product: String, price: Double, date: String?, state: String, paymentMethod: String, imageUrl: String?, id: String){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
             firestore.collection("users").document(it.uid).collection("purchases").document(id)

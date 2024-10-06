@@ -28,7 +28,6 @@ import kotlinx.coroutines.withContext
 class PurchaseCartFragment : Fragment() {
     lateinit var binding: FragmentPurchaseCardBinding
     private lateinit var authViewModel: AuthViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +49,7 @@ class PurchaseCartFragment : Fragment() {
             try {
                 val uid = authViewModel.user.value?.uid
                 if (uid == null) {
-                    Log.e("FavoriteFragment", "User UID is null")
+                    Log.e("cartFragment", "User UID is null")
                     return@launch
                 }
 
@@ -59,7 +58,7 @@ class PurchaseCartFragment : Fragment() {
                     FirebaseFirestore.getInstance()
                         .collection("users")
                         .document(uid)
-                        .collection("favorites")
+                        .collection("purchases_cart")
                         .get()
                         .await()
                         .toObjects(CartModel::class.java)
@@ -83,8 +82,8 @@ class PurchaseCartFragment : Fragment() {
 
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Log.e("FavoriteFragment", "Error fetching favorites", e)
-                    binding.textView5.text = "Failed to load favorites."
+                    Log.e("CartFragment", "Error fetching Cart", e)
+                    binding.textView5.text = "Failed to load cart."
                     binding.imageView4.visibility = View.VISIBLE
                 }
             }

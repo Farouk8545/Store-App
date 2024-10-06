@@ -6,6 +6,6 @@ plugins {
 }
 buildscript {
     dependencies {
-        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.2") // Use latest version
+        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.8.2") // Use latest version
     }
 }
