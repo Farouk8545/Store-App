@@ -12,120 +12,132 @@
         android:layout_height="match_parent"
         tools:context=".signinfragments.SignUpFragment">
 
-        <TextView
-            android:id="@+id/loginText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp"
-            android:text="Sign Up"
-            android:textSize="30sp"
-            android:textStyle="italic" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/loginText"
-            app:layout_constraintStart_toStartOf="parent"
-            android:hint="Email"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/passwordLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/password"
+            android:drawablePadding="16dp"
+            android:ems="10"
             android:hint="Password"
-            app:layout_constraintTop_toBottomOf="@id/emailLayout"
+            android:inputType="textPassword"
+            android:textColorHint="#3B608C"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:importantForAccessibility="no" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
         <com.hbb20.CountryCodePicker
             android:id="@+id/countryCodePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordLayout"
+            android:layout_width="111dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            app:ccp_showNameCode="false"/>
+            android:layout_marginEnd="10sp"
+            app:ccp_showNameCode="false"
+            app:layout_constraintEnd_toStartOf="@+id/phoneNumberEditText"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <EditText
+            android:id="@+id/phoneNumberEditText"
+            android:layout_width="222dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/edit_text_background"
+            android:digits="0123456789"
+            android:drawableStart="@drawable/phone"
+            android:drawablePadding="16dp"
+            android:ems="10"
             android:hint="Phone Number"
-            app:layout_constraintTop_toTopOf="@id/countryCodePicker"
-            app:layout_constraintBottom_toBottomOf="@id/countryCodePicker"
-            app:layout_constraintStart_toEndOf="@id/countryCodePicker"
-            app:layout_constraintEnd_toEndOf="@id/passwordLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+            android:importantForAccessibility="no"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColorHint="#3B608C"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phoneNumberEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:digits="0123456789"
-                android:importantForAccessibility="no" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/addressLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="address"
-            app:layout_constraintTop_toBottomOf="@id/countryCodePicker"
+        <EditText
+            android:id="@+id/addressEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableStart="@drawable/location"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="text"
+            android:importantForAccessibility="no"
+            android:textColorHint="#3B608C"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp">
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/addressEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:importantForAccessibility="no" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="414dp"
+            android:layout_height="304dp"
+            android:layout_marginTop="4dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/top_background1" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/emailSignUpButton"
+        <TextView
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Create\nAccount"
+            android:layout_marginStart="32dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#6672FF"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addressLayout"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:text="Sign Up"
-            android:textSize="15sp"
-            style="@style/Widget.MaterialComponents.Button" />
+            android:drawableStart="@drawable/email"
+            android:drawablePadding="16dp"
+            android:hint="Email"
+            android:textColorHint="#3B608C"
+            android:textSize="18sp"
+            android:background="@drawable/edit_text_background"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <ImageView
+            android:id="@+id/emailSignUpButton"
+            android:layout_width="133dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+            app:srcCompat="@drawable/btn_arraw1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
