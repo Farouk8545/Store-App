@@ -11,5 +11,6 @@
     <string name="overtures">overtures</string>
     <string name="todo">TODO</string>
     <string name="suggests">suggests</string>
+    <string name="delete_item">delete_item</string>
 
 </resources>

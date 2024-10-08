@@ -2,6 +2,7 @@ package com.example.sportsstore.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sportsstore.R
@@ -26,7 +27,45 @@ class ChildAdapterCart(
             binding.textView7.text = item.price.toString()
             Glide.with(binding.imageView3).load(item.imageUrl).placeholder(R.drawable.baseline_image_24).into(binding.imageView3)
             binding.textView8.text = item.description
-            binding.textView6.text = item.product
+            binding.productNameCart.text = item.productName.toString()
+            binding.itemCount.text = item.quantity.toString()
+            authViewModel.updateCartItemQuantity(item.id, item.quantity)
+
+            // Disable remove button if quantity is 1
+            binding.buttonRemove.isEnabled = item.quantity > 1
+
+            binding.buttonAdd.setOnClickListener {
+                item.quantity++ // Increment quantity
+                binding.itemCount.text = item.quantity.toString()
+                binding.buttonRemove.isEnabled = true // Re-enable the remove button
+
+                // Update quantity in Firebase
+                authViewModel.updateCartItemQuantity(item.id, item.quantity)
+            }
+
+            // Handle Remove Button Click
+            binding.buttonRemove.setOnClickListener {
+                if (item.quantity > 1) {
+                    item.quantity-- // Decrement quantity
+                    binding.itemCount.text = item.quantity.toString()
+
+                    // Disable remove button if quantity is 1
+                    if (item.quantity == 1) {
+                        binding.buttonRemove.isEnabled = false
+                    }
+
+                    // Update quantity in Firebase
+                    authViewModel.updateCartItemQuantity(item.id, item.quantity)
+                }
+            }
+
+            // Handle delete button
+            binding.deleteButton.setOnClickListener {
+                authViewModel.deletePurchaseCart(item.id)
+            }
+
+
+
             binding.root.setOnClickListener{
                 onItemClickListener.onItemClick(item)
             }
@@ -58,3 +97,4 @@ class ChildAdapterCart(
 
 
 }
+

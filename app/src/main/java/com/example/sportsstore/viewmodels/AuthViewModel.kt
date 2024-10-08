@@ -292,4 +292,18 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             false
         }
     }
+
+     fun updateCartItemQuantity(itemId: String, newQuantity: Int) {
+        val firestore = FirebaseFirestore.getInstance()
+        val purchaseRef = auth.currentUser?.let {
+            firestore.collection("users").document(it.uid).collection("purchases_cart").document(itemId)
+        }
+
+        purchaseRef?.update("quantity", newQuantity)?.addOnSuccessListener {
+            Log.d(TAG, "Quantity updated successfully for itemId: $itemId")
+        }?.addOnFailureListener { e ->
+            Log.d(TAG, "Error updating quantity for itemId: $itemId, error: ${e.message}")
+        }
+    }
+
 }
