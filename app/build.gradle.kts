@@ -57,6 +57,10 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.fragment.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +77,16 @@ dependencies {
 
     //country code picker
     implementation("com.hbb20:ccp:2.7.0")
+
+
+    // PayPal SDK (Replace with actual versions)
+    implementation("com.paypal.android:card-payments:1.0.0")
+    implementation("com.paypal.android:paypal-web-payments:1.0.0")
+    implementation("com.paypal.sdk:paypal-android-sdk:2.16.0")
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("com.squareup.okhttp3:okhttp:3.12.12")
+
 }

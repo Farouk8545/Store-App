@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
@@ -32,11 +33,13 @@ class ProductOverviewFragment : Fragment() {
     lateinit var item: ChildItem
     lateinit var onItemClickListener: OnItemClickListener
 
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
 
         // Inflate the layout for this fragment
         binding = FragmentProductOverviewBinding.inflate(inflater, container, false)

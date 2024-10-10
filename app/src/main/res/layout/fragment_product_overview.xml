@@ -117,8 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="Buy Now"
-                android:textSize="20sp"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:textSize="20sp" />
 
             <ImageButton
                 android:id="@+id/cart_add"
