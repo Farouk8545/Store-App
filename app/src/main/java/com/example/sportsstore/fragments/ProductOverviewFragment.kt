@@ -1,8 +1,6 @@
 package com.example.sportsstore.fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.sportsstore.R
-import com.example.sportsstore.adapters.ChildAdapter.OnItemClickListener
 import com.example.sportsstore.adapters.ColorChoiceAdapter
 import com.example.sportsstore.databinding.FragmentProductOverviewBinding
 import com.example.sportsstore.models.ChildItem
@@ -30,7 +27,6 @@ class ProductOverviewFragment : Fragment() {
     private val args by navArgs<ProductOverviewFragmentArgs>()
     private lateinit var authViewModel: AuthViewModel
     lateinit var item: ChildItem
-    lateinit var onItemClickListener: OnItemClickListener
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
@@ -70,29 +66,22 @@ class ProductOverviewFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        binding.cartAdd.setOnClickListener {
+            GlobalScope.launch {
+                if(authViewModel.purchaseCartExists(args.currentProduct.id)){
+                    authViewModel.deletePurchaseCart(args.currentProduct.id)
 
-            binding.cartAdd.setOnClickListener {
-                GlobalScope.launch {
-                    if(authViewModel.purchaseCartExists(args.currentProduct.id)){
-                        authViewModel.deletePurchaseCart(args.currentProduct.id)
-
-                    }else{
-                        authViewModel.addPurchaseCart(
-                            args.currentProduct.productName,
-                            args.currentProduct.price,
-                            args.currentProduct.imageUrl,
-                            args.currentProduct.description,
-                            args.currentProduct.id
-                        )
-                    }
+                }else{
+                    authViewModel.addPurchaseCart(
+                        args.currentProduct.productName,
+                        args.currentProduct.price,
+                        args.currentProduct.imageUrl,
+                        args.currentProduct.description,
+                        args.currentProduct.id
+                    )
                 }
             }
-
-        binding.root.setOnClickListener {
-            onItemClickListener.onItemClick(item)
         }
-
-
 
         val spinnerAdapter =
             context?.let {

@@ -25,8 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@mipmap/real_madrid_away_2023_foreground" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/product_name_text"

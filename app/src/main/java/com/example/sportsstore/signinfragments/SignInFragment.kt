@@ -11,10 +11,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.sportsstore.AdminDashboardActivity
 import com.example.sportsstore.MainActivity
 import com.example.sportsstore.R
 import com.example.sportsstore.databinding.FragmentSignInBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignInFragment : Fragment() {
 
@@ -54,9 +56,22 @@ class SignInFragment : Fragment() {
         // Observe user data
         authViewModel.user.observe(viewLifecycleOwner){ user ->
             if(user != null){
-                val intent = Intent(requireActivity(), MainActivity::class.java)
-                startActivity(intent)
-                requireActivity().finish()
+                authViewModel.user.value?.uid?.let {
+                    FirebaseFirestore.getInstance().collection("users").document(it)
+                }?.get()?.addOnSuccessListener { document ->
+                    if(document.exists()){
+                        val role = document.getString("role")
+                        if(role == "admin"){
+                            val intent = Intent(requireActivity(), AdminDashboardActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }else if(role == "customer"){
+                            val intent = Intent(requireActivity(), MainActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
+                    }
+                }
             }
         }
 
