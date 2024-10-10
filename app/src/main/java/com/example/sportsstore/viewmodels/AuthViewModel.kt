@@ -102,7 +102,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                         "email" to email,
                         "displayName" to user.value?.displayName,
                         "phoneNumber" to phoneNumber,
-                        "address" to address
+                        "address" to address,
+                        "role" to "customer"
                     )
                     userRef?.set(hashmap)
                     _user.value = auth.currentUser

@@ -39,7 +39,8 @@ class SignUpWithGoogleFragment : Fragment() {
                     "email" to authViewModel.user.value?.email,
                     "displayName" to authViewModel.user.value?.displayName,
                     "phoneNumber" to phoneNumber,
-                    "address" to address
+                    "address" to address,
+                    "role" to "customer"
                 )
 
                 userRef?.set(hashmap)
