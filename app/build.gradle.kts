@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +74,8 @@ dependencies {
 
     //country code picker
     implementation("com.hbb20:ccp:2.7.0")
-}
+
+
+    implementation ("com.paypal.sdk:paypal-android-sdk:2.16.0")
+
+} 
