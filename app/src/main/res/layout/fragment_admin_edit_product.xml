@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".adminFragments.AdminEditProductFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_32"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.022"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.021"
+                tools:layout_editor_absoluteX="16dp" />
+
+            <EditText
+                android:id="@+id/id_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Please enter ID"
+                android:inputType="text"
+                android:padding="8dp"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                app:layout_constraintVertical_bias="0.047" />
+
+            <Button
+                android:id="@+id/search_by_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:padding="8dp"
+                android:text="search"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/id_input"
+                app:layout_constraintVertical_bias="0.04" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_by_id"
+                app:layout_constraintVertical_bias="0.0">
+
+                <EditText
+                    android:id="@+id/name_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/price_et"
+                    android:hint="Name"
+                    android:maxLines="1" />
+
+                <EditText
+                    android:id="@+id/price_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Price"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/year_et"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/year_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:hint="Year"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toStartOf="@id/id_et"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/id_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:hint="Product Id"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/year_et"
+                    app:layout_constraintTop_toTopOf="@+id/price_et" />
+
+                <EditText
+                    android:id="@+id/description_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Description"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="@+id/id_et"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/year_et" />
+
+                <EditText
+                    android:id="@+id/color_et"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="Color"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toStartOf="@id/add_color_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description_et" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/add_color_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/color_et"
+                    app:layout_constraintTop_toTopOf="@id/color_et" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/colors_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/color_et" />
+
+                <TextView
+                    android:id="@+id/sizes_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Sizes:"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/colors_rv" />
+
+                <CheckBox
+                    android:id="@+id/small_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="S"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <CheckBox
+                    android:id="@+id/medium_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="M"
+                    app:layout_constraintStart_toEndOf="@id/small_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <CheckBox
+                    android:id="@+id/large_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="L"
+                    app:layout_constraintStart_toEndOf="@id/medium_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <CheckBox
+                    android:id="@+id/xlarge_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="XL"
+                    app:layout_constraintStart_toEndOf="@id/large_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <CheckBox
+                    android:id="@+id/xxlarge_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="XXL"
+                    app:layout_constraintStart_toEndOf="@id/xlarge_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <CheckBox
+                    android:id="@+id/xxxlarge_checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/custom_checkbox"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="XXXL"
+                    app:layout_constraintStart_toEndOf="@id/xxlarge_checkbox"
+                    app:layout_constraintTop_toBottomOf="@id/sizes_text" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/add_product_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Add Product"
+                    android:textAllCaps="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/large_checkbox"
+                    app:layout_constraintVertical_bias="0.423" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

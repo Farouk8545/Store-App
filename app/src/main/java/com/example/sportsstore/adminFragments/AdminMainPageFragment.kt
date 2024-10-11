@@ -37,6 +37,9 @@ class AdminMainPageFragment : Fragment() {
         binding.addRemoveProductButton.setOnClickListener {
             findNavController().navigate(R.id.action_adminMainPageFragment_to_adminAddRemoveProductFragment)
         }
+        binding.removeProductButton.setOnClickListener{
+            findNavController().navigate(R.id.action_adminMainPageFragment_to_adminRemoveProductFragment2)
+        }
 
         binding.logOutButton.setOnClickListener {
             authViewModel.signOut()
