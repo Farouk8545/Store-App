@@ -27,13 +27,12 @@ class ChildAdapterFav(
             binding.textView7.text = item.price.toString()
             Glide.with(binding.imageView3).load(item.imageUrl).placeholder(R.drawable.baseline_image_24).into(binding.imageView3)
             binding.textView8.text = item.description
-            binding.textView6.text = item.product
 
             binding.root.setOnClickListener {
                 listener.onItemClick(item)
             }
         }
-    }
+}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val binding = ColumFavLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
