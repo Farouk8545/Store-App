@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -120,7 +121,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun addPurchase(product: String, price: Double, date: String?, state: String, paymentMethod: String, imageUrl: String?, id: String){
+    private fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String, color: String, size: String){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
             firestore.collection("users").document(it.uid).collection("purchases").document(id)
@@ -132,7 +133,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "date" to date,
             "state" to state,
             "paymentMethod" to paymentMethod,
-            "imageUrl" to imageUrl
+            "imageUrl" to imageUrl,
+            "id" to id,
+            "color" to color,
+            "size" to size
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {
@@ -304,5 +308,33 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }?.addOnFailureListener { e ->
             Log.d(TAG, "Error updating quantity for itemId: $itemId, error: ${e.message}")
             }
+    }
+    fun addOrder(productName: String, year: String?, price: Double, imageUrl: String?, description: String?, id: String, color: String, size: String, amount: Int, address: String, email: String, phoneNumber: String, paymentMethod: String){
+        val firestore = FirebaseFirestore.getInstance()
+        val orderRef = firestore.collection("orders")
+
+        val order = hashMapOf(
+            "productName" to productName,
+            "year" to year,
+            "price" to price,
+            "imageUrl" to imageUrl,
+            "description" to description,
+            "id" to id,
+            "color" to color,
+            "size" to size,
+            "amount" to amount,
+            "email" to email,
+            "date" to Timestamp.now(),
+            "state" to "undelivered",
+            "paymentMethod" to paymentMethod,
+            "address" to address,
+            "phoneNumber" to phoneNumber
+        )
+
+        orderRef.add(order).addOnSuccessListener {
+            addPurchase(productName, price, Timestamp.now(), "pending", "cash", imageUrl, id, color, size)
+        }.addOnFailureListener { e ->
+                Log.d(TAG, "Error adding order: ${e.message}")
+        }
     }
 }

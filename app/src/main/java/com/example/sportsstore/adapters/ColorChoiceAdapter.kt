@@ -34,4 +34,8 @@ class ColorChoiceAdapter(private val colors: List<String>): RecyclerView.Adapter
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bindDate(colors[position], position)
     }
+
+    fun getSelectedColor(): String {
+        return colors[selectedPosition]
+    }
 }

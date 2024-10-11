@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
@@ -87,9 +86,23 @@ class ProductOverviewFragment : Fragment() {
             }
         }
 
+        val amountSpinnerAdapter =
+            context?.let {
+            ArrayAdapter(
+                it, android.R.layout.simple_spinner_item,
+                arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+            )
+        }
+        amountSpinnerAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.amountSpinner.adapter = amountSpinnerAdapter
+
         binding.buyNow.setOnClickListener {
-            val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToPaymentFragment(args.currentProduct)
-            findNavController().navigate(action)
+            val action = adapter?.getSelectedColor()?.let { it1 ->
+                ProductOverviewFragmentDirections.actionProductOverviewFragmentToPaymentFragment(args.currentProduct, binding.amountSpinner.selectedItem.toString().toInt(), it1, binding.sizeSpinner.selectedItem.toString())
+            }
+            if (action != null) {
+                findNavController().navigate(action)
+            }
         }
 
         val spinnerAdapter =

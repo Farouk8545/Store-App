@@ -5,21 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sportsstore.R
-import com.example.sportsstore.fragments.ProductOverviewFragmentArgs
+import com.example.sportsstore.databinding.FragmentPaymentBinding
 import com.example.sportsstore.models.User
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
-import com.hbb20.CountryCodePicker
 import com.paypal.android.sdk.payments.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -37,16 +33,7 @@ class PaymentFragment : Fragment() {
         private const val PAYPAL_REQUEST_CODE = 123
     }
 
-    private lateinit var numItemEditText: EditText
-    private lateinit var totalCostEditText: EditText
-    private lateinit var addressEditText: EditText
-    private lateinit var emailEditText: EditText
-    private lateinit var phoneNumberEditText: EditText
-    private lateinit var countryCodePicker: CountryCodePicker
-    private lateinit var btnPayment: Button
-    private lateinit var checkBox: CheckBox
-    private lateinit var numberOfItemsText: TextView
-    private lateinit var totalCostText: TextView
+    private lateinit var binding: FragmentPaymentBinding
     private lateinit var authViewModel: AuthViewModel
     private val args by navArgs<PaymentFragmentArgs>()
 
@@ -72,19 +59,9 @@ class PaymentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_payment, container, false)
+        binding = FragmentPaymentBinding.inflate(inflater, container, false)
 
         authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
-
-        // Initialize views
-        addressEditText = view.findViewById(R.id.addressEditText)
-        emailEditText = view.findViewById(R.id.emailEditText)
-        phoneNumberEditText = view.findViewById(R.id.phoneNumberEditText)
-        countryCodePicker = view.findViewById(R.id.countryCodePicker)
-        btnPayment = view.findViewById(R.id.btnpayment)
-        checkBox = view.findViewById(R.id.cash_on_delivery_checkbox)
-        numberOfItemsText = view.findViewById(R.id.number_of_items_text)
-        totalCostText = view.findViewById(R.id.total_cost_text)
 
         val firestore = FirebaseFirestore.getInstance()
 
@@ -102,25 +79,47 @@ class PaymentFragment : Fragment() {
 
             withContext(Dispatchers.Main){
                 userRef?.let {
-                    addressEditText.setText(it.address)
-                    emailEditText.setText(it.email)
-                    phoneNumberEditText.setText(it.phoneNumber)
+                    binding.addressEditText.setText(it.address)
+                    binding.emailEditText.setText(it.email)
+                    binding.phoneNumberEditText.setText(it.phoneNumber)
                 }
             }
         }
 
-        btnPayment.setOnClickListener {
-            getPayment()
+        binding.totalCostText.text = "${args.currentProduct.price * args.currentAmount}EGP"
+        binding.numberOfItemsText.text = "${args.currentAmount} items"
+
+        binding.btnpayment.setOnClickListener {
+            if(binding.cashOnDeliveryCheckbox.isChecked){
+                authViewModel.addOrder(
+                    args.currentProduct.productName,
+                    args.currentProduct.year,
+                    args.currentProduct.price,
+                    args.currentProduct.imageUrl,
+                    args.currentProduct.description,
+                    args.currentProduct.id,
+                    args.selectedColor,
+                    args.selectedSize,
+                    args.currentAmount,
+                    binding.addressEditText.text.toString(),
+                    binding.emailEditText.text.toString(),
+                    binding.phoneNumberEditText.text.toString(),
+                    "Cash On Delivery"
+                )
+                Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_paymentFragment_to_homeFragment)
+            }else{
+                getPayment()
+            }
         }
 
-        return view
+        return binding.root
     }
 
     private fun validateInputs(): Boolean {
-        if (numItemEditText.text.isNullOrBlank() ||
-            addressEditText.text.isNullOrBlank() ||
-            emailEditText.text.isNullOrBlank() ||
-            phoneNumberEditText.text.isNullOrBlank()) {
+        if (binding.addressEditText.text.isNullOrBlank() ||
+            binding.emailEditText.text.isNullOrBlank() ||
+            binding.phoneNumberEditText.text.isNullOrBlank()) {
             Toast.makeText(context, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             return false
         }
@@ -129,7 +128,7 @@ class PaymentFragment : Fragment() {
     }
 
     private fun getPayment() {
-        val amount = totalCostEditText.text.toString().replace("$", "")
+        val amount = binding.totalCostText.text.toString().substringBefore("EGP")
         if (amount.isNotEmpty()) {
             try {
                 val payment = PayPalPayment(
