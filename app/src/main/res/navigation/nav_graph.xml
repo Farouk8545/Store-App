@@ -102,6 +102,21 @@
         <action
             android:id="@+id/action_fragmentSettingBinding_to_purchaseCartFragment2"
             app:destination="@id/purchaseCartFragment2" />
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_accountSettingsFragment"
+            app:destination="@id/accountSettingsFragment" />
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment" />
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_languageSettingsFragment"
+            app:destination="@id/languageSettingsFragment" />
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_privacySecuritySettingsFragment"
+            app:destination="@id/privacySecuritySettingsFragment" />
+        <action
+            android:id="@+id/action_fragmentSettingBinding_to_helpSupportFragment"
+            app:destination="@id/helpSupportFragment" />
     </fragment>
     <fragment
         android:id="@+id/purchaseHistoryFragment"
@@ -201,4 +216,24 @@
             android:id="@+id/action_paymentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/accountSettingsFragment"
+        android:name="com.example.sportsstore.AccountSettingsFragment"
+        android:label="AccountSettingsFragment" />
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="com.example.sportsstore.NotificationSettingsFragment"
+        android:label="NotificationSettingsFragment" />
+    <fragment
+        android:id="@+id/helpSupportFragment"
+        android:name="com.example.sportsstore.fragments.settingcomponentfragment.HelpSupportFragment"
+        android:label="HelpSupportFragment" />
+    <fragment
+        android:id="@+id/languageSettingsFragment"
+        android:name="com.example.sportsstore.fragments.settingcomponentfragment.LanguageSettingsFragment"
+        android:label="LanguageSettingsFragment" />
+    <fragment
+        android:id="@+id/privacySecuritySettingsFragment"
+        android:name="com.example.sportsstore.fragments.settingcomponentfragment.PrivacySecuritySettingsFragment"
+        android:label="PrivacySecuritySettingsFragment" />
 </navigation>

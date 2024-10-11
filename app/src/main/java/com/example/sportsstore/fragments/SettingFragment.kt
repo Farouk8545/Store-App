@@ -32,7 +32,7 @@ class FragmentSettingBinding : Fragment() {
 
         binding.privacySettingsButton.setOnClickListener {
             // Handle Privacy & Security button click
-            findNavController().navigate(R.id.action_fragmentSettingBinding_to_privacySecuritySettingsFragment2)
+            findNavController().navigate(R.id.action_fragmentSettingBinding_to_privacySecuritySettingsFragment)
         }
 
         binding.paymentSettingsButton.setOnClickListener {

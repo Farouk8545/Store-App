@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -120,7 +121,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun addPurchase(product: String, price: Double, date: String?, state: String, paymentMethod: String, imageUrl: String?, id: String){
+    private fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String, color: String, size: String){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
             firestore.collection("users").document(it.uid).collection("purchases").document(id)
@@ -291,6 +292,33 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         } catch (e: Exception) {
             Log.d(TAG, "Error checking purchase existence: ${e.message}")
             false
+        }
+    }
+
+    fun addOrder(productName: String, year:String?, price: Double, imageUrl: String?, description: String?, id: String, selectedColor: String, selectedSize: String, amount: Int, address: String, email: String, phoneNumber: String, paymentMethod: String){
+        val firestore = FirebaseFirestore.getInstance()
+        val orderRef = firestore.collection("orders")
+
+        val orderData = hashMapOf(
+            "productName" to productName,
+            "year" to year,
+            "price" to price,
+            "imageUrl" to imageUrl,
+            "description" to description,
+            "id" to id,
+            "selectedColor" to selectedColor,
+            "selectedSize" to selectedSize,
+            "amount" to amount,
+            "address" to address,
+            "email" to email,
+            "phoneNumber" to phoneNumber,
+            "paymentMethod" to paymentMethod,
+            "state" to "undelivered",
+            "date" to Timestamp.now()
+        )
+
+        orderRef.add(orderData).addOnSuccessListener {
+            addPurchase(productName, price, Timestamp.now(), "undelivered", paymentMethod, imageUrl, id, selectedColor, selectedSize)
         }
     }
 }
