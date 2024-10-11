@@ -146,6 +146,9 @@
         <action
             android:id="@+id/action_productOverviewFragment_to_purchaseCartFragment22"
             app:destination="@id/purchaseCartFragment2" />
+        <action
+            android:id="@+id/action_productOverviewFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpWithGoogleFragment"
@@ -174,5 +177,16 @@
         <action
             android:id="@+id/action_purchaseCartFragment2_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="payment.PaymentFragment"
+        android:label="PaymentFragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_productOverviewFragment"
+            app:destination="@id/productOverviewFragment" />
+        <argument
+            android:name="currentProduct"
+            app:argType="com.example.sportsstore.models.ChildItem" />
     </fragment>
 </navigation>

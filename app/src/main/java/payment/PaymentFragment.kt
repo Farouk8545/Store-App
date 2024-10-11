@@ -2,19 +2,30 @@ package payment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.sportsstore.R
+import com.example.sportsstore.fragments.ProductOverviewFragmentArgs
+import com.example.sportsstore.models.User
+import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 import com.hbb20.CountryCodePicker
 import com.paypal.android.sdk.payments.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 import org.json.JSONException
 import java.math.BigDecimal
@@ -32,8 +43,12 @@ class PaymentFragment : Fragment() {
     private lateinit var emailEditText: EditText
     private lateinit var phoneNumberEditText: EditText
     private lateinit var countryCodePicker: CountryCodePicker
-    private lateinit var emailSignUpButton: ImageView
     private lateinit var btnPayment: Button
+    private lateinit var checkBox: CheckBox
+    private lateinit var numberOfItemsText: TextView
+    private lateinit var totalCostText: TextView
+    private lateinit var authViewModel: AuthViewModel
+    private val args by navArgs<PaymentFragmentArgs>()
 
     // PayPal configuration
     private val clientId = "AY8KF77cO2qwMGh7Vx7Sk7rTPR6T2eJ6smH1r-GUQXAqo-AhqoBUVf2NHl999oHZN-rnlSfdiGzw4Eou"
@@ -59,29 +74,38 @@ class PaymentFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.fragment_payment, container, false)
 
+        authViewModel = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))[AuthViewModel::class.java]
+
         // Initialize views
-        numItemEditText = view.findViewById(R.id.numItemEditText)
-        totalCostEditText = view.findViewById(R.id.passwordEditText3)
         addressEditText = view.findViewById(R.id.addressEditText)
         emailEditText = view.findViewById(R.id.emailEditText)
         phoneNumberEditText = view.findViewById(R.id.phoneNumberEditText)
         countryCodePicker = view.findViewById(R.id.countryCodePicker)
-        emailSignUpButton = view.findViewById(R.id.emailSignUpButton)
         btnPayment = view.findViewById(R.id.btnpayment)
+        checkBox = view.findViewById(R.id.cash_on_delivery_checkbox)
+        numberOfItemsText = view.findViewById(R.id.number_of_items_text)
+        totalCostText = view.findViewById(R.id.total_cost_text)
 
-        // Set up listeners
-        numItemEditText.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                calculateTotalCost()
+        val firestore = FirebaseFirestore.getInstance()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val userRefDeferred = async {
+                authViewModel.user.value?.uid?.let {
+                    firestore.collection("users").document(it)
+                        .get()
+                        .await()
+                        .toObject(User::class.java)
+                }
             }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-        })
 
-        emailSignUpButton.setOnClickListener {
-            if (validateInputs()) {
-                // Proceed with purchase
-                getPayment()
+            val userRef = userRefDeferred.await()
+
+            withContext(Dispatchers.Main){
+                userRef?.let {
+                    addressEditText.setText(it.address)
+                    emailEditText.setText(it.email)
+                    phoneNumberEditText.setText(it.phoneNumber)
+                }
             }
         }
 
@@ -90,13 +114,6 @@ class PaymentFragment : Fragment() {
         }
 
         return view
-    }
-
-    private fun calculateTotalCost() {
-        val numItems = numItemEditText.text.toString().toIntOrNull() ?: 0
-        // Assume a fixed price per item of $10 for this example
-        val totalCost = numItems * 10
-        totalCostEditText.setText("$$totalCost")
     }
 
     private fun validateInputs(): Boolean {

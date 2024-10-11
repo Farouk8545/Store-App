@@ -11,6 +11,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -84,6 +85,11 @@ class ProductOverviewFragment : Fragment() {
                     )
                 }
             }
+        }
+
+        binding.buyNow.setOnClickListener {
+            val action = ProductOverviewFragmentDirections.actionProductOverviewFragmentToPaymentFragment(args.currentProduct)
+            findNavController().navigate(action)
         }
 
         val spinnerAdapter =
