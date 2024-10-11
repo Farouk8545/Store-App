@@ -43,11 +43,11 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
         binding.recyclerCart.layoutManager = LinearLayoutManager(requireContext())
 
         try {
-        val uid = authViewModel.user.value?.uid
-        if (uid == null) {
-            Log.e("cartFragment", "User UID is null")
-        }
-        authViewModel.fetchCartItems()
+            val uid = authViewModel.user.value?.uid
+            if (uid == null) {
+                Log.e("cartFragment", "User UID is null")
+            }
+            authViewModel.fetchCartItems()
 
         } catch (e: Exception) {
             Log.e("CartFragment", "Error fetching Cart", e)
