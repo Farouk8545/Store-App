@@ -19,6 +19,7 @@ import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -70,6 +71,40 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
 
             }
 
+            binding.buyAllButton.setOnClickListener {
+                if (adapter.getItemsCount() != 0){
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                        val childItemsDeferred = async {
+                            adapter.getItemsIds().map { id ->
+                                async {
+                                    FirebaseFirestore.getInstance()
+                                        .collection("sports_shirts")
+                                        .whereEqualTo("id", id)
+                                        .get()
+                                        .await()
+                                        .toObjects(ChildItem::class.java)
+                                }
+                            }.awaitAll().flatten()
+                        }
+
+                        val childItems = childItemsDeferred.await()
+
+                        if(childItems.isNotEmpty()){
+                            withContext(Dispatchers.Main){
+                                val action = PurchaseCartFragmentDirections.actionPurchaseCartFragment2ToPaymentFragment(
+                                    childItems.toTypedArray(),
+                                    adapter.getItemsQuantity().toIntArray(),
+                                    adapter.getSelectedColor().toTypedArray(),
+                                    adapter.getSelectedSize().toTypedArray(),
+                                    adapter.getTotalCost().toFloatArray()
+                                    )
+                                binding.root.findNavController().navigate(action)
+                            }
+                        }
+                    }
+                }
+            }
+
             adapter.setData(items)
         }
         // Inflate the layout for this fragment
@@ -92,7 +127,7 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
 
                 if (childItem.isNotEmpty()) {
                     withContext(Dispatchers.Main) {
-                        val action = PurchaseCartFragmentDirections.actionPurchaseCartFragment2ToProductOverviewFragment(childItem.first())
+                        val action = PurchaseCartFragmentDirections.actionPurchaseCartFragment2ToProductOverviewFragment(childItem.toTypedArray())
                         binding.root.findNavController().navigate(action)
                     }
                 } else {

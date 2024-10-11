@@ -122,7 +122,7 @@ class SearchBarFragment : Fragment(), ChildAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: ChildItem) {
-        val action = SearchBarFragmentDirections.actionSearchBarFragment2ToProductOverviewFragment(item)
+        val action = SearchBarFragmentDirections.actionSearchBarFragment2ToProductOverviewFragment(arrayOf(item))
         findNavController().navigate(action)
     }
 }

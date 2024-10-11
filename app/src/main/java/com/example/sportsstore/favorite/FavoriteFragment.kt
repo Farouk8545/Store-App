@@ -94,7 +94,7 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
 
                 if (childItem.isNotEmpty()) {
                     withContext(Dispatchers.Main) {
-                        val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductOverviewFragment(childItem.first())
+                        val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductOverviewFragment(childItem.toTypedArray())
                         binding.root.findNavController().navigate(action)
                     }
                 } else {

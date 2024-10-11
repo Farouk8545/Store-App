@@ -14,36 +14,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportsStore"
         tools:targetApi="31" >
+
+        <!-- Custom Splash Screen Activity -->
         <activity
             android:name=".SplashScreenActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- AdminDashboardActivity -->
         <activity
             android:name=".AdminDashboardActivity"
             android:exported="false" />
+
+        <!-- SignInActivity -->
         <activity
             android:name=".SignInActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <!-- MainActivity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
     </application>
 
 </manifest>

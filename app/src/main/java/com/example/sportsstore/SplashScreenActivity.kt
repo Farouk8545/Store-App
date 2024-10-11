@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.sportsstore.databinding.ActivitySplashScreenBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var authViewModel: AuthViewModel
@@ -18,42 +21,39 @@ class SplashScreenActivity : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val videoUri = Uri.parse("android.resource://" + packageName + "/" + R.raw.splash_screen_video)
-
-        binding.videoView.setVideoURI(videoUri)
-
-        binding.videoView.setOnPreparedListener { mediaPlayer ->
-            mediaPlayer.start() // Start the video when it's ready
-        }
-
         authViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[AuthViewModel::class.java]
 
-        binding.videoView.setOnCompletionListener {
-            authViewModel.user.observe(this){ user ->
-                if(user != null){
+        lifecycleScope.launch {
+            // Apply a delay before proceeding
+            delay(1000)
+
+            // After the delay, observe the user LiveData
+            authViewModel.user.observe(this@SplashScreenActivity) { user ->
+                if (user != null) {
                     authViewModel.user.value?.uid?.let {
                         FirebaseFirestore.getInstance().collection("users").document(it)
                     }?.get()?.addOnSuccessListener { document ->
-                        if(document.exists()){
+                        if (document.exists()) {
                             val role = document.getString("role")
                             when (role) {
                                 "admin" -> {
-                                    Log.d("admin", "shit")
-                                    val intent = Intent(this, AdminDashboardActivity::class.java)
+                                    Log.d("admin", "Navigating to Admin Dashboard")
+                                    val intent = Intent(this@SplashScreenActivity, AdminDashboardActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                                 "customer" -> {
-                                    Log.d("customer", "shit")
-                                    val intent = Intent(this, MainActivity::class.java)
+                                    Log.d("customer", "Navigating to Main Activity")
+                                    val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                             }
                         }
                     }
-                }else{
-                    val intent = Intent(this, SignInActivity::class.java)
+                } else {
+                    Log.d("user", "Navigating to Sign In Activity")
+                    val intent = Intent(this@SplashScreenActivity, SignInActivity::class.java)
                     startActivity(intent)
                     finish()
                 }

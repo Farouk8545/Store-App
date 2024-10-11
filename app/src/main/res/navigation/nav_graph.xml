@@ -157,7 +157,7 @@
         tools:layout="@layout/fragment_product_overview" >
         <argument
             android:name="currentProduct"
-            app:argType="com.example.sportsstore.models.ChildItem" />
+            app:argType="com.example.sportsstore.models.ChildItem[]" />
         <action
             android:id="@+id/action_productOverviewFragment_to_purchaseCartFragment22"
             app:destination="@id/purchaseCartFragment2" />
@@ -192,6 +192,9 @@
         <action
             android:id="@+id/action_purchaseCartFragment2_to_productOverviewFragment"
             app:destination="@id/productOverviewFragment" />
+        <action
+            android:id="@+id/action_purchaseCartFragment2_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -202,19 +205,22 @@
             app:destination="@id/productOverviewFragment" />
         <argument
             android:name="currentProduct"
-            app:argType="com.example.sportsstore.models.ChildItem" />
+            app:argType="com.example.sportsstore.models.ChildItem[]" />
         <argument
             android:name="currentAmount"
-            app:argType="integer" />
+            app:argType="integer[]" />
         <argument
             android:name="selectedColor"
-            app:argType="string" />
+            app:argType="string[]" />
         <argument
             android:name="selectedSize"
-            app:argType="string" />
+            app:argType="string[]" />
         <action
             android:id="@+id/action_paymentFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="totalCost"
+            app:argType="float[]" />
     </fragment>
     <fragment
         android:id="@+id/accountSettingsFragment"

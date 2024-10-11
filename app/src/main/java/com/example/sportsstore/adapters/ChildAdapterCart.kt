@@ -29,6 +29,8 @@ class ChildAdapterCart(
             binding.textView8.text = item.description
             binding.productNameCart.text = item.productName.toString()
             binding.itemCount.text = item.quantity.toString()
+            binding.colorText.text = "Color: ${item.color}"
+            binding.sizeText.text = "Size: ${item.size}"
             authViewModel.updateCartItemQuantity(item.id, item.quantity)
 
             // Disable remove button if quantity is 1
@@ -95,5 +97,27 @@ class ChildAdapterCart(
         notifyDataSetChanged()
     }
 
+    fun getItemsIds(): List<String> {
+        return myList.map { it.id }
+    }
 
+    fun getItemsCount(): Int {
+        return myList.size
+    }
+
+    fun getItemsQuantity(): List<Int>{
+        return myList.map { it.quantity }
+    }
+
+    fun getSelectedColor(): List<String>{
+        return myList.map { it.color }
+    }
+
+    fun getSelectedSize(): List<String>{
+        return myList.map { it.size }
+    }
+
+    fun getTotalCost(): List<Float>{
+        return myList.map { it.price.toFloat() * it.quantity.toFloat() }
+    }
 }

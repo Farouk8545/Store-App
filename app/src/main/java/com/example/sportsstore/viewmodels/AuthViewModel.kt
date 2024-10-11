@@ -249,7 +249,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun addPurchaseCart(productName: String, price: Double, imageUrl: String?, description: String?, id: String) {
+    fun addPurchaseCart(productName: String, price: Double, imageUrl: String?, description: String?, id: String, color: String, size: String) {
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
             firestore.collection("users").document(it.uid).collection("purchases_cart").document(id)
@@ -260,7 +260,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "price" to price,
             "imageUrl" to imageUrl,
             "description" to description,
-            "id" to id
+            "id" to id,
+            "color" to color,
+            "size" to size
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {

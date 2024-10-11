@@ -85,4 +85,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.squareup.okhttp3:okhttp:3.12.12")
+
+    //splash screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 }

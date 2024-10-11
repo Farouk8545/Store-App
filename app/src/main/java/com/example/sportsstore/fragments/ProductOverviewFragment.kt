@@ -65,23 +65,28 @@ class ProductOverviewFragment : Fragment() {
         }
 
         val recyclerView = binding.colorRv
-        val adapter = args.currentProduct.colors?.let { ColorChoiceAdapter(it) }
+        val adapter = args.currentProduct.first().colors?.let { ColorChoiceAdapter(it) }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         binding.cartAdd.setOnClickListener {
             GlobalScope.launch {
-                if(authViewModel.purchaseCartExists(args.currentProduct.id)){
-                    authViewModel.deletePurchaseCart(args.currentProduct.id)
-
+                if(authViewModel.purchaseCartExists(args.currentProduct.first().id)){
+                    authViewModel.deletePurchaseCart(args.currentProduct.first().id)
+                    binding.cartAdd.setImageResource(R.drawable.baseline_add_shopping_cart_24)
                 }else{
-                    authViewModel.addPurchaseCart(
-                        args.currentProduct.productName,
-                        args.currentProduct.price,
-                        args.currentProduct.imageUrl,
-                        args.currentProduct.description,
-                        args.currentProduct.id
-                    )
+                    adapter?.getSelectedColor()?.let { it1 ->
+                        authViewModel.addPurchaseCart(
+                            args.currentProduct.first().productName,
+                            args.currentProduct.first().price,
+                            args.currentProduct.first().imageUrl,
+                            args.currentProduct.first().description,
+                            args.currentProduct.first().id,
+                            it1,
+                            binding.sizeSpinner.selectedItem.toString()
+                        )
+                    }
+                    binding.cartAdd.setImageResource(R.drawable.baseline_shopping_cart_checkout_24)
                 }
             }
         }
@@ -98,7 +103,13 @@ class ProductOverviewFragment : Fragment() {
 
         binding.buyNow.setOnClickListener {
             val action = adapter?.getSelectedColor()?.let { it1 ->
-                ProductOverviewFragmentDirections.actionProductOverviewFragmentToPaymentFragment(args.currentProduct, binding.amountSpinner.selectedItem.toString().toInt(), it1, binding.sizeSpinner.selectedItem.toString())
+                ProductOverviewFragmentDirections.actionProductOverviewFragmentToPaymentFragment(
+                    args.currentProduct,
+                    intArrayOf(binding.amountSpinner.selectedItem.toString().toInt()),
+                    arrayOf(it1),
+                    arrayOf(binding.sizeSpinner.selectedItem.toString()),
+                    arrayOf((args.currentProduct.first().price * binding.amountSpinner.selectedItem.toString().toInt()).toFloat()).toFloatArray()
+                )
             }
             if (action != null) {
                 findNavController().navigate(action)
@@ -109,16 +120,16 @@ class ProductOverviewFragment : Fragment() {
             context?.let {
                 ArrayAdapter(
                     it, android.R.layout.simple_spinner_item,
-                    args.currentProduct.sizes ?: emptyList()
+                    args.currentProduct.first().sizes ?: emptyList()
                 )
             }
         spinnerAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.sizeSpinner.adapter = spinnerAdapter
 
-        Glide.with(binding.productImage).load(args.currentProduct.imageUrl).into(binding.productImage)
-        binding.productNameText.text = args.currentProduct.productName
-        binding.productYearText.text = args.currentProduct.year
-        binding.productDescription.text = args.currentProduct.description
+        Glide.with(binding.productImage).load(args.currentProduct.first().imageUrl).into(binding.productImage)
+        binding.productNameText.text = args.currentProduct.first().productName
+        binding.productYearText.text = args.currentProduct.first().year
+        binding.productDescription.text = args.currentProduct.first().description
 
         return binding.root
     }

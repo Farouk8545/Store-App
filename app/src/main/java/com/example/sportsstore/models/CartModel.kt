@@ -6,7 +6,9 @@ class CartModel (
     var imageUrl : String?,
     var description : String?,
     var quantity : Int,
-    var id :String
+    var id :String,
+    var color : String,
+    var size : String
 ){
-    constructor(): this("",0.0,null,"null",1,"")
+    constructor(): this("",0.0,null,"null",1,"", "","")
 }

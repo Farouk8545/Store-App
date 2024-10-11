@@ -86,26 +86,30 @@ class PaymentFragment : Fragment() {
             }
         }
 
-        binding.totalCostText.text = "${args.currentProduct.price * args.currentAmount}EGP"
-        binding.numberOfItemsText.text = "${args.currentAmount} items"
+        val totalCost = args.currentProduct.sumOf { it.price }
+        val totalAmount = args.currentAmount.sum()
+        binding.totalCostText.text = "${totalCost}EGP"
+        binding.numberOfItemsText.text = "${totalAmount} items"
 
         binding.btnpayment.setOnClickListener {
             if(binding.cashOnDeliveryCheckbox.isChecked){
-                authViewModel.addOrder(
-                    args.currentProduct.productName,
-                    args.currentProduct.year,
-                    args.currentProduct.price,
-                    args.currentProduct.imageUrl,
-                    args.currentProduct.description,
-                    args.currentProduct.id,
-                    args.selectedColor,
-                    args.selectedSize,
-                    args.currentAmount,
-                    binding.addressEditText.text.toString(),
-                    binding.emailEditText.text.toString(),
-                    binding.phoneNumberEditText.text.toString(),
-                    "Cash On Delivery"
-                )
+                args.currentProduct.forEachIndexed { productIndex, productIt ->
+                    authViewModel.addOrder(
+                        productIt.productName,
+                        productIt.year,
+                        productIt.price,
+                        productIt.imageUrl,
+                        productIt.description,
+                        productIt.id,
+                        args.selectedColor[productIndex],
+                        args.selectedSize[productIndex],
+                        args.currentAmount[productIndex],
+                        binding.addressEditText.text.toString(),
+                        binding.emailEditText.text.toString(),
+                        binding.phoneNumberEditText.text.toString(),
+                        "Cash On Delivery"
+                    )
+                }
                 Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_paymentFragment_to_homeFragment)
             }else{

@@ -102,7 +102,7 @@ class SearchFragment : Fragment(), ChildAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(item: ChildItem) {
-        val action = SearchFragmentDirections.actionSearchFragment2ToProductOverviewFragment(item)
+        val action = SearchFragmentDirections.actionSearchFragment2ToProductOverviewFragment(arrayOf(item))
         findNavController().navigate(action)
     }
 
