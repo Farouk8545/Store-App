@@ -3,6 +3,7 @@ package com.example.sportsstore
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.sportsstore.databinding.ActivitySplashScreenBinding
@@ -37,23 +38,24 @@ class SplashScreenActivity : AppCompatActivity() {
                             val role = document.getString("role")
                             when (role) {
                                 "admin" -> {
+                                    Log.d("admin", "shit")
                                     val intent = Intent(this, AdminDashboardActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                                 "customer" -> {
+                                    Log.d("customer", "shit")
                                     val intent = Intent(this, MainActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                }
-                                else -> {
-                                    val intent = Intent(this, SignInActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                             }
                         }
                     }
+                }else{
+                    val intent = Intent(this, SignInActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
             }
         }

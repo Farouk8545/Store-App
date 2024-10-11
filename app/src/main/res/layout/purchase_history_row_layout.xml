@@ -24,6 +24,14 @@
             name="productState"
             type="String" />
 
+        <variable
+            name="color"
+            type="String" />
+
+        <variable
+            name="size"
+            type="String" />
+
     </data>
 
     <FrameLayout
@@ -107,6 +115,29 @@
                     android:layout_marginTop="8dp"
                     android:textSize="15sp"
                     android:text='@{"State: " + productState}'
+                    android:maxWidth="150dp"/>
+
+                <TextView
+                    android:id="@+id/color_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/delivery_state_text"
+                    app:layout_constraintStart_toEndOf="@id/product_image"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="15sp"
+                    android:text='@{"Color: " + color}'
+                    android:maxWidth="150dp"/>
+
+                <TextView
+                    android:id="@+id/size_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/color_text"
+                    app:layout_constraintStart_toEndOf="@id/color_text"
+                    android:layout_marginStart="8dp"
+                    android:textSize="15sp"
+                    android:text='@{"Size: " + size}'
                     android:maxWidth="150dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

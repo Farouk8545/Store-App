@@ -17,6 +17,8 @@ class PurchaseHistoryAdapter(private val authViewModel: AuthViewModel): Recycler
             binding.purchaseDate = purchase.date.toDate().toString()
             binding.productState = purchase.state
             binding.paymentMethod = purchase.paymentMethod
+            binding.colorText.text = purchase.color
+            binding.sizeText.text = purchase.size
             Glide.with(binding.productImage).load(purchase.imageUrl).into(binding.productImage)
         }
     }

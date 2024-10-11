@@ -8,7 +8,9 @@ class PurchaseModel(
     val date: Timestamp,
     val state: String,
     val paymentMethod: String,
-    val imageUrl: String?
+    val imageUrl: String?,
+    val color: String,
+    val size: String
 ) {
-    constructor() : this("", 0.0, Timestamp.now(), "", "", null)
+    constructor() : this("", 0.0, Timestamp.now(), "", "", null, "", "")
 }
