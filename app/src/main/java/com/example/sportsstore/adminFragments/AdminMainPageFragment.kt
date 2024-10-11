@@ -40,6 +40,9 @@ class AdminMainPageFragment : Fragment() {
         binding.removeProductButton.setOnClickListener{
             findNavController().navigate(R.id.action_adminMainPageFragment_to_adminRemoveProductFragment2)
         }
+        binding.editProductsButton.setOnClickListener{
+            findNavController().navigate(R.id.action_adminMainPageFragment_to_adminEditProductFragment)
+        }
 
         binding.logOutButton.setOnClickListener {
             authViewModel.signOut()

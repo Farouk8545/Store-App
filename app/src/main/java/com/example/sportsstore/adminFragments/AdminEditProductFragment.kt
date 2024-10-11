@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.sportsstore.R
 import com.example.sportsstore.databinding.FragmentAdminEditProductBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class AdminEditProductFragment : Fragment() {
     lateinit var binding : FragmentAdminEditProductBinding
     lateinit var firestore: FirebaseFirestore
-
+    private var documentId: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,12 +24,20 @@ class AdminEditProductFragment : Fragment() {
         firestore = FirebaseFirestore.getInstance()
 
         binding.searchById.setOnClickListener{
-            var productId = binding.idEt.text.toString()
+            var productId = binding.idInput.text.toString()
             if(productId.isNotEmpty()){
                 loadProductById(productId)
             }else{
-                binding.idEt.setText("please enter ID")
+                binding.idInput.setText("please enter ID")
             }
+        }
+
+        binding.addProductButton.setOnClickListener {
+            saveProductChanges()
+        }
+
+        binding.imageView6.setOnClickListener{
+            findNavController().navigate(R.id.action_adminEditProductFragment_to_adminMainPageFragment)
         }
 
 
@@ -42,18 +52,54 @@ class AdminEditProductFragment : Fragment() {
             .get()
             .addOnSuccessListener { result ->
                 if(result.documents.isNotEmpty()){
-                    var document = result.documents[0]
-                    var documentId = document.id
+                    val document = result.documents[0]
+                    documentId = document.id
+
 
                     binding.nameEt.setText(document.getString("productName"))
                     binding.descriptionEt.setText(document.getString("description"))
-                    binding.priceEt.setText(document.getString("price"))
-                    binding.idEt.setText(document.getString("id"))
+                    binding.priceEt.setText(document.getDouble("price")?.toString())
                     binding.yearEt.setText(document.getString("year"))
+                    binding.layoutDisplay.visibility = View.VISIBLE
 
+
+                }else{
+                    binding.layoutDisplay.visibility = View.GONE
+                    Toast.makeText(context, "No product found with this ID", Toast.LENGTH_SHORT).show()
                 }
             }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error fetching product: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+
     }
+    fun saveProductChanges(){
+        if (documentId != null) {
+            // Get the updated details from EditText fields
+            val updatedProduct = hashMapOf(
+                "productName" to binding.nameEt.text.toString(),
+                "price" to binding.priceEt.text.toString().toDouble(),
+                "description" to binding.descriptionEt.text.toString(),
+                "year" to binding.yearEt.text.toString()
+                // Add other fields (colors, sizes, etc.) as needed
+            )
+
+            // Update the product in Firestore
+            firestore.collection("sports_shirts")
+                .document(documentId!!)
+                .update(updatedProduct as Map<String, Any>)
+                .addOnSuccessListener {
+                    binding.layoutDisplay.visibility = View.GONE
+                    Toast.makeText(context, "Product updated successfully", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "Failed to update product: ${it.message}", Toast.LENGTH_SHORT).show()
+                }
+        } else {
+            Toast.makeText(context, "No product loaded to update", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
 
 }

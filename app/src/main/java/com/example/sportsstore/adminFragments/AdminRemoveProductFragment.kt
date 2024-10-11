@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class AdminRemoveProductFragment : Fragment() {
     lateinit var binding :FragmentAdminRemoveProductBinding
-    lateinit var firestore :FirebaseFirestore
+    lateinit var firestore: FirebaseFirestore
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
