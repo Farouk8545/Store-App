@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notification_settings_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/notification_settings_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/notification_settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification Settings"
+            android:textColor="?attr/android:textColorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:background="?attr/colorSurface"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_push_notifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Push Notifications"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/switch_push_notifications"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:background="?attr/colorSurface"
+            android:layout_marginBottom="8dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_email_notifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email Notifications"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/switch_email_notifications"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:paddingVertical="8dp"
+            android:background="?attr/colorSurface"
+            android:layout_marginBottom="8dp"
+            >
+
+            <TextView
+                android:id="@+id/tv_vibration"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vibration"
+                android:textColor="?attr/android:textColorPrimary"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/switch_vibration"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

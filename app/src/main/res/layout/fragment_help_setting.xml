@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/help_support_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/help_support_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/help_support_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Help &amp; Support"
+            android:textColor="?attr/android:textColorPrimary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btn_view_faqs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View FAQs"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:id="@+id/btn_contact_support"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contact Support"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:id="@+id/btn_submit_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit Feedback"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="15dp" />
+
+        <Button
+            android:id="@+id/btn_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terms &amp; Conditions"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp" />
+
+        <Button
+            android:id="@+id/btn_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privacy Policy"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="15dp" />
+
+    </LinearLayout>
+</ScrollView>
