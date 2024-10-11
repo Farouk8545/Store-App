@@ -76,6 +76,10 @@ class AdminAddRemoveProductFragment : Fragment() {
             }
         }
 
+        binding.backbut.setOnClickListener{
+            findNavController().navigate(R.id.action_adminAddRemoveProductFragment_to_adminMainPageFragment)
+        }
+
         return binding.root
     }
 

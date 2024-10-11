@@ -91,6 +91,8 @@ class AdminEditProductFragment : Fragment() {
                 .addOnSuccessListener {
                     binding.layoutDisplay.visibility = View.GONE
                     Toast.makeText(context, "Product updated successfully", Toast.LENGTH_SHORT).show()
+                    binding.idInput.setText("")
+
                 }
                 .addOnFailureListener {
                     Toast.makeText(context, "Failed to update product: ${it.message}", Toast.LENGTH_SHORT).show()

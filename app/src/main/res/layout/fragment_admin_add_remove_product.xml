@@ -13,22 +13,24 @@
         android:id="@+id/name_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/price_et"
+        android:layout_marginTop="8dp"
         android:hint="Name"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        app:layout_constraintEnd_toStartOf="@id/price_et"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backbut" />
 
     <EditText
         android:id="@+id/price_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:hint="Price"
         android:inputType="numberDecimal"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_et"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/backbut" />
 
     <EditText
         android:id="@+id/year_et"
@@ -45,12 +47,12 @@
         android:id="@+id/id_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/year_et"
-        app:layout_constraintTop_toBottomOf="@id/name_et"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:hint="Product Id"
         android:layout_marginTop="8dp"
-        android:maxLines="1"/>
+        android:hint="Product Id"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/year_et"
+        app:layout_constraintTop_toBottomOf="@id/name_et" />
 
     <EditText
         android:id="@+id/description_et"
@@ -200,5 +202,17 @@
         android:text="Add Product"
         android:textAllCaps="false"
         android:layout_marginBottom="8dp"/>
+
+    <ImageView
+        android:id="@+id/backbut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_arrow_back_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
