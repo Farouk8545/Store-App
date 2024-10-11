@@ -41,29 +41,67 @@ class AdminRemoveProductFragment : Fragment() {
 
     }
 
-    fun deleteProductById (productId: String){
+    fun deleteProductById(productId: String) {
+        // Delete the product from sports_shirts collection
         firestore.collection("sports_shirts")
-            .whereEqualTo("id",productId)
+            .whereEqualTo("id", productId)
             .get()
             .addOnSuccessListener { result ->
-                if(result.documents.isNotEmpty()){
+                if (result.documents.isNotEmpty()) {
                     val documentId = result.documents[0].id
                     firestore.collection("sports_shirts").document(documentId)
                         .delete()
                         .addOnSuccessListener {
                             Toast.makeText(context, "Product deleted successfully", Toast.LENGTH_SHORT).show()
                             binding.editTextText.text.clear()
+                            // After deleting the product, delete it from all users' carts
+                            deleteProductFromCarts(productId)
                         }
                         .addOnFailureListener {
                             Toast.makeText(context, "Failed to delete product: ${it.message}", Toast.LENGTH_SHORT).show()
                         }
-                }else{
+                } else {
                     Toast.makeText(context, "No product found with this ID", Toast.LENGTH_SHORT).show()
                 }
 
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 Toast.makeText(context, "Error fetching product: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun deleteProductFromCarts(productId: String) {
+        // Query all users' carts
+        firestore.collection("users")
+            .get()
+            .addOnSuccessListener { users ->
+                for (user in users.documents) {
+                    val userId = user.id
+                    val cartRef = firestore.collection("users").document(userId).collection("purchases_cart")
+                    cartRef
+                        .whereEqualTo("id", productId) // Check if the product exists in the user's cart
+                        .get()
+                        .addOnSuccessListener { cartItems ->
+                            for (cartItem in cartItems.documents) {
+                                val cartItemId = cartItem.id
+                                // Remove the product from the cart
+                                cartRef.document(cartItemId)
+                                    .delete()
+                                    .addOnSuccessListener {
+                                        Toast.makeText(context, "Product removed from user's cart", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener {
+                                        Toast.makeText(context, "Failed to remove from cart: ${it.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(context, "Error checking user carts: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error fetching users: ${it.message}", Toast.LENGTH_SHORT).show()
             }
     }
 

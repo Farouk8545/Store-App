@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -63,7 +64,12 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
                 binding.textView5.text = "There are no favorite items yet"
             } else {
                 binding.imageView4.visibility = View.GONE
-                binding.textView5.text = "${authViewModel.favItems.value?.size} products"
+                if(authViewModel.favItems.value?.size == 1){
+                    binding.textView5.text = "${authViewModel.favItems.value?.size} product"
+                }else{
+                    binding.textView5.text = "${authViewModel.favItems.value?.size} products"
+                }
+
             }
 
             adapter.setData(items)
@@ -74,20 +80,38 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
 
     override fun onItemClick(item: FavoriteModel) {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val childItemDeferred = async {
-                FirebaseFirestore.getInstance()
-                    .collection("sports_shirts")
-                    .whereEqualTo("id", item.id)
-                    .get()
-                    .await()
-                    .toObjects(ChildItem::class.java)
-            }
+            try {
+                val childItemDeferred = async {
+                    FirebaseFirestore.getInstance()
+                        .collection("sports_shirts")
+                        .whereEqualTo("id", item.id)
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
 
-            val childItem = childItemDeferred.await()
+                val childItem = childItemDeferred.await()
 
-            withContext(Dispatchers.Main){
-                val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductOverviewFragment(childItem.first())
-                binding.root.findNavController().navigate(action)
+                if (childItem.isNotEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        val action = FavoriteFragmentDirections.actionFavoriteFragmentToProductOverviewFragment(childItem.first())
+                        binding.root.findNavController().navigate(action)
+                    }
+                } else {
+                    // Handle case when childItem is empty
+                    withContext(Dispatchers.Main) {
+                        Log.e("FavoriteFragment", "Item not found in the database")
+                        Toast.makeText(context, "sorry element not available now", Toast.LENGTH_SHORT).show()
+                        // You can show a Toast or Snackbar to notify the user
+                    }
+                }
+            } catch (e: Exception) {
+                // Handle any exception that might occur
+                withContext(Dispatchers.Main) {
+                    Log.e("FavoriteFragment", "Error fetching item details", e)
+                    Toast.makeText(context, "sorry element not available now", Toast.LENGTH_SHORT).show()
+                    // Optionally, show an error message to the user, such as a Toast or Snackbar
+                }
             }
         }
     }

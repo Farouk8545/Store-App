@@ -1,5 +1,6 @@
 package com.example.sportsstore.purchaseCart
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -61,7 +62,12 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
                 binding.textView5.text = "card is empty"
             } else {
                 binding.imageView4.visibility = View.GONE
-                binding.textView5.text = "${authViewModel.cartItems.value?.size} products"
+                if(authViewModel.cartItems.value?.size == 1){
+                    binding.textView5.text = "${authViewModel.cartItems.value?.size} product"
+                }else{
+                    binding.textView5.text = "${authViewModel.cartItems.value?.size} products"
+                }
+
             }
 
             adapter.setData(items)
@@ -72,20 +78,33 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
 
     override fun onItemClick(item: CartModel) {
         viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-            val childItemDeferred = async {
-                FirebaseFirestore.getInstance()
-                    .collection("sports_shirts")
-                    .whereEqualTo("id", item.id)
-                    .get()
-                    .await()
-                    .toObjects(ChildItem::class.java)
-            }
+            try {
+                val childItemDeferred = async {
+                    FirebaseFirestore.getInstance()
+                        .collection("sports_shirts")
+                        .whereEqualTo("id", item.id)
+                        .get()
+                        .await()
+                        .toObjects(ChildItem::class.java)
+                }
 
-            val childItem = childItemDeferred.await()
+                val childItem = childItemDeferred.await()
 
-            withContext(Dispatchers.Main){
-                val action = PurchaseCartFragmentDirections.actionPurchaseCartFragment2ToProductOverviewFragment(childItem.first())
-                binding.root.findNavController().navigate(action)
+                if (childItem.isNotEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        val action = PurchaseCartFragmentDirections.actionPurchaseCartFragment2ToProductOverviewFragment(childItem.first())
+                        binding.root.findNavController().navigate(action)
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        Log.e("PurchaseCartFragment", "Item not found")
+                        // Optionally notify the user that the item is no longer available
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Log.e("PurchaseCartFragment", "Error fetching item", e)
+                }
             }
         }
     }

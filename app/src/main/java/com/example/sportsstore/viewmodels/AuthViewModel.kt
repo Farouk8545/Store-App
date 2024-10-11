@@ -236,13 +236,16 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val userId = auth.currentUser?.uid ?: return
 
         firestore.collection("users").document(userId).collection("purchases_cart")
-            .get()
-            .addOnSuccessListener { documents ->
-                val items = documents.toObjects(CartModel::class.java)
-                _cartItems.postValue(items)
-            }
-            .addOnFailureListener { e ->
-                Log.d(TAG, "Error fetching cart items: ${e.message}")
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.d(TAG, "Error listening to cart items: ${e.message}")
+                    return@addSnapshotListener
+                }
+
+                if (snapshots != null) {
+                    val items = snapshots.toObjects(CartModel::class.java)
+                    _cartItems.postValue(items)
+                }
             }
     }
 
