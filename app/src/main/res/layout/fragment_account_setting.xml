@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_settings_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/account_settings_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/account_settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Settings"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="?attr/android:textColorPrimary"
+            android:layout_marginBottom="24dp" />
+
+        <Button
+            android:id="@+id/btn_change_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Username"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:layout_marginBottom="15dp"
+            android:padding="16dp"
+            android:elevation="8dp"/>
+
+        <Button
+            android:id="@+id/btn_change_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Change Password"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textSize="20sp"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:background="?attr/colorSurface"
+            android:elevation="8dp">
+
+            <TextView
+                android:id="@+id/tv_push_notifications"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="?attr/android:textColorPrimary"
+                android:text="Dark Mode"
+                android:textSize="20sp" />
+
+            <Switch
+                android:id="@+id/DarkMode"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
