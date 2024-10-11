@@ -133,7 +133,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "date" to date,
             "state" to state,
             "paymentMethod" to paymentMethod,
-            "imageUrl" to imageUrl
+            "imageUrl" to imageUrl,
+            "color" to color,
+            "size" to size
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {
