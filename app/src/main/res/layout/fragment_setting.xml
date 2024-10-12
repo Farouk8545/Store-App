@@ -13,12 +13,14 @@
 
         <TextView
             android:id="@+id/privacy_security_settings_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
+            android:textAlignment="center"
             android:text="Setting"
-            android:textSize="24sp"
+            android:textColor="@color/Purple"
             android:textStyle="bold"
+            android:textSize="20sp"
             android:layout_marginBottom="20dp" />
 
             <LinearLayout
@@ -214,7 +216,8 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/privacy"
+                    android:src="@drawable/help"
+                    android:scaleType="centerCrop"
                     android:background="@android:color/transparent"
                     android:contentDescription="help Settings Icon" />
 

@@ -22,6 +22,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flag_transparent"
             android:text="Add Product"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -42,6 +44,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flag_transparent"
             android:text="Remove Product"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -62,6 +66,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flag_transparent"
             android:text="Edit Products"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -82,6 +88,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flag_transparent"
             android:text="Manage Customers"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -102,6 +110,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flag_transparent"
             android:text="Log Out"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
             android:textAllCaps="false"
             android:textSize="20sp"
             android:textStyle="bold"/>

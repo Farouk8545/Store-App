@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/values-night/colors.xml -->
+<resources>
+    <!-- Primary Colors -->
+    <color name="primaryColor">#1E90FF</color> <!-- Dodger Blue (same as light) -->
+    <color name="primaryDarkColor">#1C86EE</color> <!-- Darker Blue (same as light) -->
+
+    <!-- Accent Colors -->
+    <color name="accentColor">#FF6347</color> <!-- Tomato (slightly different for dark mode) -->
+
+    <!-- Background and Surface Colors -->
+    <color name="backgroundColor">#121212</color> <!-- Almost Black -->
+    <color name="surfaceColor">#1E1E1E</color> <!-- Dark Gray -->
+
+    <!-- Text Colors -->
+    <color name="textColorPrimary">#FFFFFF</color> <!-- White -->
+    <color name="textColorSecondary">#BBBBBB</color> <!-- Light Gray -->
+
+    <!-- Error Colors -->
+    <color name="errorColor">#CF6679</color> <!-- Light Red for dark backgrounds -->
+</resources>

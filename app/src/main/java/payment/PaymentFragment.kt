@@ -88,7 +88,7 @@ class PaymentFragment : Fragment() {
 
         val totalCost = args.currentProduct.sumOf { it.price }
         val totalAmount = args.currentAmount.sum()
-        binding.totalCostText.text = "${totalCost}EGP"
+        binding.totalCostText.text = "${totalCost * totalAmount}EGP"
         binding.numberOfItemsText.text = "${totalAmount} items"
 
         binding.btnpayment.setOnClickListener {

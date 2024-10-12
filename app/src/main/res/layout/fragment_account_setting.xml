@@ -19,7 +19,7 @@
             android:text="Account Settings"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="?attr/android:textColorPrimary"
+            android:textColor="@color/Purple"
             android:layout_marginBottom="24dp" />
 
         <Button

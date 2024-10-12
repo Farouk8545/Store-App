@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Name"
+            android:textColor="?attr/android:textColorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/userImage" />
@@ -39,8 +40,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="Hello"
+            android:textColor="@color/Purple"
             android:textSize="25sp"
-            android:textStyle="italic"
+            android:textStyle="bold|italic"
             android:layout_marginTop="24dp" />
 
         <FrameLayout
