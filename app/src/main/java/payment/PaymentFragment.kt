@@ -111,6 +111,7 @@ class PaymentFragment : Fragment() {
                     )
                 }
                 Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
+                authViewModel.deleteAllCartItems()
                 findNavController().navigate(R.id.action_paymentFragment_to_homeFragment)
             }else{
                 getPayment()
@@ -182,4 +183,5 @@ class PaymentFragment : Fragment() {
         requireActivity().stopService(Intent(requireContext(), PayPalService::class.java))
         super.onDestroy()
     }
+
 }

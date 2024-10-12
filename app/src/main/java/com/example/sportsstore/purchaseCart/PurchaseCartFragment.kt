@@ -60,9 +60,11 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
         authViewModel.cartItems.observe(viewLifecycleOwner) { items ->
             if (authViewModel.cartItems.value?.isEmpty() == true) {
                 binding.imageView4.visibility = View.VISIBLE
+                binding.buyAllButton.visibility = View.GONE
                 binding.textView5.text = "card is empty"
             } else {
                 binding.imageView4.visibility = View.GONE
+                binding.buyAllButton.visibility = View.VISIBLE
                 if(authViewModel.cartItems.value?.size == 1){
                     binding.textView5.text = "${authViewModel.cartItems.value?.size} product"
                 }else{

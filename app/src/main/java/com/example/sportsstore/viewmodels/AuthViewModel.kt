@@ -287,6 +287,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+
+
     suspend fun purchaseCartExists(id: String): Boolean {
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
@@ -339,6 +341,29 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             Log.d(TAG, "Quantity updated successfully for itemId: $itemId")
         }?.addOnFailureListener { e ->
             Log.d(TAG, "Error updating quantity for itemId: $itemId, error: ${e.message}")
+        }
+    }
+
+
+    fun deleteAllCartItems() {
+        val userId = auth.currentUser?.uid ?: return
+
+        // Reference to the user's cart collection
+        val cartCollectionRef = firestore.collection("users").document(userId).collection("purchases_cart")
+
+        cartCollectionRef.get().addOnSuccessListener { snapshot ->
+            // Iterate through all cart items and delete each one
+            for (document in snapshot.documents) {
+                document.reference.delete().addOnSuccessListener {
+                    Log.d(TAG, "Cart item ${document.id} deleted successfully.")
+                }.addOnFailureListener { e ->
+                    Log.d(TAG, "Error deleting cart item: ${e.message}")
+                }
+            }
+            // After all deletions, refresh the cart items list
+            fetchCartItems()
+        }.addOnFailureListener { e ->
+            Log.d(TAG, "Error fetching cart items for deletion: ${e.message}")
         }
     }
 }
