@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
 import com.example.sportsstore.adapters.AdminColorChoiceAdapter
 import com.example.sportsstore.databinding.FragmentAdminAddRemoveProductBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -116,6 +118,15 @@ class AdminAddRemoveProductFragment : Fragment() {
     }
 
     private fun saveProductToFirestore(imageUrl: String) {
+        val selectedId = binding.radioGroup.checkedRadioButtonId
+
+        if(selectedId == -1){
+            Toast.makeText(context, "Please, select a category", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val selectedRadioButton = binding.root.findViewById<RadioButton>(selectedId)
+
         // Create a product object
         val product = hashMapOf(
             "productName" to binding.nameEt.text.toString(),
@@ -125,7 +136,9 @@ class AdminAddRemoveProductFragment : Fragment() {
             "year" to binding.yearEt.text.toString(),
             "id" to binding.idEt.text.toString(),
             "colors" to adapter.getData(),
-            "sizes" to getSelectedSizes()
+            "sizes" to getSelectedSizes(),
+            "category" to selectedRadioButton.text.toString(),
+            "createdAt" to Timestamp.now()
             // Add other product details if necessary
         )
 

@@ -95,4 +95,7 @@
     <string name="description">Beschreibung</string>
     <string name="sizes">Größen:</string>
     <string name="add">Hinzufügen</string>
+    <string name="category">Kategorie:</string>
+    <string name="sports_shoes">Sportschuhe</string>
+    <string name="sports_wears">Sportbekleidung</string>
 </resources>

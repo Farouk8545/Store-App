@@ -62,12 +62,61 @@
         android:hint="@string/description"
         android:layout_marginTop="8dp"
         android:maxLines="1"/>
+    
+    <TextView
+        android:id="@+id/category_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/radio_group"
+        app:layout_constraintBottom_toBottomOf="@id/radio_group"
+        android:text="@string/category"
+        android:textSize="20sp" />
+    
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/category_text"
+        app:layout_constraintTop_toBottomOf="@id/description_et"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/sports_shirts_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            android:text="@string/sportsshirts"
+            android:layout_marginStart="8dp"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/sports_shoes_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            android:text="@string/sports_shoes"
+            android:layout_marginStart="8dp"/>
+
+        <RadioButton
+            android:id="@+id/sports_wears_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_checkbox"
+            android:button="@null"
+            android:text="@string/sports_wears"
+            android:layout_marginStart="8dp"/>
+
+    </RadioGroup>
 
     <EditText
         android:id="@+id/color_et"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/description_et"
+        app:layout_constraintTop_toBottomOf="@id/radio_group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/add_color_button"
         android:hint="@string/color"

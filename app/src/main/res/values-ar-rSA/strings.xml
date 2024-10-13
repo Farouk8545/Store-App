@@ -95,4 +95,7 @@
     <string name="description">الوصف</string>
     <string name="sizes">الأحجام:</string>
     <string name="add">إضافة</string>
+    <string name="category">الفئة:</string>
+    <string name="sports_shoes">أحذية رياضية</string>
+    <string name="sports_wears">ملابس رياضية</string>
 </resources>

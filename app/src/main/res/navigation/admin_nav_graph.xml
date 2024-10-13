@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_adminMainPageFragment_to_adminManageCustomerFragment"
             app:destination="@id/adminManageCustomerFragment" />
+        <action
+            android:id="@+id/action_adminMainPageFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminAddRemoveProductFragment"
@@ -67,6 +70,15 @@
         android:label="AdminManageCustomerFragment" >
         <action
             android:id="@+id/action_adminManageCustomerFragment_to_adminMainPageFragment"
+            app:destination="@id/adminMainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.example.sportsstore.adminFragments.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" >
+        <action
+            android:id="@+id/action_ordersFragment_to_adminMainPageFragment"
             app:destination="@id/adminMainPageFragment" />
     </fragment>
 </navigation>

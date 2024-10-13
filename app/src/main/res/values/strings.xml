@@ -94,5 +94,8 @@
     <string name="description">Description</string>
     <string name="sizes">Sizes:</string>
     <string name="add">Add</string>
+    <string name="category">Category:</string>
+    <string name="sports_shoes">Sports Shoes</string>
+    <string name="sports_wears">Sports Wears</string>
 
 </resources>
