@@ -16,9 +16,9 @@
             android:id="@+id/passwordEditText"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/edit_text_background"
             android:drawableStart="@drawable/password"
             android:drawablePadding="16dp"
@@ -32,71 +32,70 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/countryCodePicker"
-            android:layout_width="111dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10sp"
-            app:ccp_showNameCode="false"
-            app:layout_constraintEnd_toStartOf="@+id/phoneNumberEditText"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+        <LinearLayout
+            android:id="@+id/address_phone_number_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/passwordEditText"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-        <EditText
-            android:id="@+id/phoneNumberEditText"
-            android:layout_width="222dp"
-            android:layout_height="58dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/edit_text_background"
-            android:digits="0123456789"
-            android:drawableStart="@drawable/phone"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="Phone Number"
-            android:importantForAccessibility="no"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:textColorHint="#3B608C"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+            <EditText
+                android:id="@+id/phoneNumberEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:digits="0123456789"
+                android:drawableStart="@drawable/phone"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="Phone Number"
+                android:importantForAccessibility="no"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:textColorHint="#3B608C"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
-        <EditText
-            android:id="@+id/addressEditText"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/edit_text_background"
-            android:drawableStart="@drawable/location"
-            android:drawablePadding="16dp"
-            android:ems="10"
-            android:hint="@string/address"
-            android:inputType="text"
-            android:importantForAccessibility="no"
-            android:textColorHint="#3B608C"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+            <EditText
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/edit_text_background"
+                android:drawableStart="@drawable/location"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:importantForAccessibility="no"
+                android:textColorHint="#3B608C"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="414dp"
-            android:layout_height="304dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="330dp"
+            android:layout_height="0dp"
             android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/top_background1" />
+            app:srcCompat="@drawable/sign_in_background" />
 
         <TextView
             android:id="@+id/textView6"
@@ -106,7 +105,7 @@
             android:layout_marginStart="32dp"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:textColor="#6672FF"
+            android:textColor="@color/Purple"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -114,8 +113,8 @@
             android:id="@+id/emailEditText"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:drawableStart="@drawable/email"
             android:drawablePadding="16dp"
@@ -131,13 +130,14 @@
 
         <ImageView
             android:id="@+id/emailSignUpButton"
-            android:layout_width="133dp"
-            android:layout_height="82dp"
-            android:layout_marginTop="180dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            app:srcCompat="@drawable/btn_arraw1" />
+            app:layout_constraintTop_toBottomOf="@+id/address_phone_number_layout"
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:background="@drawable/round_button_shape"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

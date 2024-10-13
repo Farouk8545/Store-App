@@ -34,14 +34,14 @@
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="330dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/top_background1" />
+            app:srcCompat="@drawable/sign_in_background" />
 
         <TextView
             android:id="@+id/textView6"
@@ -76,13 +76,14 @@
 
         <ImageView
             android:id="@+id/emailSignInButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            app:srcCompat="@drawable/btn_arraw1" />
+            android:src="@drawable/baseline_arrow_forward_24"
+            android:background="@drawable/round_button_shape"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/google_sign_in_button"

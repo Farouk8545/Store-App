@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/rect_with_inner_left_curve.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="100dp"
+    android:viewportWidth="200"
+    android:viewportHeight="100">
+
+    <!-- Full rectangle background -->
+    <path
+        android:fillColor="#4CAF50"
+    android:pathData="M 0,0 H 200 V 100 H 0 Z" /> <!-- Rectangle -->
+
+    <!-- Inner curve on the left side filling about 1/3 of the width -->
+    <path
+        android:fillColor="#FFC107"
+    android:pathData="M 0,0
+    L 70,0
+    Q 40,50 70,100
+    L 0,100 Z" /> <!-- Curved shape -->
+</vector>
