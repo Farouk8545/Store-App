@@ -3,7 +3,7 @@
 <resources>
     <!-- Primary Colors -->
     <color name="off_white">#222024</color>
-    <color name="primaryColor">#488d61</color> <!-- Dodger Blue (same as light) -->
+    <color name="primaryColor">#008DDA</color> <!-- Dodger Blue (same as light) -->
     <color name="primaryDarkColor">#65a96e</color> <!-- Darker Blue (same as light) -->
 
     <!-- Accent Colors -->

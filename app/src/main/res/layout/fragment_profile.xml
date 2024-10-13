@@ -21,7 +21,7 @@
             android:textColor="@color/Purple"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_gravity="center" />
+            android:layout_gravity="start" />
 
 
         <com.google.android.material.card.MaterialCardView

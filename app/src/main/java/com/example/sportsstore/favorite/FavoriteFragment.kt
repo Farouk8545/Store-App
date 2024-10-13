@@ -54,14 +54,14 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
 
         } catch (e: Exception) {
             Log.e("FavoriteFragment", "Error fetching favorites", e)
-            binding.textView5.text = "Failed to load favorites."
+            binding.textView5.text = "Failed to load favorites"
             binding.imageView4.visibility = View.VISIBLE
         }
 
         authViewModel.favItems.observe(viewLifecycleOwner) { items ->
             if (authViewModel.favItems.value?.isEmpty() == true) {
                 binding.imageView4.visibility = View.VISIBLE
-                binding.textView5.text = "There are no favorite items yet"
+                binding.textView5.text = "there_are_no_favorite_items"
             } else {
                 binding.imageView4.visibility = View.GONE
                 if(authViewModel.favItems.value?.size == 1){

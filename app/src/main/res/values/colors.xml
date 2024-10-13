@@ -3,15 +3,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="off_white">#FAF9F6</color>
-    <color name="Purple">#488d61</color>
-        <color name="primaryColor">#488d61</color> <!-- Dodger Blue -->
+    <color name="Purple">#008DDA</color>
+        <color name="primaryColor">#008DDA</color> <!-- Dodger Blue -->
         <color name="primaryDarkColor">#65a96e</color> <!-- Darker Blue -->
 
         <!-- Accent Colors -->
         <color name="accentColor">#63208f</color> <!-- blue Red -->
 
         <!-- Background and Surface Colors -->
-        <color name="backgroundColor">#FFFFFF</color> <!-- White -->
+        <color name="backgroundColor">#F7EEDD</color> <!-- White -->
         <color name="surfaceColor">#FaFaFa</color> <!-- Light Gray -->
 
         <!-- Text Colors -->
