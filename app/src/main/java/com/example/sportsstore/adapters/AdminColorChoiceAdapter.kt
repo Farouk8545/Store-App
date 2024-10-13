@@ -30,6 +30,11 @@ class AdminColorChoiceAdapter: RecyclerView.Adapter<AdminColorChoiceAdapter.MyVi
         holder.bindData(list[position])
     }
 
+    fun setData(newList: List<String>){
+        list = newList.toMutableList()
+        notifyDataSetChanged()
+    }
+
     fun setData(newItem: String){
         list.add(newItem)
         notifyDataSetChanged()

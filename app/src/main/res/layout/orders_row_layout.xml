@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/product_image"
+                android:layout_width="150dp"
+                android:layout_height="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/product_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toTopOf="@id/product_image"
+                android:text="Real Madrid - Home"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/product_year_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/product_name_text"
+                android:text="2024"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/product_price_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="350.0"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@+id/product_year_text"/>
+
+            <TextView
+                android:id="@+id/customer_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/product_price_text"
+                android:text="customer@gmail.com"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_phone_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/customer_email_text"
+                android:text="01024512546"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/customer_address_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/customer_phone_number_text"
+                android:text="beni suef - beni suef"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/amount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/customer_address_text"
+                android:text="3"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/color_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/product_image"
+                app:layout_constraintTop_toBottomOf="@id/amount_text"
+                android:text="Fixed"
+                android:textSize="20sp"
+                android:layout_marginStart="8dp"/>
+
+            <TextView
+                android:id="@+id/size_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/color_text"
+                app:layout_constraintTop_toTopOf="@id/color_text"
+                android:text="XL"
+                android:textSize="20sp"
+                android:layout_marginStart="24dp"/>
+
+            <TextView
+                android:id="@+id/date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/product_image"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="october any shit"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/payment_method_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/date_text"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="cash on delivery"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/delivery_state_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/payment_method_text"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="undelivered"
+                android:textSize="20sp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/change_to_delivered_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/delivery_state_text"
+                android:text="  Change to delivered  "
+                android:background="@drawable/rounded_corners_button_shape"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel_order_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/change_to_delivered_button"
+                app:layout_constraintTop_toBottomOf="@id/delivery_state_text"
+                android:text="  Cancel order  "
+                android:background="@drawable/rounded_corners_button_shape"
+                android:textAllCaps="false"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

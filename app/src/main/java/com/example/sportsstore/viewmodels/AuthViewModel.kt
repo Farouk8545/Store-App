@@ -135,7 +135,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "paymentMethod" to paymentMethod,
             "imageUrl" to imageUrl,
             "color" to color,
-            "size" to size
+            "size" to size,
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {
@@ -181,14 +181,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         )
 
         favoriteRef?.set(favoriteData)?.addOnSuccessListener {
-            val query = firestore.collection("sports_shirts").whereEqualTo("id", id)
-            query.get().addOnCompleteListener { task ->
-                if(task.isSuccessful){
-                    for(document in task.result){
-                        document.reference.update("inFavourite", true)
-                    }
-                }
-            }
+            Log.d(TAG, "Item added to favorite")
         }?.addOnFailureListener{e ->
             Log.d(TAG, e.toString())
         }
@@ -304,7 +297,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun addOrder(productName: String, year:String?, price: Double, imageUrl: String?, description: String?, id: String, selectedColor: String, selectedSize: String, amount: Int, address: String, email: String, phoneNumber: String, paymentMethod: String){
+    fun addOrder(productName: String, year:String?, price: Double, imageUrl: String?, id: String, selectedColor: String, selectedSize: String, amount: Int, address: String, email: String, phoneNumber: String, paymentMethod: String){
         val firestore = FirebaseFirestore.getInstance()
         val orderRef = firestore.collection("orders")
 
@@ -313,7 +306,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "year" to year,
             "price" to price,
             "imageUrl" to imageUrl,
-            "description" to description,
             "id" to id,
             "selectedColor" to selectedColor,
             "selectedSize" to selectedSize,
@@ -323,7 +315,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "phoneNumber" to phoneNumber,
             "paymentMethod" to paymentMethod,
             "state" to "undelivered",
-            "date" to Timestamp.now()
+            "date" to Timestamp.now(),
+            "userId" to user.value?.uid.toString()
         )
 
         orderRef.add(orderData).addOnSuccessListener {

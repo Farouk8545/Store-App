@@ -31,7 +31,12 @@ class FragmentProfileBinding : Fragment() {
         context?.let { authViewModel.initGoogleSignInClient(it) }
 
         binding.userName.text = if(authViewModel.user.value?.displayName.isNullOrEmpty()) authViewModel.user.value?.email?.substringBefore("@") ?: "User" else authViewModel.user.value?.displayName
-        binding.profilePic.setImageURI(authViewModel.user.value?.photoUrl)
+        authViewModel.user.value?.photoUrl?.run {
+            binding.profilePic.setImageURI(authViewModel.user.value!!.photoUrl)
+        } ?: run {
+            // Set default image if the photo URL is null
+            binding.profilePic.setImageResource(R.drawable.baseline_account_circle_24)
+        }
 
         val doc = authViewModel.user.value?.uid?.let {
             FirebaseFirestore.getInstance().collection("users").document(it)

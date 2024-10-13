@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
+import com.example.sportsstore.adapters.AdminColorChoiceAdapter
 import com.example.sportsstore.databinding.FragmentAdminEditProductBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -15,6 +17,7 @@ class AdminEditProductFragment : Fragment() {
     lateinit var binding : FragmentAdminEditProductBinding
     lateinit var firestore: FirebaseFirestore
     private var documentId: String? = null
+    private lateinit var adapter: AdminColorChoiceAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,8 +26,12 @@ class AdminEditProductFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         firestore = FirebaseFirestore.getInstance()
 
+        adapter = AdminColorChoiceAdapter()
+        binding.colorsRv.adapter = adapter
+        binding.colorsRv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
         binding.searchById.setOnClickListener{
-            var productId = binding.idInput.text.toString()
+            val productId = binding.idInput.text.toString()
             if(productId.isNotEmpty()){
                 loadProductById(productId)
             }else{
@@ -60,6 +67,14 @@ class AdminEditProductFragment : Fragment() {
                     binding.descriptionEt.setText(document.getString("description"))
                     binding.priceEt.setText(document.getDouble("price")?.toString())
                     binding.yearEt.setText(document.getString("year"))
+                    document.get("colors")?.let { colors ->
+                        if (colors is List<*>) {
+                            // Check if the list is of type String
+                            val colorList = colors.filterIsInstance<String>()
+                            // Pass the list to the adapter
+                            adapter.setData(colorList)
+                        }
+                    }
                     binding.layoutDisplay.visibility = View.VISIBLE
 
 

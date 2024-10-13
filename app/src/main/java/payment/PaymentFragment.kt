@@ -99,7 +99,6 @@ class PaymentFragment : Fragment() {
                         productIt.year,
                         productIt.price,
                         productIt.imageUrl,
-                        productIt.description,
                         productIt.id,
                         args.selectedColor[productIndex],
                         args.selectedSize[productIndex],

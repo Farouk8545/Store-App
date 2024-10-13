@@ -105,6 +105,28 @@
         android:layout_marginBottom="8dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/orders_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flag_transparent"
+            android:text="Orders"
+            android:textColor="?attr/android:textColorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        android:layout_marginBottom="8dp">
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/log_out_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
