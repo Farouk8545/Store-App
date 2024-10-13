@@ -27,7 +27,7 @@
                 android:textColor="@color/Purple"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

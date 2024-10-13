@@ -74,5 +74,25 @@
     <string name="purchase_history">Purchase History</string>
     <string name="color1">Color:</string>
     <string name="size1">Size:</string>
+    <string name="failed_to_load_cart">Failed to load cart.</string>
+    <string name="failed_to_load_favorites">Failed to load favorites</string>
+    <string name="latest">Latest</string>
+    <string name="sportsshirts">Sports Shirts</string>
+    <string name="product_id">Product ID</string>
+    <string name="wait">Wait ...</string>
+    <string name="delete">Delete</string>
+    <string name="new_admin_email">New admin Email</string>
+    <string name="add_admin">Add admin</string>
+    <string name="add_product">Add Product</string>
+    <string name="remove_product">Remove Product</string>
+    <string name="edit_products">Edit Products</string>
+    <string name="manage_customers">Manage Customers</string>
+    <string name="please_enter_id">Please enter ID</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="year">Year</string>
+    <string name="description">Description</string>
+    <string name="sizes">Sizes:</string>
+    <string name="add">Add</string>
 
 </resources>

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapterCart
 import com.example.sportsstore.databinding.FragmentPurchaseCardBinding
 import com.example.sportsstore.models.CartModel
@@ -53,7 +54,7 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
 
         } catch (e: Exception) {
             Log.e("CartFragment", "Error fetching Cart", e)
-            binding.textView5.text = "Failed to load cart."
+            binding.textView5.text = getString(R.string.failed_to_load_cart)
             binding.imageView4.visibility = View.VISIBLE
         }
 
@@ -61,7 +62,7 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
             if (authViewModel.cartItems.value?.isEmpty() == true) {
                 binding.imageView4.visibility = View.VISIBLE
                 binding.buyAllButton.visibility = View.GONE
-                binding.textView5.text = "card is empty"
+                binding.textView5.text = getString(R.string.card_is_empty)
             } else {
                 binding.imageView4.visibility = View.GONE
                 binding.buyAllButton.visibility = View.VISIBLE

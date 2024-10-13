@@ -66,8 +66,8 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
                 // Once both are ready, update the adapter on the main thread
                 withContext(Dispatchers.Main) {
                     adapter.setData(listOf(
-                        ParentItem("Sports Shirts", sportsShirts),
-                        ParentItem("Latest", latest)
+                        ParentItem(getString(R.string.sportsshirts), sportsShirts),
+                        ParentItem(getString(R.string.latest), latest)
                     ))
                 }
             } catch (e: Exception) {
