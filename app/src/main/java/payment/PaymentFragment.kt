@@ -111,7 +111,7 @@ class PaymentFragment : Fragment() {
                     )
                 }
                 Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
-                authViewModel.deleteAllCartItems()
+                if(args.fromCart) authViewModel.deleteAllCartItems()
                 findNavController().navigate(R.id.action_paymentFragment_to_homeFragment)
             }else{
                 getPayment()

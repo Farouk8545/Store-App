@@ -108,7 +108,8 @@ class ProductOverviewFragment : Fragment() {
                     intArrayOf(binding.amountSpinner.selectedItem.toString().toInt()),
                     arrayOf(it1),
                     arrayOf(binding.sizeSpinner.selectedItem.toString()),
-                    arrayOf((args.currentProduct.first().price * binding.amountSpinner.selectedItem.toString().toInt()).toFloat()).toFloatArray()
+                    arrayOf((args.currentProduct.first().price * binding.amountSpinner.selectedItem.toString().toInt()).toFloat()).toFloatArray(),
+                    false
                 )
             }
             if (action != null) {

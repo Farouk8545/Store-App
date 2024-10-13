@@ -98,7 +98,8 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
                                     adapter.getItemsQuantity().toIntArray(),
                                     adapter.getSelectedColor().toTypedArray(),
                                     adapter.getSelectedSize().toTypedArray(),
-                                    adapter.getTotalCost().toFloatArray()
+                                    adapter.getTotalCost().toFloatArray(),
+                                    true
                                     )
                                 binding.root.findNavController().navigate(action)
                             }

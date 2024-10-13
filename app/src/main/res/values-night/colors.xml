@@ -2,8 +2,9 @@
 <!-- res/values-night/colors.xml -->
 <resources>
     <!-- Primary Colors -->
-    <color name="primaryColor">#1E90FF</color> <!-- Dodger Blue (same as light) -->
-    <color name="primaryDarkColor">#1C86EE</color> <!-- Darker Blue (same as light) -->
+    <color name="off_white">#222024</color>
+    <color name="primaryColor">#488d61</color> <!-- Dodger Blue (same as light) -->
+    <color name="primaryDarkColor">#65a96e</color> <!-- Darker Blue (same as light) -->
 
     <!-- Accent Colors -->
     <color name="accentColor">#FF6347</color> <!-- Tomato (slightly different for dark mode) -->

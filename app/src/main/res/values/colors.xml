@@ -2,9 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="Purple">#6200EE</color>
-        <color name="primaryColor">#6200EE</color> <!-- Dodger Blue -->
-        <color name="primaryDarkColor">#1C86EE</color> <!-- Darker Blue -->
+    <color name="off_white">#FAF9F6</color>
+    <color name="Purple">#488d61</color>
+        <color name="primaryColor">#488d61</color> <!-- Dodger Blue -->
+        <color name="primaryDarkColor">#65a96e</color> <!-- Darker Blue -->
 
         <!-- Accent Colors -->
         <color name="accentColor">#63208f</color> <!-- blue Red -->

@@ -12,6 +12,7 @@ import com.example.sportsstore.R
 import com.example.sportsstore.SignInActivity
 import com.example.sportsstore.databinding.FragmentProfileBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.google.firebase.firestore.FirebaseFirestore
 
 class FragmentProfileBinding : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -28,6 +29,22 @@ class FragmentProfileBinding : Fragment() {
 
         authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
         context?.let { authViewModel.initGoogleSignInClient(it) }
+
+        binding.userName.text = if(authViewModel.user.value?.displayName.isNullOrEmpty()) authViewModel.user.value?.email?.substringBefore("@") ?: "User" else authViewModel.user.value?.displayName
+        binding.profilePic.setImageURI(authViewModel.user.value?.photoUrl)
+
+        val doc = authViewModel.user.value?.uid?.let {
+            FirebaseFirestore.getInstance().collection("users").document(it)
+        }
+        doc?.get()?.addOnSuccessListener { document ->
+            if(document != null && document.exists()){
+                val address = document.getString("address")
+                val phoneNumber = document.getString("phoneNumber")
+
+                binding.address.text = address
+                binding.phoneNumber.text = phoneNumber
+            }
+        }
 
         binding.logOutButton.setOnClickListener {
             authViewModel.signOut()

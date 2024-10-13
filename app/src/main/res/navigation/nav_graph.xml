@@ -221,6 +221,9 @@
         <argument
             android:name="totalCost"
             app:argType="float[]" />
+        <argument
+            android:name="fromCart"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/accountSettingsFragment"
