@@ -7,7 +7,7 @@
         <color name="primaryDarkColor">#1C86EE</color> <!-- Darker Blue -->
 
         <!-- Accent Colors -->
-        <color name="accentColor">#FF4500</color> <!-- Orange Red -->
+        <color name="accentColor">#63208f</color> <!-- blue Red -->
 
         <!-- Background and Surface Colors -->
         <color name="backgroundColor">#FFFFFF</color> <!-- White -->

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Purchase History"
+        android:text="@string/purchase_history"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/Purple"/>

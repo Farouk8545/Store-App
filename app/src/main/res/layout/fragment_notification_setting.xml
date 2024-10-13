@@ -16,7 +16,7 @@
             android:id="@+id/notification_settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notification Settings"
+            android:text="@string/notification_settings"
             android:textColor="@color/Purple"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Push Notifications"
+                android:text="@string/push_notifications"
                 android:textColor="?attr/android:textColorPrimary"
                 android:textSize="20sp" />
 
@@ -62,7 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Email Notifications"
+                android:text="@string/email_notifications"
                 android:textColor="?attr/android:textColorPrimary"
                 android:textSize="20sp" />
 
@@ -88,7 +88,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Vibration"
+                android:text="@string/vibration"
                 android:textColor="?attr/android:textColorPrimary"
                 android:textSize="20sp" />
 

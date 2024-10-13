@@ -2,16 +2,14 @@ package com.example.sportsstore
 
 import android.app.AlertDialog
 import android.content.Context
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.fragment.app.Fragment
 import com.example.sportsstore.databinding.FragmentAccountSettingBinding
 
 class AccountSettingsFragment : Fragment() {
@@ -28,24 +26,24 @@ class AccountSettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Intialize dark mode
-        val sharedPref = requireActivity().getSharedPreferences("AppSettings", 0)
+        // Initialize dark mode based on saved preference
+        val sharedPref = requireActivity().getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val isDarkModeOn = sharedPref.getBoolean("DarkMode", false)
 
-        // Set initial switch state
+        // Set the initial switch state based on the saved preference
         binding.DarkMode.isChecked = isDarkModeOn
 
-        // Set the dark mode based on the saved preference
+        // Apply the dark mode setting immediately on fragment creation
         setDarkMode(isDarkModeOn)
 
-        // Toggle dark mode on switch change
+        // Toggle dark mode and save the preference when the switch is toggled
         binding.DarkMode.setOnCheckedChangeListener { _, isChecked ->
             setDarkMode(isChecked)
-            // Save user preference
+            // Save user preference for dark mode
             sharedPref.edit().putBoolean("DarkMode", isChecked).apply()
-
         }
 
+        // Set up other UI elements (Change Username and Password buttons)
         binding.btnChangeUsername.setOnClickListener {
             showChangeDialog("Change Username", "Enter new username:", "username")
         }
@@ -55,7 +53,7 @@ class AccountSettingsFragment : Fragment() {
         }
     }
 
-    // Set dark mode based on the switch state
+    // Function to apply dark mode based on the boolean parameter
     private fun setDarkMode(isDarkModeOn: Boolean) {
         if (isDarkModeOn) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -72,7 +70,7 @@ class AccountSettingsFragment : Fragment() {
         val input = AppCompatEditText(requireContext())
         builder.setView(input)
 
-        builder.setPositiveButton("OK") { dialog, which ->
+        builder.setPositiveButton("OK") { dialog, _ ->
             val newValue = input.text.toString()
             if (newValue.isNotEmpty()) {
                 saveSetting(type, newValue)
@@ -82,7 +80,7 @@ class AccountSettingsFragment : Fragment() {
             }
         }
 
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
         }
 
@@ -91,7 +89,7 @@ class AccountSettingsFragment : Fragment() {
 
     private fun saveSetting(key: String, value: String) {
         val sharedPref = requireActivity().getSharedPreferences("user_settings", Context.MODE_PRIVATE)
-        with (sharedPref.edit()) {
+        with(sharedPref.edit()) {
             putString(key, value)
             apply()
         }
