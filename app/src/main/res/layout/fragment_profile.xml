@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PROFILE"
+            android:text="@string/profile"
             android:layout_marginTop="8dp"
             android:textColor="@color/Purple"
             android:textStyle="bold"
@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="phone number : "
+                        android:text="@string/phone_number1"
                         android:textColor="?attr/android:textColorPrimary"
                         android:textSize="15sp"
                         />
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address : "
+                        android:text="@string/address1"
                         android:textColor="?attr/android:textColorPrimary"
                         android:textSize="15sp" />
                     <TextView
@@ -129,7 +129,7 @@
                 android:textAlignment="center"
                 android:layout_gravity="center"
                 android:textSize="20sp"
-                android:text="Order History"
+                android:text="@string/order_history"
                 android:textColor="?attr/android:textColorPrimary"
                 android:backgroundTint="@android:color/transparent"
                 android:padding="12dp"
@@ -156,7 +156,7 @@
                     android:textSize="20sp"
                     android:textColor="?attr/android:textColorPrimary"
                     android:backgroundTint="@android:color/transparent"
-                    android:text="Setting"
+                    android:text="@string/setting"
                     android:padding="12dp"
                     style="@style/Widget.MaterialComponents.CardView"
                     android:textStyle="normal"
@@ -179,7 +179,7 @@
                 android:textAlignment="center"
                 android:layout_gravity="center"
                 android:textSize="20sp"
-                android:text="log out"
+                android:text="@string/log_out"
                 android:textColor="?attr/android:textColorPrimary"
                 android:backgroundTint="@android:color/transparent"
                 android:padding="12dp"

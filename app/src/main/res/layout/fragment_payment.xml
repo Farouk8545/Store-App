@@ -16,7 +16,7 @@
         android:drawableStart="@drawable/location"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Address"
+        android:hint="@string/address"
         android:importantForAccessibility="no"
         android:inputType="text"
         android:textColorHint="#3B608C"
@@ -50,7 +50,7 @@
         android:drawableStart="@drawable/phone"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Phone Number"
+        android:hint="@string/phone_number"
         android:importantForAccessibility="no"
         android:inputType="phone"
         android:maxLength="11"
@@ -65,7 +65,7 @@
         android:layout_height="116dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="52dp"
-        android:text="Buy\n Now"
+        android:text="@string/buy_now"
         android:textColor="#6672FF"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -85,7 +85,7 @@
         android:drawableStart="@drawable/email"
         android:drawablePadding="16dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="text"
         android:textColorHint="#3B608C"
         android:textSize="18sp"
@@ -127,7 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="4 items"
+            android:text="@string/_4_items"
             android:textAlignment="center"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -152,7 +152,7 @@
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Cash on delivery"
+        android:text="@string/cash_on_delivery"
         android:textSize="20sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

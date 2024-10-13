@@ -13,7 +13,7 @@ import java.util.*
 class LanguageSettingsFragment : Fragment(R.layout.fragment_language_setting) {
 
     private lateinit var languageSpinner: Spinner
-    private val languages = listOf("English", "Spanish", "French", "German", "Chinese")
+    private val languages = listOf("English", "Spanish", "French", "German", "Arabic")
 
     override fun onViewCreated(view: android.view.View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

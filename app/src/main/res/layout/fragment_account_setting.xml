@@ -16,7 +16,7 @@
             android:id="@+id/account_settings_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Account Settings"
+            android:text="@string/account_settings"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/Purple"
@@ -26,7 +26,7 @@
             android:id="@+id/btn_change_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change Username"
+            android:text="@string/change_username"
             android:textColor="?attr/android:textColorPrimary"
             android:backgroundTint="?attr/colorSurface"
             android:textSize="20sp"
@@ -38,7 +38,7 @@
             android:id="@+id/btn_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Change Password"
+            android:text="@string/change_password"
             android:textColor="?attr/android:textColorPrimary"
             android:backgroundTint="?attr/colorSurface"
             android:textSize="20sp"
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="?attr/android:textColorPrimary"
-                android:text="Dark Mode"
+                android:text="@string/dark_mode"
                 android:textSize="20sp" />
 
             <Switch
