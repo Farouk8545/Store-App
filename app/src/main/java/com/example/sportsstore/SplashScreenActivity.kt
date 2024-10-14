@@ -37,22 +37,23 @@ class SplashScreenActivity : AppCompatActivity() {
                             val role = document.getString("role")
                             when (role) {
                                 "admin" -> {
-                                    Log.d("admin", "Navigating to Admin Dashboard")
                                     val intent = Intent(this@SplashScreenActivity, AdminDashboardActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                                 "customer" -> {
-                                    Log.d("customer", "Navigating to Main Activity")
                                     val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 }
                             }
+                        }else{
+                            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 } else {
-                    Log.d("user", "Navigating to Sign In Activity")
                     val intent = Intent(this@SplashScreenActivity, SignInActivity::class.java)
                     startActivity(intent)
                     finish()

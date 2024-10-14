@@ -74,6 +74,10 @@ class SignInFragment : Fragment() {
                             startActivity(intent)
                             requireActivity().finish()
                         }
+                    }else {
+                        val intent = Intent(requireActivity(), MainActivity::class.java)
+                        startActivity(intent)
+                        requireActivity().finish()
                     }
                 }
             }
