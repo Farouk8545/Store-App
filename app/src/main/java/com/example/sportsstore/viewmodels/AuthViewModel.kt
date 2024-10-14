@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.AndroidViewModel
@@ -55,25 +57,27 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         googleSignInClient = GoogleSignIn.getClient(context, gso)
     }
 
-    fun signIn(launcher: ActivityResultLauncher<Intent>) {
+    fun signIn(launcher: ActivityResultLauncher<Intent>, progressBar: ProgressBar) {
+        progressBar.visibility = View.VISIBLE
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
     }
 
-    fun handleSignInResult(data: Intent?) {
+    fun handleSignInResult(data: Intent?, progressBar: ProgressBar) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(data)
         try {
             val account = task.getResult(ApiException::class.java)!!
-            firebaseAuthWithGoogle(account.idToken!!)
+            firebaseAuthWithGoogle(account.idToken!!, progressBar)
         } catch (e: ApiException) {
             Log.w(TAG, "Google sign in failed", e)
         }
     }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
+    private fun firebaseAuthWithGoogle(idToken: String, progressBar: ProgressBar) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
+                progressBar.post { progressBar.visibility = View.VISIBLE }
                 if (task.isSuccessful) {
                     // Update LiveData with signed-in user information
                     _user.value = auth.currentUser
@@ -112,9 +116,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    fun signIn(email: String, password: String) {
+    fun signIn(email: String, password: String, progressBar: ProgressBar) {
+        progressBar.post { progressBar.visibility = View.VISIBLE }
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
+                progressBar.post { progressBar.visibility = View.GONE }
                 if(task.isSuccessful){
                     _user.value = auth.currentUser
                 }else Toast.makeText(getApplication(), "Wrong email or password!", Toast.LENGTH_SHORT).show()

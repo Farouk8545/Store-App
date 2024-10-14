@@ -1,6 +1,7 @@
 package com.example.sportsstore.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,7 +53,16 @@ class PurchaseHistoryFragment : Fragment() {
 
         FirebaseFirestore.getInstance().collection("users").document(authViewModel.user.value?.uid ?: "").collection("purchases")
             .get().addOnSuccessListener {
-                adapter.setData(it.toObjects(PurchaseModel::class.java))
+                val purchases = it.toObjects(PurchaseModel::class.java)
+                for (purchase in purchases) {
+                    Log.d("Firestore", "Product: ${purchase.product}, Color: ${purchase.color}, Size: ${purchase.size}")
+                }
+                adapter.setData(purchases)
+                if (adapter.getData().isEmpty()){
+                    binding.emptyText.visibility = View.VISIBLE
+                }else{
+                    binding.emptyText.visibility = View.GONE
+                }
             }
 
         return binding.root

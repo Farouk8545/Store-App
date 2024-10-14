@@ -29,7 +29,7 @@ class SignInFragment : Fragment() {
     ) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // Handle the Google Sign-In result
-            authViewModel.handleSignInResult(result.data)
+            authViewModel.handleSignInResult(result.data, binding.progressBar)
         } else {
             Toast.makeText(requireContext(), "Sign in failed!", Toast.LENGTH_SHORT).show()
         }
@@ -77,7 +77,7 @@ class SignInFragment : Fragment() {
 
         // Set click listener for Google Sign-In button
         binding.googleSignInButton.setOnClickListener {
-            authViewModel.signIn(signInLauncher)
+            authViewModel.signIn(signInLauncher, binding.progressBar)
         }
 
         // Set click listener for sign up text
@@ -90,7 +90,7 @@ class SignInFragment : Fragment() {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                authViewModel.signIn(email, password)
+                authViewModel.signIn(email, password, binding.progressBar)
             }else Toast.makeText(requireContext(), "Please fill all fields!", Toast.LENGTH_SHORT).show()
         }
     }

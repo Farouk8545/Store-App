@@ -12,13 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentResearchAdpters
 import com.example.sportsstore.databinding.FragmentSearchBinding
-import com.example.sportsstore.fragments.HomeFragmentDirections
 import com.example.sportsstore.models.ChildItem
 import com.example.sportsstore.models.ParentResearchItem
 import com.example.sportsstore.viewmodels.AuthViewModel

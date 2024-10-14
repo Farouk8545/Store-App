@@ -22,4 +22,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="16dp"/>
 
+    <TextView
+        android:id="@+id/empty_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="You haven't bought anything yet!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

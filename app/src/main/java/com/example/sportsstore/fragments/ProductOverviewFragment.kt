@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,6 +69,14 @@ class ProductOverviewFragment : Fragment() {
         val adapter = args.currentProduct.first().colors?.let { ColorChoiceAdapter(it) }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        lifecycleScope.launch {
+            if(authViewModel.purchaseCartExists(args.currentProduct.first().id)){
+                binding.cartAdd.setImageResource(R.drawable.baseline_shopping_cart_checkout_24)
+            }else{
+                binding.cartAdd.setImageResource(R.drawable.baseline_add_shopping_cart_24)
+            }
+        }
 
         binding.cartAdd.setOnClickListener {
             GlobalScope.launch {
