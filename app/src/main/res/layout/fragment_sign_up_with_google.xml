@@ -25,57 +25,36 @@
             android:textSize="30sp"
             android:textStyle="bold|italic" />
 
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/countryCodePicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/loginText"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            app:ccp_showNameCode="false"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Phone Number"
-            app:layout_constraintTop_toTopOf="@id/countryCodePicker"
-            app:layout_constraintBottom_toBottomOf="@id/countryCodePicker"
-            app:layout_constraintStart_toEndOf="@id/countryCodePicker"
-            app:layout_constraintEnd_toEndOf="@id/addressLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@id/addressEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginText"
+                android:digits="0123456789"
+                android:importantForAccessibility="no"
                 android:inputType="phone"
                 android:maxLength="11"
-                android:digits="0123456789"
-                android:importantForAccessibility="no" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/addressLayout"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:hint="address"
-            app:layout_constraintTop_toBottomOf="@id/countryCodePicker"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp">
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:hint="Phone Number"
+                android:drawableStart="@drawable/phone"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/addressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:inputType="text"
-                android:importantForAccessibility="no" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phoneNumberEditText"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Address"
+                android:drawableStart="@drawable/location"/>
 
         <Button
             android:id="@+id/googleSignUpButton"
@@ -83,7 +62,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/addressLayout"
+            app:layout_constraintTop_toBottomOf="@id/addressEditText"
             android:layout_marginTop="16dp"
             android:text="@string/sign_up"
             android:textSize="15sp"

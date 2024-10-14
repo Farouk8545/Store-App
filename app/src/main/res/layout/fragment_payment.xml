@@ -26,25 +26,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
-    <com.hbb20.CountryCodePicker
-        android:id="@+id/countryCodePicker"
-        android:layout_width="91dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="10sp"
-        app:ccp_showNameCode="false"
-        app:layout_constraintEnd_toStartOf="@+id/phoneNumberEditText"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressEditText" />
-
     <EditText
         android:id="@+id/phoneNumberEditText"
-        android:layout_width="246dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="32dp"
         android:background="@drawable/edit_text_background"
         android:digits="0123456789"
         android:drawableStart="@drawable/phone"
@@ -57,7 +43,10 @@
         android:textColorHint="#3B608C"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addressEditText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addressEditText"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -120,7 +109,7 @@
         android:layout_marginTop="50dp"
         android:orientation="horizontal"
         android:weightSum="2"
-        app:layout_constraintTop_toBottomOf="@id/countryCodePicker">
+        app:layout_constraintTop_toBottomOf="@id/phoneNumberEditText">
 
         <TextView
             android:id="@+id/number_of_items_text"
@@ -151,7 +140,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/cash_on_delivery"
         android:textSize="20sp"/>
 
