@@ -67,9 +67,9 @@ class PurchaseCartFragment : Fragment(), ChildAdapterCart.OnItemClickListener {
                 binding.imageView4.visibility = View.GONE
                 binding.buyAllButton.visibility = View.VISIBLE
                 if(authViewModel.cartItems.value?.size == 1){
-                    binding.textView5.text = "${authViewModel.cartItems.value?.size} product"
+                    binding.textView5.text = "${authViewModel.cartItems.value?.size}" +" "+ getString(R.string.product)
                 }else{
-                    binding.textView5.text = "${authViewModel.cartItems.value?.size} products"
+                    binding.textView5.text = "${authViewModel.cartItems.value?.size}" + " "+ getString(R.string.product)
                 }
 
             }

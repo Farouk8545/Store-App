@@ -45,11 +45,13 @@ class AccountSettingsFragment : Fragment() {
 
         // Set up other UI elements (Change Username and Password buttons)
         binding.btnChangeUsername.setOnClickListener {
-            showChangeDialog("Change Username", "Enter new username:", "username")
+            showChangeDialog(getString(R.string.change_username),
+                getString(R.string.enter_new_username), "username")
         }
 
         binding.btnChangePassword.setOnClickListener {
-            showChangeDialog("Change Password", "Enter new password:", "password")
+            showChangeDialog(getString(R.string.change_password),
+                getString(R.string.enter_new_password), "password")
         }
     }
 
@@ -70,17 +72,18 @@ class AccountSettingsFragment : Fragment() {
         val input = AppCompatEditText(requireContext())
         builder.setView(input)
 
-        builder.setPositiveButton("OK") { dialog, _ ->
+        builder.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
             val newValue = input.text.toString()
             if (newValue.isNotEmpty()) {
                 saveSetting(type, newValue)
                 Toast.makeText(requireContext(), "$title updated", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(), "Input cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.input_cannot_be_empty), Toast.LENGTH_SHORT).show()
             }
         }
 
-        builder.setNegativeButton("Cancel") { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
             dialog.cancel()
         }
 

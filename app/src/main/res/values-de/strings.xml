@@ -98,4 +98,18 @@
     <string name="category">Kategorie:</string>
     <string name="sports_shoes">Sportschuhe</string>
     <string name="sports_wears">Sportbekleidung</string>
+    <string name="product">Produkt</string>
+    <string name="language_set_to">Sprache gesetzt auf</string>
+    <string name="enter_new_username">Neuen Benutzernamen eingeben:</string>
+    <string name="enter_new_password">Neues Passwort eingeben:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="input_cannot_be_empty">Eingabe darf nicht leer sein</string>
+    <string name="navigating_to_faqs">Zu FAQs navigieren</string>
+    <string name="enter_your_feedback">Geben Sie Ihr Feedback ein:</string>
+    <string name="submit">Senden</string>
+    <string name="thank_you_for_your_feedback">Danke für Ihr Feedback!</string>
+    <string name="feedback_cannot_be_empty">Feedback darf nicht leer sein</string>
+    <string name="enabled">Aktiviert</string>
+    <string name="disabled">Deaktiviert</string>
 </resources>

@@ -26,7 +26,8 @@ class HelpSupportFragment : Fragment(R.layout.fragment_help_setting) {
         privacyPolicyButton = view.findViewById(R.id.btn_privacy_policy)
 
         viewFAQsButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Navigating to FAQs", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                getString(R.string.navigating_to_faqs), Toast.LENGTH_SHORT).show()
             // Implement navigation to FAQs
             // we don't have faqs now so we just show toast
         }
@@ -40,17 +41,17 @@ class HelpSupportFragment : Fragment(R.layout.fragment_help_setting) {
         }
 
         termsButton.setOnClickListener {
-            openWebPage("https://www..com/terms")
+            openWebPage("https://www.google.com/terms")
         }
 
         privacyPolicyButton.setOnClickListener {
-            openWebPage("https://www..com/privacy")
+            openWebPage("https://www.google.com/privacy")
         }
     }
 
     private fun sendSupportEmail() {
         val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:support@example.com")
+            data = Uri.parse("hemdanmohamedhany@gmail.com")
             putExtra(Intent.EXTRA_SUBJECT, "Support Request")
         }
         if (intent.resolveActivity(requireActivity().packageManager) != null) {
@@ -62,24 +63,25 @@ class HelpSupportFragment : Fragment(R.layout.fragment_help_setting) {
 
     private fun showFeedbackDialog() {
         val builder = android.app.AlertDialog.Builder(requireContext())
-        builder.setTitle("Submit Feedback")
-        builder.setMessage("Enter your feedback:")
+        builder.setTitle(getString(R.string.submit_feedback))
+        builder.setMessage(getString(R.string.enter_your_feedback))
 
         val input = androidx.appcompat.widget.AppCompatEditText(requireContext())
         builder.setView(input)
 
-        builder.setPositiveButton("Submit") { dialog, _ ->
+        builder.setPositiveButton(getString(R.string.submit)) { dialog, _ ->
             val feedback = input.text.toString()
             if (feedback.isNotEmpty()) {
-                // Handle feedback submission (e.g., send to server)
-                Toast.makeText(requireContext(), "Thank you for your feedback!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.thank_you_for_your_feedback), Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             } else {
-                Toast.makeText(requireContext(), "Feedback cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),
+                    getString(R.string.feedback_cannot_be_empty), Toast.LENGTH_SHORT).show()
             }
         }
 
-        builder.setNegativeButton("Cancel") { dialog, _ ->
+        builder.setNegativeButton(getString(R.string.cancel)) { dialog, _ ->
             dialog.cancel()
         }
 

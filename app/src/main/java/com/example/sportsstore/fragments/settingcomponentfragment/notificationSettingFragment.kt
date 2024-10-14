@@ -28,17 +28,23 @@ class NotificationSettingsFragment : Fragment(R.layout.fragment_notification_set
 
         pushNotificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
             saveSetting("push_notifications", isChecked)
-            Toast.makeText(requireContext(), "Push Notifications ${if (isChecked) "Enabled" else "Disabled"}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.push_notifications) +" ${if (isChecked) getString(
+                R.string.enabled
+            ) else getString(R.string.disabled)}", Toast.LENGTH_SHORT).show()
         }
 
         emailNotificationsSwitch.setOnCheckedChangeListener { _, isChecked ->
             saveSetting("email_notifications", isChecked)
-            Toast.makeText(requireContext(), "Email Notifications ${if (isChecked) "Enabled" else "Disabled"}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.email_notifications) +" ${if (isChecked) getString(
+                R.string.enabled
+            ) else getString(R.string.disabled)}", Toast.LENGTH_SHORT).show()
         }
 
         vibrationSwitch.setOnCheckedChangeListener { _, isChecked ->
             saveSetting("vibration", isChecked)
-            Toast.makeText(requireContext(), "Vibration ${if (isChecked) "Enabled" else "Disabled"}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.vibration) +" ${if (isChecked) getString(
+                R.string.enabled
+            ) else getString(R.string.disabled)}", Toast.LENGTH_SHORT).show()
         }
     }
 

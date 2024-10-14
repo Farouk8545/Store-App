@@ -98,4 +98,18 @@
     <string name="category">الفئة:</string>
     <string name="sports_shoes">أحذية رياضية</string>
     <string name="sports_wears">ملابس رياضية</string>
+    <string name="product">منتج</string>
+    <string name="language_set_to"> اللغه الاساسية هي  </string>
+    <string name="enter_new_username">أدخل اسم مستخدم جديد:</string>
+    <string name="enter_new_password">أدخل كلمة مرور جديدة:</string>
+    <string name="ok">موافق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="input_cannot_be_empty">لا يمكن أن يكون الإدخال فارغًا</string>
+    <string name="navigating_to_faqs">الانتقال إلى الأسئلة الشائعة</string>
+    <string name="enter_your_feedback">أدخل ملاحظاتك:</string>
+    <string name="submit">إرسال</string>
+    <string name="thank_you_for_your_feedback">شكرًا لملاحظاتك!</string>
+    <string name="feedback_cannot_be_empty">لا يمكن أن تكون الملاحظات فارغة</string>
+    <string name="enabled">مفعل</string>
+    <string name="disabled">معطل</string>
 </resources>

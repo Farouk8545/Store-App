@@ -66,9 +66,9 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
             } else {
                 binding.imageView4.visibility = View.GONE
                 if(authViewModel.favItems.value?.size == 1){
-                    binding.textView5.text = "${authViewModel.favItems.value?.size} product"
+                    binding.textView5.text = "${authViewModel.favItems.value?.size}" + " " + getString(R.string.product)
                 }else{
-                    binding.textView5.text = "${authViewModel.favItems.value?.size} products"
+                    binding.textView5.text = "${authViewModel.favItems.value?.size}" + " " + getString(R.string.product)
                 }
 
             }

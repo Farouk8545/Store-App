@@ -42,14 +42,15 @@ class LanguageSettingsFragment : Fragment(R.layout.fragment_language_setting) {
                 val selectedLanguage = languages[position]
                 if (selectedLanguage != LocaleHelper.getLocale(requireContext())) {
                     saveLanguage(selectedLanguage)
-                    Toast.makeText(requireContext(), "Language set to $selectedLanguage", Toast.LENGTH_SHORT).show()
                     // Restart activity to apply changes
                     requireActivity().recreate()
                 }
+                Toast.makeText(requireContext(),
+                    getString(R.string.language_set_to) +"$selectedLanguage", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
-                // Do nothing
+
             }
         })
     }

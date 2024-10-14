@@ -29,6 +29,7 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var authViewModel: AuthViewModel
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
