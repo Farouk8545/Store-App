@@ -1,8 +1,10 @@
 package com.example.sportsstore.signinfragments
 
 import android.app.Activity
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import com.example.sportsstore.R
 import com.example.sportsstore.databinding.FragmentSignInBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.paypal.android.sdk.e
 
 class SignInFragment : Fragment() {
 
@@ -32,6 +35,7 @@ class SignInFragment : Fragment() {
             authViewModel.handleSignInResult(result.data, binding.progressBar)
         } else {
             Toast.makeText(requireContext(), "Sign in failed!", Toast.LENGTH_SHORT).show()
+
         }
     }
 
@@ -95,3 +99,4 @@ class SignInFragment : Fragment() {
         }
     }
 }
+
