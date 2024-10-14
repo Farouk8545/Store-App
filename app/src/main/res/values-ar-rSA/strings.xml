@@ -75,5 +75,27 @@
     <string name="purchase_history">سجل المشتريات</string>
     <string name="color1">اللون:</string>
     <string name="size1">المقاس:</string>
-
+    <string name="failed_to_load_cart">فشل في تحميل العربة</string>
+    <string name="failed_to_load_favorites">فشل في تحميل المفضلات</string>
+    <string name="latest">أحدث العروض</string>
+    <string name="sportsshirts">قمصان رياضية</string>
+    <string name="product_id">معرّف المنتج</string>
+    <string name="wait">انتظر ...</string>
+    <string name="delete">حذف</string>
+    <string name="new_admin_email">بريد إلكتروني جديد للمسؤول</string>
+    <string name="add_admin">إضافة مسؤول</string>
+    <string name="add_product">إضافة منتج</string>
+    <string name="remove_product">إزالة المنتج</string>
+    <string name="edit_products">تحرير المنتجات</string>
+    <string name="manage_customers">إدارة العملاء</string>
+    <string name="please_enter_id">يرجى إدخال المعرّف</string>
+    <string name="name">الاسم</string>
+    <string name="price">السعر</string>
+    <string name="year">السنة</string>
+    <string name="description">الوصف</string>
+    <string name="sizes">الأحجام:</string>
+    <string name="add">إضافة</string>
+    <string name="category">الفئة:</string>
+    <string name="sports_shoes">أحذية رياضية</string>
+    <string name="sports_wears">ملابس رياضية</string>
 </resources>

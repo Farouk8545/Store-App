@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapterFav
 import com.example.sportsstore.databinding.FragmentFavoriteBinding
 import com.example.sportsstore.models.ChildItem
@@ -54,14 +55,14 @@ class FavoriteFragment : Fragment(), ChildAdapterFav.OnItemClickListener {
 
         } catch (e: Exception) {
             Log.e("FavoriteFragment", "Error fetching favorites", e)
-            binding.textView5.text = "Failed to load favorites"
+            binding.textView5.text = getString(R.string.failed_to_load_favorites)
             binding.imageView4.visibility = View.VISIBLE
         }
 
         authViewModel.favItems.observe(viewLifecycleOwner) { items ->
             if (authViewModel.favItems.value?.isEmpty() == true) {
                 binding.imageView4.visibility = View.VISIBLE
-                binding.textView5.text = "there_are_no_favorite_items"
+                binding.textView5.text = getString(R.string.there_are_no_favorite_items)
             } else {
                 binding.imageView4.visibility = View.GONE
                 if(authViewModel.favItems.value?.size == 1){

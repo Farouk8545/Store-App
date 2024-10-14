@@ -75,4 +75,27 @@
     <string name="purchase_history">Historial de compras</string>
     <string name="color1">Color:</string>
     <string name="size1">Tamaño:</string>
+    <string name="failed_to_load_cart">falló al cargar el carrito</string>
+    <string name="failed_to_load_favorites">falló al cargar favoritos</string>
+    <string name="latest">Último</string>
+    <string name="sportsshirts">Camisetas deportivas</string>
+    <string name="product_id">ID del producto</string>
+    <string name="wait">Espera ...</string>
+    <string name="delete">Eliminar</string>
+    <string name="new_admin_email">Nuevo correo electrónico del administrador</string>
+    <string name="add_admin">Agregar administrador</string>
+    <string name="add_product">Agregar producto</string>
+    <string name="remove_product">Eliminar producto</string>
+    <string name="edit_products">Editar productos</string>
+    <string name="manage_customers">Gestionar clientes</string>
+    <string name="please_enter_id">Por favor, ingrese la ID</string>
+    <string name="name">Nombre</string>
+    <string name="price">Precio</string>
+    <string name="year">Año</string>
+    <string name="description">Descripción</string>
+    <string name="sizes">Tamaños:</string>
+    <string name="add">Agregar</string>
+    <string name="category">Categoría:</string>
+    <string name="sports_shoes">Zapatos deportivos</string>
+    <string name="sports_wears">Ropa deportiva</string>
 </resources>

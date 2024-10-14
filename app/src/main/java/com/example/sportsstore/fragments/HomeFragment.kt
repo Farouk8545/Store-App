@@ -45,29 +45,15 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 // Fetch both collections in parallel
-                val latestDeferred = async {
-                    FirebaseFirestore.getInstance().collection("sports_shirts").orderBy("createdAt", Query.Direction.DESCENDING).limit(10)
-                        .get()
-                        .await()
-                        .toObjects(ChildItem::class.java)
-                }
-
                 val sportsShirtsDeferred = async {
-                    FirebaseFirestore.getInstance().collection("sports_shirts").whereEqualTo("category", "Sports Shirts").limit(10)
+                    FirebaseFirestore.getInstance().collection("sports_shirts")
                         .get()
                         .await()
                         .toObjects(ChildItem::class.java)
                 }
 
-                val sportsShoesDeferred = async {
-                    FirebaseFirestore.getInstance().collection("sports_shirts").whereEqualTo("category", "Sports Shoes").limit(10)
-                        .get()
-                        .await()
-                        .toObjects(ChildItem::class.java)
-                }
-
-                val sportsWearsDeferred = async {
-                    FirebaseFirestore.getInstance().collection("sports_shirts").whereEqualTo("category", "Sports Wears").limit(10)
+                val latestDeferred = async {
+                    FirebaseFirestore.getInstance().collection("sports_shirts").orderBy("salesCount", Query.Direction.DESCENDING).limit(5)
                         .get()
                         .await()
                         .toObjects(ChildItem::class.java)
@@ -76,16 +62,12 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
                 // Wait for both collections to be fetched
                 val sportsShirts = sportsShirtsDeferred.await()
                 val latest = latestDeferred.await()
-                val sportsShoes = sportsShoesDeferred.await()
-                val sportsWears = sportsWearsDeferred.await()
 
                 // Once both are ready, update the adapter on the main thread
                 withContext(Dispatchers.Main) {
                     adapter.setData(listOf(
-                        ParentItem("Latest", latest),
-                        ParentItem("Sports Shirts", sportsShirts),
-                        ParentItem("Sports Shoes", sportsShoes),
-                        ParentItem("Sports Wears", sportsWears)
+                        ParentItem(getString(R.string.sportsshirts), sportsShirts),
+                        ParentItem(getString(R.string.latest), latest)
                     ))
                 }
             } catch (e: Exception) {

@@ -75,5 +75,27 @@
     <string name="purchase_history">Historique dachats</string>
     <string name="color1">Couleur :</string>
     <string name="size1">Taille :</string>
-
+    <string name="failed_to_load_cart">échec du chargement du panier</string>
+    <string name="failed_to_load_favorites">échec du chargement des favoris</string>
+    <string name="latest">Dernier</string>
+    <string name="sportsshirts">Maillots de sport</string>
+    <string name="product_id">ID du produit</string>
+    <string name="wait">Attendez ...</string>
+    <string name="delete">Supprimer</string>
+    <string name="new_admin_email">Nouvel e-mail administrateur</string>
+    <string name="add_admin">Ajouter un administrateur</string>
+    <string name="add_product">Ajouter un produit</string>
+    <string name="remove_product">Supprimer le produit</string>
+    <string name="edit_products">Modifier les produits</string>
+    <string name="manage_customers">Gérer les clients</string>
+    <string name="please_enter_id">Veuillez entrer lID</string>
+    <string name="name">Nom</string>
+    <string name="price">Prix</string>
+    <string name="year">Année</string>
+    <string name="description">Description</string>
+    <string name="sizes">Tailles :</string>
+    <string name="add">Ajouter</string>
+    <string name="category">Catégorie :</string>
+    <string name="sports_shoes">Chaussures de sport</string>
+    <string name="sports_wears">Vêtements de sport</string>
 </resources>

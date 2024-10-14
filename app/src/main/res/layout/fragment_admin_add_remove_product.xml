@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Name"
+        android:hint="@string/name"
         android:maxLines="1"
         app:layout_constraintEnd_toStartOf="@id/price_et"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Price"
+        android:hint="@string/price"
         android:inputType="numberDecimal"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name_et"
         app:layout_constraintEnd_toStartOf="@id/id_et"
-        android:hint="Year"
+        android:hint="@string/year"
         android:layout_marginTop="8dp"
         android:maxLines="1"/>
 
@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Product Id"
+        android:hint="@string/product_id"
         android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/year_et"
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/year_et"
-        android:hint="Description"
+        android:hint="@string/description"
         android:layout_marginTop="8dp"
         android:maxLines="1"/>
     
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/radio_group"
         app:layout_constraintBottom_toBottomOf="@id/radio_group"
-        android:text="Category: "
+        android:text="@string/category"
         android:textSize="20sp" />
     
     <RadioGroup
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:text="Sports Shirts"
+            android:text="@string/sportsshirts"
             android:layout_marginStart="8dp"
             android:checked="true"/>
 
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:text="Sports Shoes"
+            android:text="@string/sports_shoes"
             android:layout_marginStart="8dp"/>
 
         <RadioButton
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_checkbox"
             android:button="@null"
-            android:text="Sports Wears"
+            android:text="@string/sports_wears"
             android:layout_marginStart="8dp"/>
 
     </RadioGroup>
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/radio_group"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/add_color_button"
-        android:hint="Color"
+        android:hint="@string/color"
         android:layout_marginTop="8dp"
         android:maxLines="1"/>
 
@@ -130,7 +130,7 @@
         app:layout_constraintStart_toEndOf="@id/color_et"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/color_et"
-        android:text="Add"
+        android:text="@string/add"
         android:textAllCaps="false"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -147,7 +147,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/colors_rv"
         android:layout_marginTop="8dp"
-        android:text="Sizes:"
+        android:text="@string/sizes"
         android:textSize="20sp"
         android:textStyle="bold"/>
 
@@ -248,7 +248,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Add Product"
+        android:text="@string/add_product"
         android:textAllCaps="false"
         android:layout_marginBottom="8dp"/>
 

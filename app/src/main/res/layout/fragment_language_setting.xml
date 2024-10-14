@@ -28,8 +28,9 @@
         android:id="@+id/spinner_language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:backgroundTint="?attr/colorSurface"
+        android:padding="12dp"
+        android:background="?attr/colorSurface"
+        android:popupBackground="?attr/colorSurface"
         />
 
 </LinearLayout>
