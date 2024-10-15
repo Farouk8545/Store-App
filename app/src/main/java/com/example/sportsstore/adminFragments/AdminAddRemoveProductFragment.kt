@@ -138,7 +138,8 @@ class AdminAddRemoveProductFragment : Fragment() {
             "colors" to adapter.getData(),
             "sizes" to getSelectedSizes(),
             "category" to selectedRadioButton.text.toString(),
-            "createdAt" to Timestamp.now()
+            "createdAt" to Timestamp.now(),
+            "salesCount" to 0,
             // Add other product details if necessary
         )
 

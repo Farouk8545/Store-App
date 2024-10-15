@@ -32,6 +32,10 @@
             name="size"
             type="String" />
 
+        <variable
+            name="amount"
+            type="String" />
+
     </data>
 
     <FrameLayout
@@ -54,6 +58,7 @@
                     android:id="@+id/product_image"
                     android:layout_width="150dp"
                     android:layout_height="200dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -138,6 +143,18 @@
                     android:layout_marginStart="8dp"
                     android:textSize="15sp"
                     android:text='@{"Size: " + size}'
+                    android:maxWidth="150dp"/>
+
+                <TextView
+                    android:id="@+id/amount_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/color_text"
+                    app:layout_constraintStart_toEndOf="@id/product_image"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textSize="15sp"
+                    android:text='@{"Amount: " + amount}'
                     android:maxWidth="150dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

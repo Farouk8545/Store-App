@@ -127,7 +127,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             }
     }
 
-    private fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String, color: String, size: String){
+    private fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String, color: String, size: String, amount: Int){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
             firestore.collection("users").document(it.uid).collection("purchases").document(id)
@@ -142,6 +142,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "imageUrl" to imageUrl,
             "color" to color,
             "size" to size,
+            "amount" to amount
         )
 
         purchaseRef?.set(purchaseData)?.addOnSuccessListener {
@@ -326,7 +327,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         )
 
         orderRef.add(orderData).addOnSuccessListener {
-            addPurchase(productName, price, Timestamp.now(), "undelivered", paymentMethod, imageUrl, id, selectedColor, selectedSize)
+            addPurchase(productName, price, Timestamp.now(), "undelivered", paymentMethod, imageUrl, id, selectedColor, selectedSize, amount)
         }
     }
 
