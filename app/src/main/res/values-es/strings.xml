@@ -112,4 +112,5 @@
     <string name="feedback_cannot_be_empty">Los comentarios no pueden estar vacíos</string>
     <string name="enabled">Activado</string>
     <string name="disabled">Desactivado</string>
+    <string name="you_haven_t_bought_anything_yet">¡Aún no has comprado nada!</string>
 </resources>

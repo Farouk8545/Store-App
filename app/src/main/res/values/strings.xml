@@ -111,5 +111,6 @@
     <string name="feedback_cannot_be_empty">Feedback cannot be empty</string>
     <string name="enabled">Enabled</string>
     <string name="disabled">Disabled</string>
+    <string name="you_haven_t_bought_anything_yet">You haven\'t bought anything yet!</string>
 
 </resources>

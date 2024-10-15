@@ -112,4 +112,5 @@
     <string name="feedback_cannot_be_empty">Feedback darf nicht leer sein</string>
     <string name="enabled">Aktiviert</string>
     <string name="disabled">Deaktiviert</string>
+    <string name="you_haven_t_bought_anything_yet">Du hast noch nichts gekauft!</string>
 </resources>

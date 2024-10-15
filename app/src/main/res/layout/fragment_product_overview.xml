@@ -22,10 +22,14 @@
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="16dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/product_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:background="@color/photoBackground"
+            android:layout_gravity="center"
+            app:shapeAppearanceOverlay="@style/roundImageView1"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

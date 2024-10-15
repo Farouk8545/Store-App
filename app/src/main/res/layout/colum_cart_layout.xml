@@ -35,7 +35,7 @@
                     android:layout_height="150dp"
                     app:flow_horizontalAlign="center"
                     app:flow_verticalAlign="center"
-                    android:backgroundTint="?attr/colorSurface"
+                    android:background="@color/photoBackground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"

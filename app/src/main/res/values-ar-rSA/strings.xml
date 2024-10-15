@@ -112,4 +112,5 @@
     <string name="feedback_cannot_be_empty">لا يمكن أن تكون الملاحظات فارغة</string>
     <string name="enabled">مفعل</string>
     <string name="disabled">معطل</string>
+    <string name="you_haven_t_bought_anything_yet">لم تشترِ أي شيء بعد!</string>
 </resources>

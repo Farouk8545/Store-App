@@ -6,6 +6,7 @@
     <color name="Purple">#008DDA</color>
         <color name="primaryColor">#008DDA</color> <!-- Dodger Blue -->
         <color name="primaryDarkColor">#65a96e</color> <!-- Darker Blue -->
+        <color name="photoBackground">#FFFFFF</color> <!-- Light Blue -->
 
         <!-- Accent Colors -->
         <color name="accentColor">#63208f</color> <!-- blue Red -->
