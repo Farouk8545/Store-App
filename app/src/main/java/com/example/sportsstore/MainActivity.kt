@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.toColor
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
@@ -26,6 +27,7 @@ private lateinit var navViewModel: NavViewModel
 
 class MainActivity : AppCompatActivity() {
     private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getLocale(newBase)))
     }
@@ -40,25 +42,27 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
-        // Load dark mode preference
-        val sharedPref = getSharedPreferences("AppSettings", MODE_PRIVATE)
+        val sharedPref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val isDarkModeOn = sharedPref.getBoolean("DarkMode", false)
         AppCompatDelegate.setDefaultNightMode(if (isDarkModeOn) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO)
 
+
         navViewModel = ViewModelProvider(this)[NavViewModel::class.java]
+
         if (navController == null) {
             Log.e("MainActivity", "Navigation controller not found")
             return
         }
+
         // Listen to fragment changes and update the ViewModel
         navController.addOnDestinationChangedListener { _, destination, _ ->
             Log.d("MainActivity", "Navigated to destination: ${destination.id}")
             navViewModel.setCurrentFragment(destination.id)
         }
+
         // Observe current fragment LiveData and update the bottom navigation
         navViewModel.currentFragmentId.observe(this) { fragmentId ->
             Log.d("MainActivity", "Current fragment ID: $fragmentId")
@@ -89,10 +93,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize AuthViewModel and check user authentication
-        authViewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(application)
-        )[AuthViewModel::class.java]
+        authViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(application))[AuthViewModel::class.java]
         authViewModel.initGoogleSignInClient(this)
         authViewModel.user.observe(this) { user ->
             if (user == null) {
@@ -111,16 +112,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     private suspend fun checkForNewUser(): Boolean {
         val firestore = FirebaseFirestore.getInstance()
-        val userRef =
-            authViewModel.user.value?.let { firestore.collection("users").document(it.uid) }
+        val userRef = authViewModel.user.value?.let { firestore.collection("users").document(it.uid) }
 
         return try {
             val documentSnapshot = userRef?.get()?.await()
