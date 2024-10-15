@@ -4,6 +4,7 @@ package com.example.sportsstore
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.sportsstore.databinding.ActivityMainBinding
 import com.example.sportsstore.viewmodels.AuthViewModel
+import com.example.sportsstore.viewmodels.NavViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -21,7 +23,7 @@ import kotlinx.coroutines.withContext
 
 private lateinit var binding: ActivityMainBinding
 private lateinit var authViewModel: AuthViewModel
-
+private lateinit var navViewModel: NavViewModel
 class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.getLocale(newBase)))
@@ -44,6 +46,32 @@ class MainActivity : AppCompatActivity() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
+        //livedate
+        navViewModel = ViewModelProvider(this)[NavViewModel::class.java]
+
+        // Listen to fragment changes and update the ViewModel
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            Log.d("MainActivity", "Navigated to destination: ${destination.id}")
+            navViewModel.setCurrentFragment(destination.id)
+        }
+
+        // Observe current fragment LiveData and update the bottom navigation
+        navViewModel.currentFragmentId.observe(this) { fragmentId ->
+            Log.d("MainActivity", "Current fragment ID: $fragmentId")
+            binding.bottomNavigationView.selectedItemId = when (fragmentId) {
+                R.id.homeFragment -> R.id.home
+                R.id.searchFragment2 -> R.id.search
+                R.id.fragmentProfileBinding -> R.id.profile
+                R.id.favoriteFragment -> R.id.favorite
+                R.id.purchaseCartFragment2 -> R.id.purchase_cart
+                else -> {
+                    Log.d("MainActivity", "Unknown fragment ID: $fragmentId")
+                    return@observe // Prevent selecting an unknown item
+                }
+            }
+        }
+
         binding.bottomNavigationView.setupWithNavController(navController)
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
