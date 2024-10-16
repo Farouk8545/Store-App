@@ -48,6 +48,11 @@ class OrdersFragment : Fragment() {
 
             withContext(Dispatchers.Main){
                 adapter.setData(orders)
+                if(adapter.getData().isEmpty()){
+                    binding.emptyText.visibility = View.VISIBLE
+                }else{
+                    binding.emptyText.visibility = View.GONE
+                }
             }
         }
 

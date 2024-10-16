@@ -85,10 +85,12 @@ class PaymentFragment : Fragment() {
                 }
             }
         }
-
-        val totalCost = args.currentProduct.sumOf { it.price }
+        var totalCost = 0.0
+        args.currentProduct.forEachIndexed { index, childItem ->
+            totalCost += childItem.price * args.currentAmount[index]
+        }
         val totalAmount = args.currentAmount.sum()
-        binding.totalCostText.text = "${totalCost * totalAmount}EGP"
+        binding.totalCostText.text = "${totalCost}EGP"
         binding.numberOfItemsText.text = "${totalAmount} items"
 
         binding.btnpayment.setOnClickListener {

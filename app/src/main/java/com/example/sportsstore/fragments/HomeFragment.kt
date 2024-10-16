@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.sportsstore.R
 import com.example.sportsstore.adapters.ChildAdapter
 import com.example.sportsstore.adapters.ParentAdapter
@@ -103,7 +104,11 @@ class HomeFragment : Fragment(), ChildAdapter.OnItemClickListener {
                     if(user.displayName.isNullOrEmpty()) user.email?.substringBefore("@") ?: "User" else user.displayName
 
                 user.photoUrl?.let { uri ->
-                    binding.userImage.setImageURI(uri)
+                    Glide.with(binding.userImage)
+                        .load(uri)
+                        .placeholder(R.drawable.baseline_account_circle_24)
+                        .error(R.drawable.baseline_account_circle_24)
+                        .into(binding.userImage)
                 } ?: run {
                     // Set default image if the photo URL is null
                     binding.userImage.setImageResource(R.drawable.baseline_account_circle_24)

@@ -130,7 +130,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private fun addPurchase(product: String, price: Double, date: Timestamp, state: String, paymentMethod: String, imageUrl: String?, id: String, color: String, size: String, amount: Int){
         val firestore = FirebaseFirestore.getInstance()
         val purchaseRef = auth.currentUser?.let {
-            firestore.collection("users").document(it.uid).collection("purchases").document(id)
+            firestore.collection("users").document(it.uid).collection("purchases")
         }
 
         val purchaseData = hashMapOf(
@@ -142,10 +142,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             "imageUrl" to imageUrl,
             "color" to color,
             "size" to size,
-            "amount" to amount
+            "amount" to amount,
+            "id" to id
         )
 
-        purchaseRef?.set(purchaseData)?.addOnSuccessListener {
+        purchaseRef?.add(purchaseData)?.addOnSuccessListener {
             val query = firestore.collection("sports_shirts").whereEqualTo("id", id)
             query.get().addOnCompleteListener { task ->
                 if(task.isSuccessful){

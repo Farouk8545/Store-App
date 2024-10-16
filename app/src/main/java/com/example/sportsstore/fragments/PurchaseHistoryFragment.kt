@@ -15,6 +15,7 @@ import com.example.sportsstore.databinding.FragmentPurchaseHistoryBinding
 import com.example.sportsstore.models.PurchaseModel
 import com.example.sportsstore.viewmodels.AuthViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class PurchaseHistoryFragment : Fragment() {
     private lateinit var authViewModel: AuthViewModel
@@ -51,7 +52,7 @@ class PurchaseHistoryFragment : Fragment() {
         binding.purchaseHistoryRv.adapter = adapter
         binding.purchaseHistoryRv.layoutManager = LinearLayoutManager(requireContext())
 
-        FirebaseFirestore.getInstance().collection("users").document(authViewModel.user.value?.uid ?: "").collection("purchases")
+        FirebaseFirestore.getInstance().collection("users").document(authViewModel.user.value?.uid ?: "").collection("purchases").orderBy("date", Query.Direction.DESCENDING)
             .get().addOnSuccessListener {
                 val purchases = it.toObjects(PurchaseModel::class.java)
                 for (purchase in purchases) {

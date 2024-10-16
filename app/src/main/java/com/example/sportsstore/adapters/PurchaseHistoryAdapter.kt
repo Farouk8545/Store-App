@@ -13,7 +13,7 @@ class PurchaseHistoryAdapter(private val authViewModel: AuthViewModel): Recycler
     inner class MyViewHolder(private val binding: PurchaseHistoryRowLayoutBinding): RecyclerView.ViewHolder(binding.root){
         fun bindDate(purchase: PurchaseModel){
             binding.productName = purchase.product
-            binding.productPrice = purchase.price.toString()
+            binding.productPrice = (purchase.price * purchase.amount).toString()
             binding.purchaseDate = purchase.date.toDate().toString()
             binding.productState = purchase.state
             binding.paymentMethod = purchase.paymentMethod

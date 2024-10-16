@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.sportsstore.R
 import com.example.sportsstore.SignInActivity
 import com.example.sportsstore.databinding.FragmentProfileBinding
@@ -31,8 +32,12 @@ class FragmentProfileBinding : Fragment() {
         context?.let { authViewModel.initGoogleSignInClient(it) }
 
         binding.userName.text = if(authViewModel.user.value?.displayName.isNullOrEmpty()) authViewModel.user.value?.email?.substringBefore("@") ?: "User" else authViewModel.user.value?.displayName
-        authViewModel.user.value?.photoUrl?.run {
-            binding.profilePic.setImageURI(authViewModel.user.value!!.photoUrl)
+        authViewModel.user.value?.photoUrl?.let { uri ->
+            Glide.with(binding.profilePic)
+                .load(uri)
+                .placeholder(R.drawable.baseline_account_circle_24)
+                .error(R.drawable.baseline_account_circle_24)
+                .into(binding.profilePic)
         } ?: run {
             // Set default image if the photo URL is null
             binding.profilePic.setImageResource(R.drawable.baseline_account_circle_24)

@@ -37,11 +37,11 @@ class AdminOrdersAdapter(private val authViewModel: AuthViewModel):RecyclerView.
                         }
                     }
                 }
-                val purchaseRef = FirebaseFirestore.getInstance().collection("users").document(order.userId).collection("purchases").document(order.id)
+                val purchaseRef = FirebaseFirestore.getInstance().collection("users").document(order.userId).collection("purchases").whereEqualTo("id", order.id)
 
                 purchaseRef.get().addOnCompleteListener { task ->
                     if(task.isSuccessful){
-                        task.result.reference.update("state", "Delivered")
+                        for(document in task.result) document.reference.update("state", "Delivered")
                     }
                 }
                 deleteData(order)
@@ -56,11 +56,11 @@ class AdminOrdersAdapter(private val authViewModel: AuthViewModel):RecyclerView.
                         }
                     }
                 }
-                val purchaseRef = FirebaseFirestore.getInstance().collection("users").document(order.userId).collection("purchases").document(order.id)
+                val purchaseRef = FirebaseFirestore.getInstance().collection("users").document(order.userId).collection("purchases").whereEqualTo("id", order.id)
 
                 purchaseRef.get().addOnCompleteListener { task ->
                     if(task.isSuccessful){
-                        task.result.reference.update("state", "Canceled")
+                        for(document in task.result) document.reference.update("state", "Canceled")
                     }
                 }
                 deleteData(order)
@@ -88,4 +88,6 @@ class AdminOrdersAdapter(private val authViewModel: AuthViewModel):RecyclerView.
         myList.remove(order)
         notifyDataSetChanged()
     }
+
+    fun getData(): List<OrderModel> = myList
 }

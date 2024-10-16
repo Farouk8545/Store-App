@@ -60,7 +60,7 @@ class SearchFragment : Fragment(), ChildAdapter.OnItemClickListener {
                 }
 
                 val itemDisplayDeferred = async {
-                    FirebaseFirestore.getInstance().collection("sports_shirts")
+                    FirebaseFirestore.getInstance().collection("sports_shirts").limit(12)
                         .get()
                         .await()
                         .toObjects(ChildItem::class.java)
