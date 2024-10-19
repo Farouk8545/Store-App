@@ -18,11 +18,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 class FragmentProfileBinding : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var authViewModel: AuthViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
 
         binding.settingButton.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentProfileBinding_to_fragmentSettingBinding)

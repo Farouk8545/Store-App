@@ -1,11 +1,18 @@
 package payment
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -36,6 +43,8 @@ class PaymentFragment : Fragment() {
     private lateinit var binding: FragmentPaymentBinding
     private lateinit var authViewModel: AuthViewModel
     private val args by navArgs<PaymentFragmentArgs>()
+    private val CHANNEL_ID = "purchase_notification_channel"
+    private val NOTIFICATION_ID = 1
 
     // PayPal configuration
     private val clientId = "AY8KF77cO2qwMGh7Vx7Sk7rTPR6T2eJ6smH1r-GUQXAqo-AhqoBUVf2NHl999oHZN-rnlSfdiGzw4Eou"
@@ -111,7 +120,13 @@ class PaymentFragment : Fragment() {
                         "Cash On Delivery"
                     )
                 }
-                Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
+                val sharedPref = requireActivity().getSharedPreferences("notification_settings", Context.MODE_PRIVATE)
+                val check = sharedPref.getBoolean("push_notifications", true)
+                if(check){
+                    sendNotification()
+                    Toast.makeText(context, "Order placed!", Toast.LENGTH_SHORT).show()
+                }
+                triggerVibrationOnPurchase()
                 if(args.fromCart) authViewModel.deleteAllCartItems()
                 findNavController().navigate(R.id.action_paymentFragment_to_homeFragment)
             }else{
@@ -179,7 +194,37 @@ class PaymentFragment : Fragment() {
             }
         }
     }
+    @Suppress("DEPRECATION")
+    private fun triggerVibrationOnPurchase() {
+        val sharedPref = requireActivity().getSharedPreferences("notification_settings", Context.MODE_PRIVATE)
+        val check = sharedPref.getBoolean("vibration", true)
 
+        if (check) {
+            val vibrator = requireContext().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+            // Vibrate for 500 milliseconds (half a second)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // For Android O and above
+                val vibrationEffect = VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE)
+                vibrator.vibrate(vibrationEffect)
+            } else {
+                // For Android below O
+                vibrator.vibrate(500)
+            }
+        }
+    }
+    @SuppressLint("MissingPermission")
+    private fun sendNotification() {
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground) // Ensure this icon exists
+            .setContentTitle("Purchase Complete")
+            .setContentText("You have successfully made a purchase!")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            notify(NOTIFICATION_ID, builder.build())
+        }
+    }
     override fun onDestroy() {
         requireActivity().stopService(Intent(requireContext(), PayPalService::class.java))
         super.onDestroy()

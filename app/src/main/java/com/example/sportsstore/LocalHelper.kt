@@ -14,7 +14,7 @@ object LocaleHelper {
             "Spanish" -> Locale("es")
             "French" -> Locale.FRENCH
             "German" -> Locale.GERMAN
-            "Arabic" -> Locale("ar")  // Correct Arabic locale
+            "Arabic" -> Locale("ar")
             else -> Locale.ENGLISH
         }
 
