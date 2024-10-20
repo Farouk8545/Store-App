@@ -35,10 +35,6 @@ class FragmentSettingBinding : Fragment() {
             findNavController().navigate(R.id.action_fragmentSettingBinding_to_privacySecuritySettingsFragment)
         }
 
-        binding.paymentSettingsButton.setOnClickListener {
-            // Handle Payment Methods button click
-        }
-
         binding.languageSettingsButton.setOnClickListener {
             // Handle Language Selection button click
             findNavController().navigate(R.id.action_fragmentSettingBinding_to_languageSettingsFragment)

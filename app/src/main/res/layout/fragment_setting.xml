@@ -123,43 +123,6 @@
                     />
             </LinearLayout>
 
-        <!-- Payment Methods -->
-
-
-
-            <LinearLayout
-                android:id="@+id/payment_settings_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp"
-                android:layout_marginTop="16dp"
-                android:elevation="8dp"
-                android:background="?attr/colorSurface"
-                >
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/payment"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="payment Settings Icon" />
-
-                <Button
-                    android:id="@+id/payment_settings_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:text="@string/payment"
-                    android:fontFamily="sans-serif"
-                    android:textColor="?attr/android:textColorPrimary"
-                    android:backgroundTint="@android:color/transparent"
-                    style="@style/Widget.MaterialComponents.CardView"
-                    />
-            </LinearLayout>
-
 
         <!-- Language Selection -->
 
