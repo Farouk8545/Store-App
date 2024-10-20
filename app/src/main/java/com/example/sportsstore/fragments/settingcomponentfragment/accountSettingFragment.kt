@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.sportsstore.databinding.FragmentAccountSettingBinding
+import com.example.sportsstore.viewmodels.AuthViewModel
 
 class AccountSettingsFragment : Fragment() {
     private lateinit var binding: FragmentAccountSettingBinding
@@ -20,6 +22,7 @@ class AccountSettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAccountSettingBinding.inflate(inflater, container, false)
+        authViewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
         return binding.root
     }
 
@@ -76,6 +79,27 @@ class AccountSettingsFragment : Fragment() {
             val newValue = input.text.toString()
             if (newValue.isNotEmpty()) {
                 saveSetting(type, newValue)
+                if (type == "username"){
+                    // Call the updateUserName function
+                    authViewModel.updateUserName(newValue,
+                        onSuccess = {
+                            Toast.makeText(requireContext(), "User name updated successfully", Toast.LENGTH_SHORT).show()
+                        },
+                        onFailure = { errorMessage ->
+                            Toast.makeText(requireContext(), "Failed to update name: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
+                else if (type == "password")
+                    authViewModel.updateUserPassword(newValue,
+                        onSuccess = {
+                            Toast.makeText(requireContext(), "Password updated successfully", Toast.LENGTH_SHORT).show()
+                        },
+                        onFailure = { errorMessage ->
+                            Toast.makeText(requireContext(), "Failed to update password: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+
                 Toast.makeText(requireContext(), "$title updated", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(),

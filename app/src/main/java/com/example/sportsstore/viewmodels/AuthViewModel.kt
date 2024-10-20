@@ -22,6 +22,7 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -365,6 +366,59 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             fetchCartItems()
         }.addOnFailureListener { e ->
             Log.d(TAG, "Error fetching cart items for deletion: ${e.message}")
+        }
+    }
+    fun updateUserName(newName: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        val user = auth.currentUser
+
+        if (user != null) {
+            // Create a UserProfileChangeRequest to update the display name
+            val profileUpdates = UserProfileChangeRequest.Builder()
+                .setDisplayName(newName)
+                .build()
+
+            // Update the user profile
+            user.updateProfile(profileUpdates)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        // Success: name updated
+                        Log.d("AuthViewModel", "User name updated.")
+                        onSuccess() // Trigger success callback
+                    } else {
+                        // Failure: handle the error
+                        task.exception?.let { exception ->
+                            Log.e("AuthViewModel", "Error updating user name", exception)
+                            onFailure(exception.message ?: "Unknown error occurred")
+                        }
+                    }
+                }
+        } else {
+            // If the user is not signed in, show an error message
+            onFailure("No user is signed in")
+        }
+    }
+
+    fun updateUserPassword(newPassword: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
+        val user = auth.currentUser
+
+        if (user != null) {
+            // Update the user's password
+            user.updatePassword(newPassword)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("AuthViewModel", "User password updated.")
+                        onSuccess()  // Trigger success callback
+                    } else {
+                        // Handle the error
+                        task.exception?.let { exception ->
+                            Log.e("AuthViewModel", "Error updating password", exception)
+                            onFailure(exception.message ?: "Unknown error occurred")
+                        }
+                    }
+                }
+        } else {
+            // If the user is not signed in, return an error
+            onFailure("No user is signed in")
         }
     }
 }

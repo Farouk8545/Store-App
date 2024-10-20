@@ -22,7 +22,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 private lateinit var binding: ActivityMainBinding
-private lateinit var authViewModel: AuthViewModel
+lateinit var authViewModel: AuthViewModel
 private lateinit var navViewModel: NavViewModel
 class MainActivity : AppCompatActivity() {
     override fun attachBaseContext(newBase: Context) {
